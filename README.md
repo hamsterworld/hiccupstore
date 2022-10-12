@@ -1,6 +1,6 @@
-# Project Title
+# HiccupStore Project
 
-One Paragraph of project description goes here
+우리나라 전통술을 판매하는 웹사이트를 만들어보고 호스팅해보는 것이 목적인 Project입니다.
 
 ## Getting Started
 
