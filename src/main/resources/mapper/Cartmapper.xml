@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hiccup.hiccupstore.cart.dao.CartMapper">
+
+    <insert id="insertCart" parameterType="hiccup.hiccupstore.cart.dto.CartForm">
+        INSERT INTO cart(productId,quantity,userId) VALUE(#{productId},#{quantity},#{userId})
+    </insert>
+    <select id="findAll" resultType="hiccup.hiccupstore.cart.dto.Cart">
+        SELECT * FROM cart
+    </select>
+    <update id="modifyQuantity" parameterType="Integer">
+        UPDATE cart SET quantity = #{quantity} WHERE productId = #{productId}
+    </update>
+
+    <delete id="deleteCartByProductId" parameterType="Integer">
+        DELETE FROM cart WHERE productId = #{productId} AND userId = #{userId}
+    </delete>
+
+    <delete id="deleteAllCart" parameterType="Integer">
+        DELETE FROM cart WHERE userId = #{userId}
+    </delete>
+
+    <select id="GetCartListByUserId" resultType="hiccup.hiccupstore.cart.dto.Cart" parameterType="Integer">
+        SELECT c.userId, c.productId, c.quantity, p.productName, p.price, p.quantity"productQuantity" ,img.imagePath
+        FROM cart c
+        LEFT JOIN product p ON c.productId= p.productId
+        LEFT JOIN product_image img ON p.productId = img.productId
+        WHERE userId = #{userId} AND imageType LIKE CONCAT('%', "PRODUCT", '%')
+    </select>
+</mapper>

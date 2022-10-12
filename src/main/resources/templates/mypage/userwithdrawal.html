@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/mypage/userwithdrawal.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="mypage_wrapper">
+            <div class="mypage_sidebar mt60">
+                <div th:replace="layout/sidebar::sidebar"></div>
+            </div>
+            <div class="mypage_maincontent pt60">
+                <div class="maincontent">
+                    <div class="board_zone_sec">
+                        <div class="mypage_zone_tit">
+                            <h2>회원탈퇴</h2>
+                        </div>
+                        <form th:action="@{/mypage/userwithdrawal}" method="POST" name="information">
+                        <div class="mypage_unregister">
+                            <div class="mypage_zone_tit">
+                                <h3>01.회원탈퇴</h3>
+                            </div>
+                            <div class="unregister_info">
+                                술마켓 탈퇴안내
+                                <br>
+                                <br>
+                                회원님께서 회원 탈퇴를 원하신다니 저희 쇼핑몰의 서비스가 많이 부족하고 미흡했나 봅니다.
+                                <br>
+                                불편하셨던 점이나 불만사항을 알려주시면 적극 반영해서 고객님의 불편함을 해결해 드리도록 노력하겠습니다.
+                                <br>
+                                <br>
+                                ■ 아울러 회원 탈퇴시의 아래 사항을 숙지하시기 바랍니다.
+                                <br>
+                                1. 회원 탈퇴 시 회원님의 정보는 상품 반품 및 A/S를 위해 전자상거래 등에서의 소비자 보호에 관한 법률에 의거한 
+                                <br>
+                                고객정보 보호정책에따라 관리 됩니다.  
+                                <br>
+                                2. 탈퇴 시 회원님께서 보유하셨던 마일리지는 삭제 됩니다 
+                            </div>
+                            <div class="mypage_zone_tit">
+                                <h3>02.회원탈퇴 하기</h3>
+                            </div>
+                            <div class="mypage_table_type">
+                                <table class="table_left">
+                                    <colgroup>
+                                        <col width="15%">
+                                        <col width="85%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr th:if="${!snsUserOrUser}">
+                                            <th scope="row">비밀번호</th>
+                                            <td>
+                                                <input type="password" name="password">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">탈퇴 사유</th>
+                                            <td>
+                                                <textarea cols="30" rows="5" name="reason" style="width: 677px; height: 116px;"></textarea>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="btn_center_box">
+                            <a th:href="@{/mypage}" class="btn_claim_cancel btn_prev"><em>이전으로</em></a>
+                            <button type="button" class="btn_claim_ok" onclick="deleteUser()"><em>탈퇴 하기</em></button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script th:src="@{/js/mypage/userwithdrawal.js}"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

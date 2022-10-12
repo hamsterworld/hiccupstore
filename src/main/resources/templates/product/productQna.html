@@ -1,0 +1,61 @@
+<div id="qna-list">
+    <div class="qna_table_container">
+        <table class="qna_table">
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>등록날짜</th>
+                <th>답변</th>
+            </tr>
+            </thead>
+            <tbody>
+                <!-- list 반복부분 -->
+                <!-- 절대적 정렬 기준 : 1)최신순 2)답변 안된것 -->
+                <th:block th:each="qna : ${productQnAList}">
+                <tr class="qna_row">
+                    <td class="qna_row_num" th:text="${qna.boardId}"></td><!-- 정렬기준에 따른 글번호 -->
+                    <!-- th:if 사용 -->
+                    <td class="qna_tit real_writer" th:if="${session.userId} == ${qna.userId}"><!-- 계정 정보 확인 & 자기가 쓴 글만 열 수 있도록 -->
+                        <!-- 자기가 쓴 글 아이콘 : X ( img 태그 자체를 랜더링 X ) / 남이 쓴 글 : 자물쇠 아이콘 -->
+                        <button class="btn_qna_open" th:onclick="|javascript:getQnaDetail(${qna.boardId})|">
+                            <span th:text="${qna.boardTitle}">상품 결제 문의입니다.</span><!-- qna 글 제목 -->
+                        </button>
+                    </td>
+                    <td class="qna_tit not_writer" th:if="${session.userId} != ${qna.userId}"  sec:authorize="hasRole('ROLE_USER')">
+                        <a class="" onclick="return false;" >
+                            <img src="https://e7.pngegg.com/pngimages/684/453/png-clipart-padlock-line-lock-icon-black-and-white-line.png">
+                            <span>상품 결제 문의입니다.</span><!-- qna 글 제목 -->
+                        </a>
+                    </td>
+                    <td class="qna_tit real_writer" th:if="${session.userId} != ${qna.userId}" sec:authorize="hasRole('ROLE_ADMIN')"><!-- 계정 정보 확인 & 자기가 쓴 글만 열 수 있도록 -->
+                        <!-- 자기가 쓴 글 아이콘 : X ( img 태그 자체를 랜더링 X ) / 남이 쓴 글 : 자물쇠 아이콘 -->
+                        <button class="btn_qna_open" th:onclick="|javascript:getQnaDetail(${qna.boardId})|">
+                            <span th:text="${qna.boardTitle}">상품 결제 문의입니다.</span><!-- qna 글 제목 -->
+                        </button>
+                    </td>
+                    <td class="qna_tit not_writer" sec:authorize="isAnonymous()">
+                        <a class="" onclick="return false;" >
+                            <img src="https://e7.pngegg.com/pngimages/684/453/png-clipart-padlock-line-lock-icon-black-and-white-line.png">
+                            <span>상품 문의입니다.</span><!-- qna 글 제목 -->
+                        </a>
+                    </td>
+
+
+                    <td class="qna_writer"><span th:text="${qna.userName}"></span></td><!-- 닉네임 -->
+                    <td class="qna_date"><span th:text="${qna.createDate}"></span></td><!-- 등록 일자 -->
+                    <td class="qna_result" th:if="${qna.commentCount}>0"><a th:href ="@{/mypage/mypageproductsee/{id}(id=${qna.boardId} , page=1)}">답변완료</a></td><!-- 답변 완료 여부 (미답변 / 답변완료) -->
+                    <td class="qna_result" th:if="${qna.commentCount}<1">답변미완료</a></td><!-- 답변 완료 여부 (미답변 / 답변완료) -->
+                </tr>
+                <!-- qna 상세 내용 view : 권한 있을 때, 행 밑으로 qna 페이지 열릴 수 있도록 -->
+                <tr class="qna_detail">
+                    <td colspan="5">
+                        <div th:id="|qna_detail_${qna.boardId}|"></div>
+                    </td>
+                </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/login/logincontent.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+
+      function homepage(){location.href = '/join'}
+
+      function login(){document.login.submit()}
+
+      function findusername(){location.href = '/find/findusername'}
+
+      function findpassword(){location.href = '/find/findpassword'}
+
+    </script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="loginwrapper">
+            <h2>로그인</h2>
+            <div class="loginbox">
+                <h3>회원 로그인
+                    <form th:action="@{/login_proc}" method="post" name="login">
+                <div class="login_input_sec">
+                    <div>
+                        <input type="text" placeholder="아이디" id="loginid" th:field="${User.userName}">
+                        <input type="password" placeholder="패스워드" id="loginpassword" th:field="${User.password}">
+                    </div>
+                    <button type="submit" onclick="login()">로그인</button>
+                    </form>
+                    <div class="btn_login_box">
+                        <div th:if="${param.error}" class="errorcheck">
+                            <span th:text="${exception}">잘못된 아이디나 암호입니다</span>
+                        </div>
+                        <ul>
+                            <li>
+                                <button type="button" class="btn_member_join" onclick="homepage()" >회원가입</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn_member_idpassword" onclick="findusername()">아이디찾기</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn_member_idpassword" onclick="findpassword()">비밀번호찾기</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sns_login_box1">
+                        <a href="/oauth2/authorization/naver">
+                            <img class="sns_login_logo" th:src="|/image/99580C465C3D7D130C.png|">
+                        </a>
+                    </div>
+                    <div class="sns_login_box2">
+                        <a href="/oauth2/authorization/google">
+                            <img class="sns_login_logo" th:src="|/image/998689465C3D7D1217.png|">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+</body>
+</html>

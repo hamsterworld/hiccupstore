@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/index/index.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+    <script th:inline="javascript">
+        let msg = [[${msg}]];
+        if(msg=="DEL_OK"){ alert("정상적으로 탈퇴되었습니다.")};
+    </script>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+        <div class="slider-1">
+            <div class="slides">
+                <div class="active"><img src="image/19eb80fca6e17b4780a9f0577d2b6af6_18821.jpg"></div>
+                <div ><img src="image/19eb80fca6e17b4780a9f0577d2b6af6_47493.jpg"></div>
+                <div ><img src="image/19eb80fca6e17b4780a9f0577d2b6af6_79146.jpg"></div>
+                <div ><img src="image/751f4d1ac0a9c41fc788aec3c28aefcd_34394.jpg"></div>
+                <div ><img src="image/51ede99afa8d38a1e04ae1121e32f7bc_12786.jpg"></div>
+            </div>
+            <div class="page-btns">
+                <div class="active"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="side-btns">
+                <div>
+                    <span><i class="fas fa-angle-left"></i></span>
+                </div>
+                <div>
+                    <span><i class="fas fa-angle-right"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main_event mt80 mb80 fw300">
+        <h3 class="fs34 fw300 text-center f_scd mb20">
+            우리들의 <strong>추천</strong>
+        </h3>
+        <div>
+            <div id="wrapper1">
+                <div id="slider-wrap">
+                    <ul id="slider">
+                       <li>         
+                        <img src="/image/538b95f6e3edb624222bc1aa00a65bfc_24039.jpg">
+                       </li>
+                       <li>
+                        <img src="/image/538b95f6e3edb624222bc1aa00a65bfc_70244.jpg">
+                       </li>
+                       <li>
+                        <img src="/image/538b95f6e3edb624222bc1aa00a65bfc_76848.jpg">
+                       </li>
+                       <li>
+                        <img src="/image/538b95f6e3edb624222bc1aa00a65bfc_54950.jpg">
+                       </li>
+                       <li>
+                        <img src="/image/538b95f6e3edb624222bc1aa00a65bfc_68061.jpg">
+                       </li>
+                       
+                    </ul>
+                    
+                     <!--controls-->
+                    <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
+                    <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+                    <div id="counter"></div>
+                    <div id="pagination-wrap">
+                      <ul>
+                      </ul>
+                    </div>
+                    <!--controls-->  
+                           
+                </div>
+            
+             </div>
+        </div>
+    </div>
+    <div class="main_m1200">
+        <img src="/image/33bf31bd27abc5620ff494fb77e5c92b_70260.jpg">
+    </div>
+    <div class="main_goods_1">
+        <div class="container container-slide-list">
+            <h3 class="fs34 fw300 text-center f_scd ">
+                <strong>모두가 좋아하는 </strong>우리 술
+            </h3>
+            <div class="btn_goods_more">
+                <a href="#" class="btn_goods_view_more">
+                    More
+                </a>
+            </div>
+        </div>
+        <div class="goods_list main_wrap_20">
+            <div class="goods_list">
+                <ul>
+                    <li th:each="product:${productlist}">
+                        <div class="item_content">
+                            <div id="item_content_wrap_wrap">
+                                <div class="item_img">
+                                    <a th:href="@{/product/detail(pid=${product.productid})}">
+                                        <img th:src="${product.imagepath}">
+                                    </a>
+                                    <div class="item_info_content">
+                                        <div class="item_tit_box">
+                                            <a th:href="@{/product/detail(pid=${product.productid})}">
+                                                <strong class="item_name" th:text="${product.productname}">
+                                                    술마켓 안동소주 일품세트17도,21도,40도,샷잔 증정
+                                                </strong>
+                                            </a>
+                                        </div>
+                                        <div class="mt10">
+    
+                                        </div>
+                                        <div class="item_price_box">
+                                            <strong class="item_price" th:text="|${{product.price}}원|">31,000원</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container container-slide-list">
+        <h3 class="fs34 fw300 text-center f_scd ">
+            <strong>새롭게 만나보는</strong> 우리 술
+        </h3>
+        <div class="btn_goods_more1">
+            <a href="#" class="btn_goods_view_more1">
+                More
+            </a>
+        </div>
+        <div class="goods_list">
+            <ul>
+                <li th:each="product:${productlist2}">
+                    <div class="item_content1">
+                        <div id="item_content_wrap_wrap">
+                            <div class="item_img1">
+                                <a th:href="@{/product/detail(pid=${product.productid})}">
+                                    <img th:src="${product.imagepath}">
+                                </a>
+                                <div class="item_info_content1">
+                                    <div class="item_tit_box1">
+                                        <a th:href="@{/product/detail(pid=${product.productid})}">
+                                            <strong class="item_name1" th:text="${product.productname}">
+                                                술마켓 안동소주 일품세트17도,21도,40도,샷잔 증정
+                                            </strong>
+                                        </a>
+                                    </div>
+                                    <div class="mt10">
+
+                                    </div>
+                                    <div class="item_price_box">
+                                        <strong class="item_price" th:text="|${{product.price}}원|">31,000원</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main_info mt80">
+        <div class="container1">
+            <a href="#">
+                <img src="/image/156005c5baf40ff51a327f1c34f2975b_98843.jpg">
+            </a>
+        </div>
+    </div>
+    <div class="main_board mt80">
+        <div class="container1">
+            <div class="row clearfix">
+                <div class="col pr30">
+                    <div>
+                        <h3>공지사항</h3>
+                        <a th:href="@{/notice}" class="moremore">More +</a>
+                        <ul th:if="${noticelist.size != 0}">
+                            <li th:each="notice:${noticelist}">
+                                <a th:href="@{/noticesee/{notice.noticeid}(notice.noticeid=${notice.noticeid})}" class="main_board_li">
+                                    <span th:text="${notice.boardtitle}" >제목입니다.</span>
+                                    <span class="main_board_date" th:text="${notice.createdate}">2020-02-30</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main_f_bn mt80">
+        <div class="row row-none clearfix">
+            <div class="col wp50 text-right bn1">
+                <a href="#">
+                    <img src="/image/8abc31bcbe1faf6f67fe56d658258663_43203.jpg">
+                </a>
+            </div>
+            <div class="col wp50 bn2">
+                <img src="/image/efc49aaf9b703babcfe8e107a03cbd64_10526.jpg">
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>

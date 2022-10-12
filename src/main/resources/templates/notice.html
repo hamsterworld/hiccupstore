@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/notice.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script th:inline="javascript">
+        let msg = [[${success}]];
+        if(msg=="success"){ alert("성공적으로 작성되었습니다.")};
+        let del_msg = [[${del_success}]];
+        if(del_msg=="del_success"){ alert("성공적으로 삭제되었습니다.")};
+        let update_msg = [[${update_success}]];
+        if(update_msg == "update_success"){alert("성공적으로 수정되었습니다.")}
+    </script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="content">
+            <div class="board_zone_sec">
+                <div class="board_zone_tit">
+                    <h2>공지사항</h2>
+                </div>
+                <div class="board_zone_cont">
+                    <div class="board_zone_list" >
+                        <table class="board_list_table" style="width:100%">
+                            <colgroup>
+                                <col style="width: 8%;">
+                                <col style="width: 15%;">
+                                <col style="width: 42%;">
+                                <col style="width: 14%;">
+                                <col style="width: 13%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>카테고리</th>
+                                    <th>제목</th>
+                                    <th>날짜</th>
+                                    <th>작성자</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="height:10px" th:each="notice:${noticedtolist}">
+                                    <td th:text="${notice.noticeid}">7</td>
+                                    <td th:text="${notice.category}">새소식</td>
+                                    <td class="board_tit">
+                                        <a th:href="@{/noticesee/{noticeid}(noticeid=${notice.noticeid})}">
+                                            <span th:text="${notice.boardtitle}">제목입니다.</span>
+                                            <img src="/image/icon_board_hot.png">
+                                        </a>
+                                    </td>
+                                    <td th:text="${notice.createdate}">2020-03-02</td>
+                                    <td>관리자</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" th:if="${noticedtolist.size != 0}">
+                        <a th:if="${paging.showPrev}" th:href="@{/notice(page=${paging.beginPage - 1})}" th:text="Prev"></a>
+                            <th:block th:with="start=${paging.beginPage}, end=${paging.endPage}">
+                                <ul>
+                                    <li th:each=" i : ${#numbers.sequence(start,end)}">
+                                        <span class="on" th:if="${page == i}" th:text="${i}">1</span>
+                                        <a th:if="${page != i}" th:href="@{/notice(page=${i})}" th:text="${i}">1</a>
+                                    </li>
+                                </ul>
+                            </th:block>
+                        <a th:if="${paging.showNext}" th:href="@{/notice(page=${paging.endPage + 1})}" th:text="Next"></a>
+                    </div>
+                    <div class="board_search_box">
+                        <form name="information" id="frmList" th:action="@{/notice}" method="get">
+                            <select name="SearchNoticeCategory" class="chosen-select">
+                                <option value="boardtitle" th:selected="${noticecategory}=='boardtitle'">제목</option>
+                                <option value="boardcontent" th:selected="${noticecategory}=='boardcontent'">내용</option>
+                                <option value="category" th:selected="${noticecategory}=='category'">카테고리</option>
+                              </select>
+                              <input type="text" class="text" name="SearchNoticeContent" th:value="${noticecontent}">
+                              <button type="button" class="btn_board_search" onclick="noticesearch()">검색</button>
+                        </form>
+                    </div>
+                    <div class="button_right_align" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <button type="button" class="btn_board_search" onclick="noticewrite()">글쓰기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/notice.js"></script>
+</body>
+</html>

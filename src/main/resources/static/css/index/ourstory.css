@@ -1,0 +1,91 @@
+/* 공통 클래스 */
+.fcBlue {
+    color: #189fdb !important;
+}
+
+.fw600 {
+    font-weight: 600 !important;
+}
+
+.fw300 {
+    font-weight: 300 !important;
+}
+
+.fs34 {
+    font-size: 34px !important;
+}
+
+.f_scd {
+    font-family: 'S-Core Dream' !important;
+}
+
+
+/* 첫번째 박스의 css */
+
+h2{
+    color:white;
+    font-size: 200%;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.6em;
+}
+
+.firstcontentbox{
+    position: relative;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    overflow: hidden;
+}
+.firstcontentbox img{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+}
+
+
+
+/* 두번째 박스의 css */
+
+.secondcontentbox{
+    position:relative;
+    margin-bottom: 100px;
+    margin:auto;
+}
+
+.secondcontentbox h3{
+    margin-top: 70px;
+    text-align: center;
+}
+
+.secondcontentboximg{
+    height: 400px;
+    width: 100%;
+}
+
+
+/* 세번제 박스의 css */
+
+.thirdcontentbox{
+    width: 1000px;
+    margin: auto;
+}
+
+.thirdcontentbox img{
+    width: 1000px;
+}
+
+
+/* 네번째 박스의 css */
+
+.fourchcontentbox{
+    width: 1000px;
+    margin: auto;
+}
+
+.fourchcontentbox img{
+    width: 1000px;
+}

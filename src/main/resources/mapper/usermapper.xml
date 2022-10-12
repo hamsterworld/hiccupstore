@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hiccup.hiccupstore.user.dao.UserMapper">
+    <insert id="save" parameterType="hiccup.hiccupstore.user.dto.UserDto">
+        insert into user (userid,userName ,nickName ,address ,email ,birth ,phone ,password,userrole)
+        values(#{userId},#{userName} ,#{nickName} ,#{address} ,#{email} ,#{birth} ,#{phone} ,#{password},#{userrole})
+    </insert>
+    <insert id="saveOrder" parameterType="hiccup.hiccupstore.user.dto.order.OrderDto">
+        insert into user_order (orderid,userid,status,orderdate,address)
+        values(#{orderid},#{userid},#{status},#{orderdate},#{address})
+    </insert>
+    <select id="getTest"  resultType="hiccup.hiccupstore.user.dto.TestDto">
+        SELECT nickname,status
+        FROM user
+        INNER JOIN user_order
+        ON user.userId = user_order.userId
+    </select>
+    <select id="getOrderLatelyProductList"  resultType="hiccup.hiccupstore.user.dto.order.OrderLatelyProductDto">
+        select  j.userid,j.orderdate,j.orderid,j.status,order_product.productid,productname,price,order_product.quantity,imagepath from (
+        select u.userid,orderid, orderdate,status from user as u
+        INNER JOIN user_order as uo
+        ON u.userId = uo.userId
+        AND u.userId = #{userid}
+        LIMIT 0,5 ) as j
+        INNER JOIN order_product
+        ON j.orderid = order_product.orderid
+        INNER JOIN product
+        ON product.productid = order_product.productid
+        INNER JOIN product_image
+        ON product_image.productid = order_product.productid
+        ORDER BY j.orderid DESC;
+    </select>
+    <select id="getProductList"  resultType="hiccup.hiccupstore.user.dto.ProductDto" parameterType="java.util.ArrayList">
+        SELECT * FROM product
+        INNER JOIN product_image
+        ON product_image.productid = product.productid
+        WHERE imageType = "PRODUCT" and product.productid IN
+        <foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="getOrderLatelyProductListPageByDate"  resultType="hiccup.hiccupstore.user.dto.order.OrderLatelyProductDto">
+        select  j.userid,j.orderdate,j.status,j.orderid,order_product.productid,productname,price,order_product.quantity,imagepath from (
+        select u.userid,orderid, orderdate,status from user as u
+        INNER JOIN user_order as uo
+        ON u.userId = uo.userId
+        WHERE (orderdate BETWEEN #{startdate} AND #{lastdate})
+        AND u.userId = #{userid}
+        LIMIT #{page},#{pagesize}) as j
+        INNER JOIN order_product
+        ON j.orderid = order_product.orderid
+        INNER JOIN product
+        ON product.productid = order_product.productid
+        INNER JOIN product_image
+        ON product_image.productid = order_product.productid
+        ORDER BY j.orderid DESC;
+    </select>
+    <insert id="saveBoardImage" parameterType="java.util.ArrayList">
+        insert into image (boardid,imagename)
+        values
+        <foreach collection="list" item="item" index="index" separator=" , ">
+            (#{item.boardid},#{item.storeFileName})
+        </foreach>
+    </insert>
+    <delete id="deleteBoardImage" parameterType="java.util.ArrayList">
+        delete from image where imagename in (
+        <foreach collection="list" item="item" index="index" separator=" , ">
+            #{item}
+        </foreach>
+        )
+    </delete>
+    <select id="getOrderLatelyProductListtManagerPage"  resultType="hiccup.hiccupstore.user.dto.order.OrderLatelyProductDto">
+        select  j.userid,j.orderdate,j.orderid,j.status,order_product.productid,productname,price,order_product.quantity,imagepath from (
+        select u.userid,orderid, orderdate,status from user as u
+        INNER JOIN user_order as uo
+        ON u.userId = uo.userId
+        LIMIT #{page},#{pagesize} ) as j
+        INNER JOIN order_product
+        ON j.orderid = order_product.orderid
+        INNER JOIN product
+        ON product.productid = order_product.productid
+        INNER JOIN product_image
+        ON product_image.productid = order_product.productid
+        ORDER BY j.orderid DESC;
+    </select>
+    <select id="getUser1vs1BoardOne"  resultType="hiccup.hiccupstore.user.dto.board.User1vs1BoardDto">
+        select * from (select * from board where boardid = #{boardid}) as b
+        left join comment c on b.boardid = c.boardid
+        left join image i on i.boardid = b.boardid
+        left join user u on u.userid = b.userid
+    </select>
+    <select id="getUserProductBoardOne"  resultType="hiccup.hiccupstore.user.dto.board.User1vs1BoardDto">
+        select * from (select * from board where boardid = #{boardid}) as b
+        left join comment c on b.boardid = c.boardid
+        left join product p on p.productid = b.productid
+        left join user u on b.userid = u.userid
+        left join product_image pi on pi.productid = b.productid
+    </select>
+    <select id="getOrderLatelyProductListManagerPage"  resultType="hiccup.hiccupstore.user.dto.order.OrderLatelyProductDto">
+        select  j.userid,j.orderdate,j.status,j.orderid,order_product.productid,productname,price,order_product.quantity,imagepath from (
+        select u.userid,orderid, orderdate,status from user as u
+        INNER JOIN user_order as uo
+        ON u.userId = uo.userId
+        WHERE (orderdate BETWEEN #{startdate} AND #{lastdate})
+        LIMIT #{page},#{pagesize}) as j
+        INNER JOIN order_product
+        ON j.orderid = order_product.orderid
+        INNER JOIN product
+        ON product.productid = order_product.productid
+        INNER JOIN product_image
+        ON product_image.productid = order_product.productid
+        ORDER BY j.orderid DESC;
+    </select>
+    <select id="getOrderLatelyRefundProductListPageByDate" resultType="hiccup.hiccupstore.user.dto.order.OrderLatelyProductDto">
+        select  j.userid,j.orderdate,j.status,j.orderid,order_product.productid,productname,price,order_product.quantity,imagepath from (
+        select u.userid,orderid, orderdate,status from user as u
+        INNER JOIN user_order as uo
+        ON u.userId = uo.userId
+        WHERE (orderdate BETWEEN #{startdate} AND #{lastdate})
+        AND u.userId = #{userid} And status IN ('환불신청','교환신청','주문취소신청')
+        LIMIT #{page},#{pagesize}) as j
+        INNER JOIN order_product
+        ON j.orderid = order_product.orderid
+        INNER JOIN product
+        ON product.productid = order_product.productid
+        INNER JOIN product_image
+        ON product_image.productid = order_product.productid
+        ORDER BY j.orderid DESC;
+    </select>
+    <select id="getOrderLatelyRefundResultProductListPageByDate" resultType="hiccup.hiccupstore.user.dto.order.OrderLatelyProductDto">
+        select  j.userid,j.orderdate,j.status,j.orderid,order_product.productid,productname,price,order_product.quantity,imagepath from (
+        select u.userid,orderid, orderdate,status from user as u
+        INNER JOIN user_order as uo
+        ON u.userId = uo.userId
+        WHERE (orderdate BETWEEN #{startdate} AND #{lastdate})
+        AND u.userId = #{userid} And status IN ('환불완료','교환완료','주문취소')
+        LIMIT #{page},#{pagesize}) as j
+        INNER JOIN order_product
+        ON j.orderid = order_product.orderid
+        INNER JOIN product
+        ON product.productid = order_product.productid
+        INNER JOIN product_image
+        ON product_image.productid = order_product.productid
+        ORDER BY j.orderid DESC;
+    </select>
+    <select id="getOrderLatelyProductListManagerPageByUserId"  resultType="hiccup.hiccupstore.user.dto.order.OrderLatelyProductDto">
+        select  j.userid,j.orderdate,j.status,j.orderid,order_product.productid,productname,price,order_product.quantity,imagepath from (
+        select u.userid,orderid, orderdate,status from user as u
+        INNER JOIN user_order as uo
+        ON u.userId = uo.userId
+        WHERE u.userid = #{searchUserId}
+        LIMIT #{page},#{pageSize}) as j
+        INNER JOIN order_product
+        ON j.orderid = order_product.orderid
+        INNER JOIN product
+        ON product.productid = order_product.productid
+        INNER JOIN product_image
+        ON product_image.productid = order_product.productid
+        ORDER BY j.orderid DESC;
+    </select>
+</mapper>

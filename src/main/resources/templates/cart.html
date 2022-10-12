@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/header/header.css">
+    <link rel="stylesheet" href="css/footer/footer.css">
+    <link rel="stylesheet" href="css/cart/cart.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+      let csrfHeader = $('meta[name=_csrf_header]').attr('content');
+      let csrfToken = $('meta[name=_csrf]').attr('content');
+      function modifyQuantity(productId){
+        document.getElementById(productId).style.display = "block";
+      }
+      function modifyCansel(productId){
+        let form = document.getElementById(productId)
+        form.style.display = "none";
+        form.querySelector('.changeQuantity').value = parseInt(form.parentNode.querySelector(".quantity").innerText);
+      }
+      function plusQuantity(productId){
+        let quantity = document.getElementById(productId).querySelector('.changeQuantity');
+        quantity.value=parseInt(quantity.value)+1;
+
+      }
+
+      function minusQuantity(productId){
+        if(document.getElementById(productId).querySelector('.changeQuantity').value > 1){
+            document.getElementById(productId).querySelector('.changeQuantity').value-=1;
+        }
+      }
+      function modifySave(productId){
+        var data = {
+                productId: productId,
+                quantity:document.getElementById(productId).querySelector('.changeQuantity').value
+             };
+
+            $.ajax({
+               type: 'POST',
+               url: '/api/cart/modify',
+               dataType: 'json',
+               contentType:'application/json; charset=utf-8',
+
+               data: JSON.stringify(data),
+               beforeSend : function(xhr){
+                   xhr.setRequestHeader(csrfHeader,csrfToken);
+                   xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+               }
+            }).done(function(data) {
+                console.log(data)
+                if(data !== false){
+                    window.location.reload();
+                }
+                else{
+                    alert("다시 시도해주세요");
+                }
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+      }
+      function deleteProduct(productId){
+             var data = {
+                productId: productId,
+             };
+
+            $.ajax({
+               type: 'POST',
+               url: '/api/cart/delete',
+               dataType: 'json',
+               contentType:'application/json; charset=utf-8',
+               data: JSON.stringify(data),
+               beforeSend : function(xhr){
+                   xhr.setRequestHeader(csrfHeader,csrfToken);
+                   xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+               }
+            }).done(function(data) {
+                console.log(data)
+                if(data !== false){
+                    window.location.reload();
+                }
+                else{
+                    alert("다시 시도해주세요");
+                }
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+         }
+     function deleteAllCart(){
+        $.ajax({
+           type: 'POST',
+           url: '/api/cart/deleteAll',
+           dataType: 'json',
+           contentType:'application/json; charset=utf-8',
+           beforeSend : function(xhr){
+                   xhr.setRequestHeader(csrfHeader,csrfToken);
+                   xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+           }
+        }).done(function(data) {
+             console.log(data)
+            if(data !== false){
+                window.location.reload();
+            }
+            else{
+                alert("다시 시도해주세요");
+            }
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+     }
+    </script>
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="contentwrapper">
+            <div class="contenttit">
+                <h2>
+                    장바구니
+                </h2>
+                <ol>
+                    <li class="page_on">
+                        <span>01 </span>
+                        장바구니
+                        <span><img src="/image/icon_join_step_on.png"> </span>
+                    </li>
+                    <li>
+                        <span>02 </span>
+                        주문서작성/결제
+                        <span><img src="/image/icon_join_step_off.png"> </span>
+                    </li>
+                    <li>
+                        <span>03 </span>
+                        주문완료
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="contentwrapper">
+            <div>
+                <button type="button" class="cart-btn" th:onclick="|deleteAllCart()|">장바구니 비우기</button>
+            </div>
+        </div>
+        <div class ="contentwrapper">
+            <table class ="cartlist" style="width:100%">
+                <colgroup>
+                    <col style="width:5%">  <!-- 체크박스 -->
+                    <col>					<!-- 상품명/옵션 -->
+                    <col style="width:20%">  <!-- 수량 -->
+                    <col style="width:10%"> <!-- 상품금액 -->
+                    <col style="width:10%"> <!-- 합계금액 -->
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>삭제</th>
+                        <th>상품</th>
+                        <th>수량</th>
+                        <th>상품금액</th>
+                        <th>합계금액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product: ${productList}">
+                    <td>
+                        <div>
+                            <button type="button" class="cart-btn" th:onclick="|deleteProduct(${product.productId})|">
+                                <img src="image/delete_btn.png"></button>
+                        </div>
+                    </td>
+                    <td>
+                        <div >
+                            <div>
+                                <em>
+                                    <div style="display: table-cell; vertical-align: middle; width:100px;">
+                                        <img th:if="${product.productQuantity} > 0" th:src="${product.imagePath}" style="width:100%;" >
+                                    </div>
+                                    <div style="display: table-cell; vertical-align: middle;">
+                                        <a th:href="@{/product/detail(pid = ${product.productId})}" th:text="${product.productName}">술마켓 맑은내일 발효막걸리 시그니처 6.5도 930ml</a>
+                                    </div>
+                                </em>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td>
+                        <span class="quantity" th:if="${product.productQuantity} > 0" th:text="${product.quantity}"></span>
+                        <span th:unless="${product.productQuantity} > 0">품절</span>
+                        <button th:if="${product.productQuantity} > 0" type="button" class="cart-btn" style="height:30px; width:60px; padding: 0px" th:onclick="|modifyQuantity(${product.productId})|">수정</button>
+                        <div class = "option-layer"  th:id="${product.productId}">
+                            <div class="option-content">
+                                <div>
+                                    <h2>수량 변경</h2>
+                                </div >
+                                <div class="option-div">
+                                    <dl>
+                                        <dt>
+                                            <img th:src="${product.imagePath}" style="width:200px">
+                                        </dt>
+                                        <dd>
+                                            <div th:text="${product.productName}"> 제목</div>
+                                            <div>
+                                                <span>수량:</span>
+                                                <button th:onclick="|plusQuantity(${product.productId})|">+</button>
+                                                <input type="number" class="changeQuantity" th:value="${product.quantity}" min="1"  readonly >
+                                                <button th:onclick="|minusQuantity(${product.productId})|">-</button>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <div>
+                                        <button class="cart-btn" style="float:right;" th:onclick="|modifySave(${product.productId})|">저장</button>
+                                        <button class="cart-btn" style="float:right; margin-right:30px"th:onclick="|modifyCansel(${product.productId})|">취소</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div  th:text="${product.price}" th:value="${product.price}">
+                        </div>
+                    </td>
+                    <td>
+                        <div  th:text="${product.price*product.quantity}">
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <br/>
+        <div class ="contentwrapper">
+            <div class = "totalprice">
+                <div class = "totalpricetable">
+                    <dl>
+                        <dt >총 <span th:text="${#lists.size(productList)}"></span>개의 상품 금액</dt>
+                        <dd> <span th:text="${price}"></span>원</dd>
+                    </dl>
+                    <dl><img src="/image/order_price_plus.png"> </dl>
+                    <dl>
+                        <dt>배송비</dt>
+                        <dd th:if="${#lists.size(productList)} != 0">3000원</dd>
+                        <dd th:unless="${#lists.size(productList)} != 0">0원</dd>
+                    </dl>
+                    <dl><img src="/image/order_price_total.png"> </dl>
+                    <dl>
+                        <dt>합계</dt>
+                        <dd  th:if="${#lists.size(productList)} != 0"><span th:text="${price+3000}"></span>원</dd>
+                        <dd  th:unless="${#lists.size(productList)} != 0"><span th:text="${price}"></span>원</dd>
+                    </dl>
+                    <dl>
+                        <form th:action="@{/order/list}">
+                            <button type="submit" class="cart-btn" th:if="${#lists.size(productList)} != 0" th:onclick="sendOrder()" >주문하기</button>
+                        </form>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+<div id="footer" th:replace="layout/footer::footer"></div>
+</body>
+</html>

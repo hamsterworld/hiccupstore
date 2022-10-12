@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/managerpage/managerpage1vs1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="mypage_wrapper">
+            <div class="mypage_sidebar mt60">
+                <div th:replace="layout/sidebarmanager::sidebarmanager"></div>
+            </div>
+            <div class="mypage_maincontent pt60">
+                <div class="maincontent">
+                    <div class="mypage_main">
+                        <div class="board_zone_tit">
+                            <h2>1:1문의</h2>
+                        </div>
+                        <div class="board_zone_cont">
+                            <div class="board_list_qa">
+                                <table class="board_list_table" style="width:100%">
+                                    <colgroup>
+                                        <col style="width:10%">
+                                        <col style="width:15%">
+                                        <col>
+                                        <col style="width:10%">
+                                        <col style="width:10%">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>문의날짜</th>
+                                            <th>카테고리</th>
+                                            <th>제목</th>
+                                            <th>문의상태</th>
+                                            <th>답변하기</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:if="${BoardDtoList.size == 0}">
+                                        <td colspan="5">게시글이 존재하지않습니다.</td>
+                                    </tr>
+                                    <tr th:if="${BoardDtoList.size != 0}" th:each="board : ${BoardDtoList}">
+                                        <td th:text="${board.createdate}">
+                                            22-09-18
+                                        </td>
+                                        <td th:text="${board.boardcategory}">
+                                            결제불량
+                                        </td>
+                                        <td>
+                                            <a th:text="${board.boardtitle}" th:href="@{/managerpage/managerpage1vs1see/{board.Boardid}(board.Boardid=${board.Boardid},page=${page})}">안녕하세요</a>
+                                        </td>
+                                        <td th:if="${board.commentid == null}">
+                                            답변대기
+                                        </td>
+                                        <td th:if="${board.commentid != null}">
+                                            답변완료
+                                        </td>
+                                        <td th:if="${board.commentid == null}">
+                                            <a th:href="@{/managerpage/managerpage1vs1seeandanswer/{board.Boardid}(board.Boardid=${board.Boardid},page=${page})}">답변하기</a>
+                                        </td>
+                                        <td th:if="${board.commentid != null}">
+                                            답변완료
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mypage_order_info_paging" th:if="${BoardDtoList.size != 0}">
+                                <a th:if="${paging.showPrev}" th:href="@{/managerpage/managerpage1vs1(page=${paging.beginPage - 1})}" th:text="Prev"></a>
+                                <th:block th:with="start=${paging.beginPage}, end=${paging.endPage}">
+                                    <th:block th:each=" i : ${#numbers.sequence(start,end)}">
+                                        <a th:href="@{/managerpage/managerpage1vs1(page=${i})}" th:text="${i}" th:classappend="${page} == ${i} ? 'paging_on'"></a>
+                                    </th:block>
+                                </th:block>
+                                <a th:if="${paging.showNext}" th:href="@{/managerpage/managerpage1vs1(page=${paging.endPage + 1})}" th:text="Next"></a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/managerpage/managerpage1vs1.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

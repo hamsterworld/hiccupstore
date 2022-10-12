@@ -1,0 +1,334 @@
+.mt60{
+    margin-top: 60px !important;
+}
+
+.pt60{
+    padding-top: 60px !important;
+}
+
+/* 사이드바 관련 css */
+.mypage_wrapper{
+    min-height: 400px;
+    width: 1200px;
+    margin:auto;
+}
+
+.mypage_sidebar_submenu a:hover{
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+.active {
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+
+.mypage_wrapper:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.mypage_sidebar{
+    float: left;
+    width: 200px;
+}
+
+.mypage_sidebar_content{
+    min-height: 250px;
+    padding: 0 0 50px 0;
+}
+
+.mypage_sidebar_content h2{
+    padding: 0 0 14px 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.mypage_sidebar_submenu{
+    margin: 7px 0 0 0;
+    list-style: none;
+    padding:0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin: 7px 0 0 0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu > li:first-child{
+    margin: 30px 0 0 0;
+}
+
+.mypage_sidebar_submenu > li{
+    padding: 8px 0 15px 0;
+    font-size: 14px;
+    font-weight: bold;
+    background: url(/image/lnb_tit.png) no-repeat top left;
+}
+
+
+/* 하위사이드바 1 */
+.mypage_sidebar_submenu1{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu1 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu1 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 2 */
+.mypage_sidebar_submenu2{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu2 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu2 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 3 */
+.mypage_sidebar_submenu3{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu3 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu3 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 4 */
+.mypage_sidebar_submenu4{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu4 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu4 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 메인 content 영역 */
+
+
+.mypage_maincontent {
+    width: 940px !important;
+    float: right;
+}
+.maincontent {
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+.pt60 {
+    padding-top: 60px !important;
+}
+
+.board_zone_sec{
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 0 0 0;
+}
+
+.board_zone_tit {
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+
+
+.mypage_zone_tit {
+    margin: 0 0 50px 0;
+    padding: 0 0 10px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #999999;
+}
+
+.strong_content{
+    font-size: 14px;
+    text-align: center;
+}
+
+.mypage_zone_tit h3 {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.mypage_unregister .unregister_info {
+    margin: 0 0 40px 0;
+    padding: 15px 15px 15px 15px;
+    color: #717171;
+    border: 1px solid #dadada;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.mypage_table_type .table_left {
+    border-top: 1px solid #999999;
+}
+
+.mypage_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+
+.mypage_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mypage_table_type .table_left th {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    padding: 15px 10px 14px 20px;
+    border-top: none 0;
+    background: #f7f7f7;
+    text-align: left;
+}
+
+.mypage_table_type th {
+    padding: 9px 10px 10px 10px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #dbdbdb;
+    background: #f7f7f7;
+}
+
+input[type="password"] {
+    height: 31px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: middle;
+    font-family: "Noto Sans KR",sans-serif;
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+}
+.mypage_table_type .table_left td {
+    height: 31px;
+    padding: 12px 10px 11px 15px;
+    text-align: left;
+}
+
+.mypage_table_type td {
+    height: 31px;
+    padding: 15px 10px 14px 10px;
+    color: #777777;
+    border-bottom: 1px solid #dbdbdb;
+    /* border-left: 1px dotted #ededed; */
+}
+
+.table_left textarea {
+    width: 98%;
+    height: 100px;
+    padding: 5px;
+    color: #a9a9a9;
+    border: 1px solid #d6d6d6;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.btn_center_box {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.btn_claim_cancel {
+    display: inline-block;
+    min-width: 80px;
+    height: 42px;
+    padding: 0 10px 0 10px;
+    line-height: 40px;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    text-align: center;
+}
+
+.btn_claim_cancel em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+.btn_claim_ok {
+    min-width: 100px;
+    height: 44px;
+    padding: 0 10px 0 10px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    text-align: center;
+    vertical-align: top;
+}
+
+.btn_claim_ok em {
+    font-weight: bold;
+    font-style: normal;
+}

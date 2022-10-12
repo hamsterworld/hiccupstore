@@ -1,0 +1,567 @@
+.mt60{
+    margin-top: 60px !important;
+}
+
+.pt60{
+    padding-top: 60px !important;
+}
+
+/* 사이드바 관련 css */
+.mypage_wrapper{
+    min-height: 400px;
+    width: 1200px;
+    margin:auto;
+}
+
+.mypage_wrapper:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.mypage_sidebar{
+    float: left;
+    width: 200px;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.mypage_sidebar_content{
+    min-height: 250px;
+    padding: 0 0 50px 0;
+}
+
+.mypage_sidebar_content h2{
+    padding: 0 0 14px 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.mypage_sidebar_submenu{
+    margin: 7px 0 0 0;
+    list-style: none;
+    padding:0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin: 7px 0 0 0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu > li:first-child{
+    margin: 30px 0 0 0;
+}
+
+.mypage_sidebar_submenu > li{
+    padding: 8px 0 15px 0;
+    font-size: 14px;
+    font-weight: bold;
+    background: url(/image/lnb_tit.png) no-repeat top left;
+}
+
+.mypage_sidebar_submenu a:hover{
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+/* 하위사이드바 1 */
+.mypage_sidebar_submenu1{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu1 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu1 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 2 */
+.mypage_sidebar_submenu2{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu2 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu2 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 3 */
+.mypage_sidebar_submenu3{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu3 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu3 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 4 */
+.mypage_sidebar_submenu4{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu4 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu4 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 메인 content 영역 */
+.mypage_maincontent{
+    width: 940px !important;
+    float: right;
+}
+
+.maincontent{
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.mypage_main{
+    padding: 0 0 50px 0;
+}
+
+/* main content 영역의 top-info */
+
+.mypage_top_info {
+    display: table;
+    width: 100%;
+    margin: 0 0 35px 0;
+    background: #f7f9f8;
+}
+
+.mypage_top_txt {
+    display: table-cell;
+    width: 30%;
+    padding: 20px 0 20px 0;
+    text-align: center;
+    vertical-align: middle;
+    background: #f7f9f8;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+
+.grade_img{
+    display: block;
+    max-width: 70px;
+    margin: 0 auto;
+    padding: 0 0 10px 0;
+}
+
+.grade_img img{
+    max-width: 70px;
+    border: 0 none;
+    vertical-align: top;
+}
+
+.mypage_top_wallet {
+    display: table-cell;
+    width: 69%;
+    vertical-align: middle;
+    background: #ffffff;
+}
+
+.mypage_top_wallet ul{
+    width: 100%;
+    padding: 27px 10px 27px 10px;
+    font-size: 0;
+    list-style: none;
+    line-height: 1;
+}
+
+.mypage_top_wallet ul > li:first-child{
+    border-left: none 0;
+}
+
+.mypage_top_wallet ul > li{
+    list-style: none;
+    display: inline-block;
+    width: 33%;
+    font-size: 14px;
+    border-left: 1px solid #e1e3e2;
+    text-align: center;
+}
+
+.mypage_top_wallet ul > li span{
+    display: block;
+    padding: 0 10px 10px 10px;
+}
+
+.mypage_top_wallet ul > li span img{
+    border: 0 none;
+    vertical-align: top;
+}
+
+/*mypage content영역에 order_info */
+.mypage_order_info{
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+.mypage_zone_tit {
+    margin: 0 0 20px 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.mypage_zone_tit_order_laterly {
+    border-bottom: 1px solid #999999;
+}
+
+.mypage_zone_tit h3{
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.mypage_zone_tit h3 span{
+    padding: 0 0 0 5px;
+    color: #777777;
+    font-size: 12px;
+    font-weight: normal;
+}
+.mypage_order_info_cont {
+    margin: 0 0 30px 0;
+    padding: 35px 0 35px 0;
+    font-size: 0;
+    border-top: 1px solid #999999;
+    text-align: center;
+}
+
+.mypage_order_info_cont ol {
+    margin:0;
+    padding:0;
+    list-style: none;
+    display: inline-block;
+    width: 80%;
+    font-size: 0;
+    border-right: 1px solid #e3e3e3;
+    vertical-align: middle;
+}
+
+.mypage_order_info_cont ol li:first-child {
+    padding-left: 10px;
+    background: none 0;
+}
+
+.mypage_order_info_cont ol li {
+    display: inline-block;
+    width: 10%;
+    min-width: 66px;
+    padding: 0 10px 0 30px;
+    font-size: 13px;
+    background: url(/image/mypgae_ing_next_bg.png) no-repeat left 50px;
+    text-align: center;
+}
+
+.mypage_order_info_cont ol li b {
+    display: block;
+    padding: 0 0 15px 0;
+}
+
+.mypage_order_info_cont ol li strong {
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    padding: 12px 0 0 0;
+    color: #ffffff;
+    font-size: 18px;
+    background: url(/image/mypgae_ing_list_bg.png) no-repeat 0 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.order_case_list {
+    display: inline-block;
+    width: 19%;
+    font-size: 0;
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+.order_case_list ul {
+    padding:0;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    display: inline-block;
+    width: 70%;
+    font-size: 0;
+    list-style: none;
+}
+
+.order_case_list ul li:first-child {
+    border-top: none 0;
+}
+
+.order_case_list ul li{
+    padding: 8px 5px 10px 5px;
+    font-size: 12px;
+    border-top: 1px dotted #bfbfbf;
+    text-align: left;
+}
+
+.order_case_list ul li span {
+    float: right;
+}
+
+
+/* mypage영역에 최근주문상품 */
+.mypage_table_type {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.mypage_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mypage_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mypage_table_type th {
+    padding: 9px 10px 10px 10px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #dbdbdb;
+    background: #f7f7f7;
+}
+
+.mypage_table_type td {
+    padding: 15px 10px 14px 10px;
+    color: #777777;
+    border-bottom: 1px solid #dbdbdb;
+    position: relative;
+}
+
+.product_name{
+    display: inline-block;
+    height: 33px;
+}
+
+.mypage_table_type td img{
+    height: 50px;
+    width: 50px;
+    vertical-align: bottom;
+}
+
+td[colspan="6"]{
+    height: 100px;
+}
+
+#wrap .no_data {
+    padding: 50px 30px 50px 30px;
+    /* border-bottom: 1px solid #dbdbdb; */
+    text-align: center;
+}
+
+/* 최근본상품 */
+.mypage_lately_goods {
+    margin: 50px 0 0 0;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.goods_list{
+    margin:auto;
+    width: 100%;
+}
+
+.goods_list ul{
+    list-style: none;
+    padding:0;
+    margin:0;
+    overflow: hidden;
+}
+
+.goods_list ul li{
+    float:left;
+    width: 33.3%;
+    box-sizing: border-box;
+    margin: 40px 0 0 0;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.item_content{
+    border: 1px solid #e0e0e0;
+    padding: 0 10px;
+    padding-bottom: 20px;
+    color: #1c1c1c;
+}
+
+.item_img{
+    text-align: center;
+    overflow: hidden;
+    border: 0;
+    padding: 40px 0;
+    position: relative;
+}
+
+.item_img a img{
+    border: 0 none;
+    vertical-align: top;
+    width: 248px;
+    height: 270px;
+}
+
+.item_info_content{
+    display: block;
+    width: 100%;
+    padding: 20px 20px;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+.item_tit_box .item_name {
+    display: block;
+    padding: 10px 0 0 0;
+    font-size: 16px;
+    word-break: break-all;
+    font-weight: 300;
+    line-height: 1.4;
+    height: 50px;
+    overflow: hidden;
+    font-family: "Noto Sans KR",sans-serif !important;
+}
+
+.item_price_box{
+    margin-top:22px;
+    overflow: hidden;
+}
+
+.item_price{
+    font-size: 18px;
+    color: #222;
+    font-weight: 600;
+    float: left;
+}
+
+/* 품절 이미지 */
+
+.item_sold_out{
+    background-image: url(/image/soldout-3.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    display: block;
+    border: 1px solid darkgoldenrod;
+    width: 248px;
+    height: 270px;
+    top:50px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.sold_out_gif{
+    float:left;
+    position: absolute;
+    top:0px;
+    left:-11px;
+}
+
+.item_content_wrap_wrap{
+    position: relative;
+}
+
+.item_img a {
+    display: block;
+    height: 100%;
+}
+
+.btn_board_more{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    font-size: 12px;
+}
+
+.mypage_lately_info{
+    position: relative;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+
+/** 최근 본상품이 없을때 css */
+.goods_no_data {
+     min-height: 200px;
+     text-align: center;
+     font-size: 12px;
+     line-height: 1.5;
+     font-family: "Noto Sans KR",sans-serif;
+     color: #333;
+ }
+
+ .goods_no_data strong {
+     font-size: 14px;
+     font-weight: normal;
+     line-height: 150px;
+ }
+
+ .purchaseconfirm{
+     margin: 0;
+     color: #ffffff;
+     font-size: 12px;
+     border: 1px solid #666666;
+     background: #666666;
+     cursor: pointer;
+     font-weight: bold;
+ }

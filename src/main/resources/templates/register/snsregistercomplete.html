@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/register/registercomplete.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+
+      function nextpage(){
+        location.href='/login';
+      }
+
+      function homepage(){
+        location.href='/';
+      }
+
+    </script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div id="header" th:replace="layout/header::nav"></div>
+<div id='wrapper'>
+    <div class="membercomplete_box">
+        <div class="membercomplete_wrap">
+            <h2>
+                회원가입
+            </h2>
+            <div class="membercomplete_wrap2">
+                <img src="/image/img_join_ok.png">
+                <div class="membercompletex_spanbox">
+                    <span th:text="${nickname}">유저이름</span>님 회원가입 해주셔서 감사합니다.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="member_complete_center">
+        <button type="button" id="btnprevstep" class="member_complete_prev" onclick="homepage()">
+            홈으로
+        </button>
+        <button type="button" id="btnnextstep" class="member_complete_next" onclick="nextpage()">
+            로그인
+        </button>
+        </form>
+    </div>
+</div>
+<div id="footer" th:replace="layout/footer::footer"></div>
+<script type="text/javascript" src="register.js"></script>
+</body>
+</html>

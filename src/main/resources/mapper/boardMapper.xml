@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hiccup.hiccupstore.board.dao.BoardMapper">
+
+    <select id="getBoardById" parameterType="Integer" resultType="hiccup.hiccupstore.board.dto.Board">
+        SELECT * FROM board WHERE boardId = #{boardId}
+    </select>
+
+    <select id="getImageListNameByBoardId" parameterType="Integer" resultType="String">
+        SELECT imagePath FROM image WHERE boardId = #{boardId}
+    </select>
+    <select id="getCommentListByBoardId" parameterType="Integer" resultType="hiccup.hiccupstore.board.dto.Comment">
+        SELECT * FROM comment WHERE boardId = #{boardId}
+    </select>
+    <select id="getBoardListByProductIdAndBoardType" parameterType="Integer" resultType="hiccup.hiccupstore.board.dto.Board">
+        SELECT  board.boardId, board.userId, board.boardTypeId, board.productId, board.boardTitle, board.boardContent, board.createDate, board.boardCategory, user.nickName as userName,
+        (SELECT COUNT(*) FROM comment WHERE boardId = board.boardId) as commentCount
+        FROM board
+        LEFT JOIN user ON board.userId = user.userId
+        WHERE board.productId = #{productId} AND board.boardTypeId = #{boardTypeId}
+        ORDER BY boardId desc
+    </select>
+    <select id="getBoardCountByProductIdAndBoardType" parameterType="Integer" resultType="Integer">
+        SELECT COUNT(*) FROM board WHERE board.productId = #{productId} AND board.boardTypeId = #{boardTypeId}
+    </select>
+    <insert id="insertProductQnA" parameterType="hiccup.hiccupstore.board.dto.ProductQnA">
+        INSERT INTO board(userId,boardTypeId,boardCategory,productId,boardTitle,boardContent,createDate)
+        VALUES(#{userId},#{boardTypeId},#{boardCategory},#{productId},#{boardTitle},#{boardContent},#{createDate})
+        <selectKey keyProperty="boardId" resultType="Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <insert id="insertReview" parameterType="hiccup.hiccupstore.board.dto.Review">
+        INSERT INTO board(userId,boardTypeId,productId,boardContent,createDate)
+        VALUES(#{userId},#{boardTypeId},#{productId},#{boardContent},#{createDate})
+        <selectKey keyProperty="boardId" resultType="Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <insert id="insertImage" parameterType="hiccup.hiccupstore.board.dto.Image">
+        INSERT INTO image(boardId,imageName,imagePath)
+        VALUES
+        <foreach collection="list" item="image" separator=",">
+            (
+            #{image.boardId},#{image.imageName},#{image.imagePath}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertComment" parameterType="hiccup.hiccupstore.board.dto.Comment">
+        INSERT INTO comment(userId,boardId,commentCreateDate,commentContent)
+        VALUES(#{userId},#{boardId},#{commentCreateDate},#{commentContent})
+    </insert>
+    <update id="updateComment" parameterType="hiccup.hiccupstore.board.dto.Comment">
+        UPDATE comment
+        SET commentContent = #{commentContent}
+        WHERE commentId = #{commentId}
+    </update>
+    <update id="editReview" parameterType="hiccup.hiccupstore.board.dto.Review">
+        UPDATE board
+        SET boardTypeId = #{boardTypeId},
+        boardContent = #{boardContent}
+        WHERE boardId = #{boardId}
+    </update>
+    <update id="editProductQnA" parameterType="hiccup.hiccupstore.board.dto.ProductQnA">
+        UPDATE board
+        SET boardTypeId = #{boardTypeId},
+        boardCategory= #{boardCategory},
+        productId= #{productId},
+        boardTitle = #{boardTitle},
+        boardContent = #{boardContent}
+        WHERE boardId = #{boardId}
+    </update>
+    <update id="editImage" parameterType="hiccup.hiccupstore.board.dto.Image">
+        <foreach collection="list" item="image" separator=",">
+            UPDATE image
+            SET imageName = #{imageName},
+            imagePath = #{imagePath}
+            WHERE
+        </foreach>
+    </update>
+    <delete id="deleteProductQnA" parameterType="Integer">
+        DELETE FROM board
+        WHERE boardId = #{boardId}
+    </delete>
+    <delete id="deleteImageByBoardId" parameterType="Integer">
+        DELETE FROM image
+        WHERE boardId = #{boardId}
+    </delete>
+    <delete id="deleteReview" parameterType="Integer">
+        DELETE FROM board
+        WHERE boardId = #{boardId}
+    </delete>
+    <delete id="deleteCommentByCommentId" parameterType="Integer">
+        DELETE FROM comment
+        WHERE commentId = #{commentId}
+    </delete>
+</mapper>

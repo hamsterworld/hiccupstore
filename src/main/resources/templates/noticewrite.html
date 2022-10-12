@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/noticewrite.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/SmartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="subcontent">
+            <div class="content">
+                <div class="board_zone_sec">
+                    <div class="board_zone_tit">
+                        <h2>공지사항</h2>
+                    </div>
+                    <form th:action="@{/notice/noticewrite}" name="information"  method="POST" enctype="multipart/form-data">
+                    <div class="board_zone_cont">
+                        <div class="board_zone_view">
+                            <div class="board_list_qa">
+                                <table class="board_write_table" style="width:100%">
+                                    <colgroup>
+                                        <col style="width:15%">
+                                        <col style="width:85%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">작성자</th>
+                                            <td>
+                                                관리자
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">제목</th>
+                                            <td>
+                                                <input type="text" name="boardtitle" value>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">본문</th>
+                                            <td>
+                                                <textarea name="boardcontent" id="editorTxt" class="int" cols="30" rows="10"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">파일업로드</th>
+                                            <td>
+                                                <input type="file" name="imageFiles" onchange="setThumbnail(event);">
+                                                <div id="image_container"></div>
+                                                <div id="clear"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="btn_right_box">
+                                <button type="button" class="btn_board_list" onclick="prev()">이전</button>
+                                <button type="button" class="btn_board_list" onclick="noticewrite()">글쓰기</button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>   
+        </div>
+    </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/noticewrite.js"></script>
+    <script>
+        let oEditors = []
+    
+        smartEditor = function() {
+          console.log("Naver SmartEditor")
+          nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "editorTxt",
+            sSkinURI: "/smarteditor/SmartEditor2Skin.html",
+            fCreator: "createSEditor2"
+          })
+        };
+    
+        $(document).ready(function() {
+          smartEditor()
+    
+          $("#btnJoin").on("click", function() {
+                oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
+                var value = document.getElementById("editorTxt").value;
+                let content = JSON.stringify({
+                "boardcontent":$('#editorTxt').val(),
+                "boardtitle":$('#title').val()
+                });
+    
+                $.ajax({
+                    type : "POST",
+                    contentType: "application/json",
+                    url : "/write",
+                    data : content,
+                    success : function(){
+                        console.log("성공");
+                        location.href="/board";
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log(textStatus);
+                         console.log(errorThrown);
+                        alert("통신 실패.")
+                    }
+                });
+            });
+    
+        });
+      </script>
+</body>
+</html>

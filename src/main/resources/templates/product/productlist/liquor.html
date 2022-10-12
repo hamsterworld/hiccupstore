@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/product/productlist.css">
+    <link rel="stylesheet" href="/js/header/header.js">
+    <link rel="stylesheet" href="/js/product/productlist.js">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $("#header").load("/html/header/header2.html") ;
+
+         $("#footer").load("/html/footer/footer2.html") ;
+
+      });
+
+
+    </script>
+    <script th:inline="javascript">
+            const categoryId = [1,2,3,4,5] ;
+            const category = ['makgeolli','yakju','soju','wine','etc'];
+            $(document).ready(function (){
+                categoryId.forEach(function(id){
+                    let tagId = '#'+category[id-1] ;
+                    $.ajax({
+                        type:'GET',
+                        url:'/product/productlist/category?type='+ String(id),
+                        dataType:'text',
+                        success:function(result){
+                            console.log(tagId+' 태그의 Id : '+ String(id))
+                            $(tagId).html(result);
+                        },
+                        error:function(){
+                            console.log("Ajax Error!");
+                        }
+                    });
+                });
+
+                $(function(){
+                    let viewCntValue = [[${page.cntPerPage}]] ;
+                    $("#viewCnt option[value="+viewCntValue+"]").prop('selected', true);
+                });
+            });
+
+            $(function (){
+               $("#viewCnt").change(function (){
+                   let changeVal = $("#viewCnt option:selected").val();
+                   console.log(changeVal);
+                   location.href="/product/productlist/liquor?pageNum="+ [[${page.currentPage}]] + "&type=" + [[${viewCriteria.type}]] +"&sort="+ [[${viewCriteria.sort}]] + "&viewCnt=" + changeVal;
+               });
+            });
+
+            // $("#viewCnt").on("change", function (){
+            //     let changedVal = $(this).val();
+            //     location.href="/product/productlist/liquor?pageNum="+ /*[[${page.currentPage}]]*/ + "&type=" + /*[[${viewCriteria.type}]]*/ +"&sort="+ /*[[${viewCriteria.sort}]]*/ + "&viewCnt=" + changedVal;
+            // });
+
+    </script>
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div id="header" th:replace="layout/header::nav"></div>
+
+    <!-- 본문 -->
+    <div id='wrapper'>
+        <!-- list 화면 전체-->
+
+        <div id="productlistwrap">
+            <!-- 카테고리 선택 바 -->
+            <div class="productlistcategory">
+                <ul th:object="${page}">
+                    <li>
+                        <a th:href="@{/product/productlist/liquor(pageNum='1', type='1', sort=*{viewCriteria.sort}, viewCnt=*{viewCriteria.cntPerPage})}">막걸리 (<span id="makgeolli"></span>)</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/product/productlist/liquor(pageNum='1', type='2', sort=*{viewCriteria.sort}, viewCnt=*{viewCriteria.cntPerPage})}">약주/청주 (<span id="yakju"></span>)</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/product/productlist/liquor(pageNum='1', type='3', sort=*{viewCriteria.sort}, viewCnt=*{viewCriteria.cntPerPage})}">증류식 소주 (<span id="soju"></span>)</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/product/productlist/liquor(pageNum='1', type='4', sort=*{viewCriteria.sort}, viewCnt=*{viewCriteria.cntPerPage})}">와인 (<span id="wine"></span>)</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/product/productlist/liquor(pageNum='1', type='5', sort=*{viewCriteria.sort}, viewCnt=*{viewCriteria.cntPerPage})}">기타 (<span id="etc"></span>)</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 카테고리 설명 템플릿 -->
+
+            <div class="addition_zone" th:if="${page.viewCriteria.type ne null}">
+                <div class="category_image" th:switch="${page.viewCriteria.type}">
+                    <span th:case=1>
+                        <img alt="막걸리에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">
+                    </span><!--makgeolli에 해당하는 카테고리 설명 템플릿-->
+                    <span th:case=2>
+                        <img alt="약주/청주에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">
+                    </span><!--yakju에 해당하는 카테고리 설명 템플릿-->
+                    <span th:case=3>
+                        <img alt="전통 소주에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">
+                    </span><!--soju에 해당하는 카테고리 설명 템플릿-->
+                    <span th:case=4>
+                        <img alt="한국 와인에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">
+                    </span><!--wine에 해당하는 카테고리 설명 템플릿-->
+                    <span th:case=5>
+                        <img alt="기타 주류에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">
+                    </span><!--etc에 해당하는 카테고리 설명 템플릿-->
+                </div>
+            </div>
+
+            <!-- 조회 리스트 상단바 -->
+            <div class="view-container">
+                <!-- 조회 상품 갯수 -->
+                <span class="view-num">
+                    전체상품
+                    <strong class="fw500" th:text="${page.total}"></strong>
+                    개
+                </span>
+
+                <!-- 조회 옵션 선택 바 -->
+                    <div class="view-option">
+                        <!-- Sorting 기준  -->
+                        <div class="view-option-s">
+                            <ul class="view-option-sort" th:object="${page}">
+                                <li>
+                                    <a th:with="rate='rate'" th:href="@{/product/productlist/liquor(pageNum=*{currentPage}, type=*{viewCriteria.type}, sort='rate', viewCnt=*{cntPerPage})}">판매량 순</a>
+                                </li>
+                                <li>
+                                    <a th:with="review='review'" th:href="@{/product/productlist/liquor(pageNum=*{currentPage}, type=*{viewCriteria.type}, sort='review', viewCnt=*{cntPerPage})}">리뷰 많은 순</a>
+                                </li>
+                                <li>
+                                    <a th:with="pick='pick'" th:href="@{/product/productlist/liquor(pageNum=*{currentPage}, type=*{viewCriteria.type}, sort='pick', viewCnt=*{cntPerPage})}">찜 순</a>
+                                </li>
+                                <li>
+                                    <a th:with="low='low'" th:href="@{/product/productlist/liquor(pageNum=*{currentPage}, type=*{viewCriteria.type}, sort='low', viewCnt=*{cntPerPage})}">낮은 가격 순</a>
+                                </li>
+                                <li>
+                                    <a th:with="high='high'" th:href="@{/product/productlist/liquor(pageNum=*{currentPage}, type=*{viewCriteria.type}, sort='high', viewCnt=*{cntPerPage})}">높은 가격 순</a>
+                                </li>
+
+                                <!-- <li style=" pointer-events: none;"> -->
+                                    <div style="float:right;height:50px">
+
+                                            <select class="view-option-number" id="viewCnt" style="margin-top: 15px;">
+                                        <!-- 실제 Select 박스 -->
+                                        <!-- Select 박스 템플릿 : active-->
+                                        <!--
+                                            **"선택된 값" class : "result-selected" class 추가
+                                            **드롭다운 -> "container-number-select-active" div를 찾아서
+                                                            "select-with-drop" 추가 & 드롭다운 기존 선택값 li에 "highlighted"
+                                                            (최초 드롭다운 때만, focus-out되면 모든 li 초기화)
+                                            **드롭다운active 이후, hover : "highlighted" 추가 -> 범위 벗어나면 모든 ls에 highlighted 삭제
+                                        -->
+                                                <option value="16" selected>16개씩 보기</option>
+                                                <option value="32">32개씩 보기</option>
+                                                <option value="48">48개씩 보기</option>
+                                            </select>
+
+                                    </div>
+                                <!-- </li> -->
+                            </ul>
+                        </div>
+                        <!-- 상품 조회 갯수 -->
+                        <!-- <div class="view-option-n">
+                            <select class="view-option-number" name="number"> -->
+                                <!-- 실제 Select 박스 -->
+                                <!-- Select 박스 템플릿 : active-->
+                                <!--
+                                    **"선택된 값" class : "result-selected" class 추가
+                                    **드롭다운 -> "container-number-select-active" div를 찾아서 
+                                                    "select-with-drop" 추가 & 드롭다운 기존 선택값 li에 "highlighted" 
+                                                    (최초 드롭다운 때만, focus-out되면 모든 li 초기화)
+                                    **드롭다운active 이후, hover : "highlighted" 추가 -> 범위 벗어나면 모든 ls에 highlighted 삭제
+                                -->
+                                <!-- <option value="16">16개씩 보기</option>
+                                <option value="32">32개씩 보기</option>
+                                <option value="48">48개씩 보기</option>
+                            </select>
+                        </div> -->
+                    </div>
+            </div>
+            
+            <!-- 조회 리스트 본문 -->
+<!--            <div id="list-container">
+                   나중에 페이지 include할 때, 사용하기
+                </div>-->
+            <div class="goods_list">
+
+                <div class="extist-list" th:if="${list}">
+                <ul>
+                    <th:block  th:each="item : ${list}">
+                    <li>
+                        <div class="item_content" >
+                            <div id="item_content_wrap_wrap">
+                                <div class="sold_out_gif" th:if="${item.quantity eq 0}">
+                                    <img src="/image/productlist/icon_soldout.gif">
+                                </div>
+                                <div class="item_img">
+                                    <a th:href="@{/product/detail(pid=${item.productId})}">
+                                        <img th:src="|${item.imagePath}|">
+                                    </a>
+                                    <div th:if="${item.quantity eq 0}">
+                                        <strong class="item_sold_out">
+                                        </strong>
+                                    </div>
+                                    <div class="item_info_content">
+                                        <div class="item_tit_box">
+                                            <a th:href="@{/product/detail(pid=${item.productId})}">
+                                                <strong class="item_name" th:text="${item.productName}">
+                                                </strong>
+                                            </a>
+                                        </div>
+                                        <div class="mt10">
+                                        </div>
+                                        <div class="item_price_box">
+                                            <strong class="item_price" th:text="|${#numbers.formatInteger(item.price, 0, 'COMMA')} 원|"></strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    </th:block>
+                </ul>
+                </div>
+                <div class="no-extist-list" th:if="${list.size() eq 0}">
+                    <div style="text-align: center ;height: 370px; line-height:370px">
+                        <span style="color: #777777"><strong>조회된 상품이 없습니다.</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 페이징 -->
+            <div th:object="${page}">
+
+                <div class="big-page-bar" style="text-align: center">
+                    <a class="changePage" th:if="*{prev}" th:href="@{/product/productlist/liquor(pageNum=*{startPage - 1}, type=*{viewCriteria.type}, sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">
+                        <code>&lt;</code>
+                    </a>
+                    <th:block th:each=" num : ${#numbers.sequence(page.getStartPage(), page.getEndPage())}">
+                        <!-- 현재 페이지에 해당하는 페이지 넘버일 땐, 링크없는 text로만 출력 -->
+                        <code th:if="${page.getCurrentPage() == num}" th:text="${num}"></code>
+                        <a class="changePage" th:unless="${page.getCurrentPage() == num}" th:href="@{/product/productlist/liquor(pageNum=${num}, type=*{viewCriteria.type}, sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">
+                            <code th:text="${num}"></code>
+                        </a>
+                    </th:block>
+                    <a class="changePage" th:if="*{next}" th:href="@{/product/productlist/liquor(pageNum=*{endPage + 1}, type=*{viewCriteria.type}, sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">
+                        <code>&gt;</code>
+                    </a>
+                </div>
+<!--                <div class="small-page-bar" style="text-align: center">-->
+<!--                        <a class="changePage" th:if="*{criteria.pageNum > 1}" th:href="*{criteria.pageNum - 1}">-->
+<!--                        <code>&lt;</code>-->
+<!--                    </a>-->
+<!--                    <code th:text="*{criteria.pageNum}"></code>-->
+<!--                    <a class="changePage" th:if="*{criteria.pageNum < lastEnd}" th:href="*{criteria.pageNum + 1}">-->
+<!--                        <code>&gt;</code>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <form action="/product/productlist/liquor" th:object="${page.criteria}" name="pageForm">-->
+<!--                    <input type="hidden" name="pageNum" th:field="*{pageNum}"/>-->
+<!--                    <input type="hidden" name="amountInOnePage" th:field="*{amountInOnePage}"/>-->
+<!--                    <input type="hidden" name="type" th:field="*{type}"/>-->
+<!--                    <input type="hidden" name="sort" th:field="*{sort}"/>-->
+<!--                </form>-->
+            </div>
+
+        </div>
+    </div>
+
+<div id="footer" th:replace="layout/footer::footer"></div>
+
+<!--    <script type="text/javascript" src="register.js"></script>-->
+</body>
+</html>

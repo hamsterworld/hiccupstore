@@ -1,0 +1,416 @@
+.mt60{
+    margin-top: 60px !important;
+}
+
+.pt60{
+    padding-top: 60px !important;
+}
+
+/* 사이드바 관련 css */
+.mypage_wrapper{
+    min-height: 400px;
+    width: 1200px;
+    margin:auto;
+}
+
+.mypage_sidebar_submenu a:hover{
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+.mypage_wrapper:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.mypage_sidebar{
+    float: left;
+    width: 200px;
+}
+
+.mypage_sidebar_content{
+    min-height: 250px;
+    padding: 0 0 50px 0;
+}
+
+.mypage_sidebar_content h2{
+    padding: 0 0 14px 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.mypage_sidebar_submenu{
+    margin: 7px 0 0 0;
+    list-style: none;
+    padding:0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin: 7px 0 0 0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu > li:first-child{
+    margin: 30px 0 0 0;
+}
+
+.mypage_sidebar_submenu > li{
+    padding: 8px 0 15px 0;
+    font-size: 14px;
+    font-weight: bold;
+    background: url(/image/lnb_tit.png) no-repeat top left;
+}
+
+
+/* 하위사이드바 1 */
+.mypage_sidebar_submenu1{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu1 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu1 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 2 */
+.mypage_sidebar_submenu2{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu2 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu2 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 3 */
+.mypage_sidebar_submenu3{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu3 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu3 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 4 */
+.mypage_sidebar_submenu4{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu4 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu4 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 메인 content 영역 */
+.mypage_maincontent{
+    width: 940px !important;
+    float: right;
+}
+
+.maincontent{
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.mypage_main{
+    padding: 0 0 50px 0;
+}
+
+.board_view_tit{
+    overflow: hidden;
+    padding: 10px 10px 10px 10px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #dbdbdb;
+    background: #f7f7f7;
+}
+
+.board_view_info {
+    overflow: hidden;
+    padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid #dbdbdb;
+    font-size: 15px;
+}
+
+.board_view_info .view_info_idip {
+    display: inline-block;
+}
+
+.board_view_info .view_info_day {
+    display: inline-block;
+    height: 10px;
+    margin: 0 0 0 7px;
+    font-size: 11px;
+    border-left: 1px solid #dbdbdb;
+    vertical-align: middle;
+}
+
+.view_info_day em {
+    position: relative;
+    display: block;
+    top: -3px;
+    padding: 0 0 0 10px;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.view_info_hits {
+    float: right;
+    text-align: right;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    display: inline-block;
+}
+
+.board_view_content {
+    min-height: 350px;
+}
+.view_goods_select_item {
+    margin: 10px 0 3px 0;
+    padding: 20px 20px 30px 20px;
+    font-size: 0;
+    border-bottom: 1px dotted #dbdbdb;
+}
+.view_select_item_img {
+    display: inline-block;
+    width: 120px;
+    height: auto;
+    vertical-align: top;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.view_select_item_img img {
+    width: 100%;
+    border: 1px solid #dbdbdb;
+    vertical-align: middle;
+}
+
+.board_view_content img {
+    max-width: 100%;
+}
+
+.view_select_item_info {
+    display: inline-block;
+    position: relative;
+    padding: 0px 0 0 20px;
+    font-size: 14px;
+}
+
+.view_select_item_info em {
+    display: block;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.view_select_item_info > strong {
+    display: block;
+    padding: 5px 0 0 0;
+    font-size: 12px;
+    color: #189fdb;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.board_view_qa .view_question_box {
+    position: relative;
+    padding: 30px 0 30px 40px;
+}
+
+.view_question_tit, .board_view_qa .view_answer_tit {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    color: #333333;
+    font-size: 24px;
+    font-family: arial;
+}
+
+.board_view_content .seem_cont {
+    padding: 30px 15px 30px 15px;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.board_view_qa .seem_cont {
+    padding: 0 15px 0 15px !important;
+}
+.board_view_qa .view_answer_box {
+    position: relative;
+    padding: 30px 0 30px 40px;
+    border-top: 1px solid #dbdbdb;
+}
+
+.board_view_qa .view_answer_tit {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    color: #333333;
+    font-size: 24px;
+    font-family: arial;
+}
+.view_answer_box .view_answer_info {
+    margin: 0 0 0 10px;
+    padding: 5px 0 10px 5px;
+    border-bottom: 1px dotted #dbdbdb;
+}
+
+.view_answer_info > strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.view_answer_info .view_info_idip {
+    display: inline-block;
+    margin: 5px 0 0 0;
+}
+
+.view_info_idip > strong {
+    display: block;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.view_answer_box .view_answer_info .view_info_day {
+    display: inline-block;
+    height: 10px;
+    margin: 0 0 0 7px;
+    font-size: 11px;
+    border-left: 1px solid #dbdbdb;
+    vertical-align: middle;
+}
+
+.view_answer_box .view_answer_info .view_info_day em {
+    position: relative;
+    display: block;
+    top: -3px;
+    padding: 0 0 0 10px;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.board_view_comment {
+    padding: 10px 0 10px 0;
+}
+
+.view_comment {
+    padding: 0 0 0 0;
+    border-bottom: 1px solid #dbdbdb;
+    background: #ffffff;
+}
+
+.btn_right_box {
+    text-align: right;
+}
+
+.btn_board_list {
+    height: 34px;
+    line-height: 32px;
+    margin: 0 0 0 5px;
+    margin-top:10px;
+    padding: 0 22px 0 22px;
+    color: #666666;
+    border: 1px solid #a3a3a3;
+    text-align: center;
+    font-size: 14px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.board_zone_sec .btn_center_box {
+    margin: 30px 0px 0px;
+}
+
+.btn_center_box {
+    text-align: center;
+}
+
+.btn_before {
+    display: inline-block;
+    width: 100px;
+    height: 42px;
+    padding: 0px 5px;
+    color: rgb(62, 61, 60);
+    font-size: 14px;
+    border: 1px solid rgb(204, 204, 204);
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn_write_ok {
+    margin-left: 6px;
+    display: inline-block;
+    min-width: 90px;
+    height: 42px;
+    padding: 0px 10px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    border: 1px solid rgb(24, 159, 219);
+    background: rgb(24, 159, 219);
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn_write_ok:hover {
+    border: 1px solid rgb(166, 120, 66);
+    background: rgb(166, 120, 66);
+}

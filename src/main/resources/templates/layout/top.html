@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div class="firstbarwrap" th:fragment="header">
+    <div class="firstbar">
+        <a th:href="@{/login}" class="firstbarlink" sec:authorize="isAnonymous()">LOGIN</a>
+        <a th:href="@{/logout}" class="firstbarlink" sec:authorize="isAuthenticated()">LOGOUT</a>
+        <a th:href="@{/join}" class="firstbarlink" sec:authorize="isAnonymous()">JOIN</a>
+    </div>
+</div>
+</html>

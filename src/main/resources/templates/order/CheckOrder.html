@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/header/header.css">
+  <link rel="stylesheet" href="/css/footer/footer.css">
+  <link rel="stylesheet" href="/css/order/checkOrder.css">
+  <script src="/js/order/order.js"></script>
+  <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div id="header" th:replace="layout/header::nav"></div>
+<div id='wrapper'>
+  <div class="container pt60">
+    <div class="content_box">
+      <div class="order_wrap">
+        <div class="order_tit">
+          <h2>상세 주문 확인</h2>
+        </div>
+        <div class="order_info">
+          <div class="order_zone_tit">
+            <h4>주문자 정보</h4>
+          </div>
+          <div class="order_table_type shopping_info">
+            <table class="table_left shopping_info_table" id="userInfo">
+              <colgroup>
+                <col style="width: 15%;">
+                <col style="width: 85%;">
+              </colgroup>
+              <tbody>
+              <tr>
+                <th scope="row"><span class="import">주문하시는 분</span></th>
+                <td><span th:text="${user.nickName}"></span></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="import">주소</span></th>
+                <td><span th:text="${order.address}"></span></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="import">휴대폰 번호</span></th>
+                <td><span th:text="${user.phone}"></span></td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="import">주문날짜</span></th>
+                <td><span th:text="${order.orderDate}"></span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="order_cont">
+          <div class="order_cart_tit">
+            <h4>주문상세내역</h4>
+          </div>
+          <div class="order_table_type">
+            <table>
+              <colgroup>
+                <col>
+                <!-- 상품명/옵션 -->
+                <col style="width: 5%">
+                <!-- 수량 -->
+                <col style="width: 10%">
+                <!-- 상품금액 -->
+                <col style="width: 10%">
+                <!-- 합계금액 -->
+              </colgroup>
+              <thead>
+              <tr>
+                <th>상품/옵션 정보</th>
+                <th>수량</th>
+                <th>상품금액</th>
+                <th>합계금액</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="order-goods-layout" th:each="orderInfo, stat : ${orderInfo.orderProductInfo}">
+                <td class="td_left">
+                  <img th:src="${orderInfo.imagePath}" alt="이미지를 불러올 수 없습니다" height="35" width="35">
+                  <span th:text="${orderInfo.productName}" style="font-weight: bold;"></span>
+                </td>
+                <td class="td_order_amount">
+                  <div class="order_goods_num" id="quantity">
+                    <strong><span th:text = ${orderInfo.quantity}></span></strong>
+                  </div>
+                </td>
+                <td>
+                  <strong class="order_sum_txt price">
+                    <span th:text = ${#numbers.formatInteger(orderInfo.quantity*orderInfo.price,4,'COMMA')}></span>
+                  </strong>
+                </td>
+                <td>
+                  <strong class="order_sum_txt">
+                    <span th:text = ${#numbers.formatInteger(orderInfo.quantity*orderInfo.price,4,'COMMA')}></span>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" style="padding: 15px 30px 15px 0px; font-weight: bold;" >
+                  <span th:text="${order.status}"></span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- 장바구니 리스트 끝! -->
+          </div>
+        </div>
+        <div class="price_sum">
+          <div class="price_sum_cont">
+            <div class="price_sum_list">
+              <dl>
+                <dt>
+                  총<span th:text = ${orderInfo.orderProductInfo.size}></span>개의 상품 금액
+                </dt>
+                <dd>
+                  <span th:text =  ${#numbers.formatInteger(orderInfo.total,4,'COMMA')}></span>
+                  원
+                </dd>
+              </dl>
+              <span><img src="/image/order_price_plus.png"></span>
+              <dl>
+                <dt>
+                  배송비
+                </dt>
+                <dd>
+                  <span th:text="${#numbers.formatInteger(3000,4,'COMMA')}"></span>원
+                </dd>
+              </dl>
+              <span><img src="/image/order_price_total.png"></span>
+              <dl class="price_total">
+                <dt>
+                  합계
+                </dt>
+                <dd>
+                  <span th:text = ${#numbers.formatInteger(orderInfo.total+(3000),4,'COMMA')}></span>원
+                </dd>
+
+              </dl>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer" th:replace="layout/footer::footer"></div>
+</body>
+</html>

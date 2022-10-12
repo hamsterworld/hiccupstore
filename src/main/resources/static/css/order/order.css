@@ -1,0 +1,494 @@
+.pt60 {
+    padding-top: 60px !important;
+}
+
+
+/** main-content */
+
+.content_box {
+    width: 100%;
+}
+
+.order_wrap .order_tit {
+    overflow: hidden;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.order_wrap .order_tit h2 {
+    float: left;
+    font-size: 28px;
+    color: #222222;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.order_wrap .order_tit ol {
+    float: right;
+    line-height: 62px;
+}
+
+.order_wrap .order_tit ol li {
+    float: left;
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+dl, ul, ol, li {
+    list-style: none;
+}
+
+ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.order_wrap .order_tit li span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+fieldset, img {
+    border: 0 none;
+    vertical-align: top;
+}
+
+.order_wrap .order_tit li span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.order_wrap .order_tit .page_on {
+    color: #189fdb;
+    font-weight: bold;
+}
+
+.order_wrap .order_tit li span > img {
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.order_wrap .order_tit li span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.order_wrap .order_tit li span > img {
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.cart_cont_list {
+    margin: 50px 0 10px 0;
+}
+
+.cart_cont_list .order_cart_tit {
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+div {
+    display: block;
+}
+
+colgroup {
+    display: table-column-group;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+col {
+    display: table-column;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.order_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.order_table_type .td_left {
+    text-align: left;
+}
+
+.order_table_type .td_order_amount {
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+.order_table_type td {
+    height: 31px;
+    padding: 15px 10px 14px 10px;
+    color: #777777;
+    border-bottom: 1px solid #dbdbdb;
+    border-left: 1px dotted #ededed;
+    background: #ffffff;
+}
+
+.order_table_type th {
+    padding: 9px 10px 10px 10px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #dbdbdb;
+    background: #f7f7f7;
+}
+
+.order_table_type .order_sum_txt {
+    font-size: 13px;
+}
+
+.order_table_type td > strong {
+    color: #333333;
+}
+
+.shop_go_link {
+    display: inline-block;
+    border-bottom: 1px solid #333333;
+}
+
+address, caption, cite, code, dfn, em, var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+.price_sum {
+    margin: 30px 0 0 0;
+    padding: 20px 40px 25px 40px;
+    border: 2px solid #d6d6d6;
+}
+
+.price_sum_cont {
+    display: table;
+    float: right;
+    text-align: right;
+}
+
+.price_sum_cont .price_sum_list dl {
+    display: table-cell;
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+    text-align: right;
+}
+
+dl {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.price_sum:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.price_sum_cont .price_sum_list span {
+    display: table-cell;
+    padding: 0 15px 0 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.price_sum_cont .price_sum_list dd strong {
+    font-weight: 700;
+    font-size: 18px;
+    color: #189fdb;
+}
+
+.price_sum_cont .price_sum_list dl {
+    display: table-cell;
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+    text-align: right;
+}
+
+.price_sum_cont .price_sum_list dd {
+    color: #189fdb;
+}
+
+.price_sum_cont .price_sum_list .price_total {
+    padding-right: 0;
+}
+
+.order_zone_tit {
+    margin: 0 0 0 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.order_view_info h4 {
+    margin: 50px 0 0 0;
+}
+
+.order_table_type .table_left {
+    border-top: 1px solid #999999;
+}
+
+.order_cont .table_left th {
+    padding: 15px 10px 14px 30px;
+}
+
+.order_table_type .table_left td {
+    height: 31px;
+    padding: 12px 10px 11px 15px;
+    text-align: left;
+}
+
+.order_table_type .table_left th {
+    padding: 15px 10px 14px 20px;
+    border-top: none 0;
+    background: #f7f7f7;
+    text-align: left;
+}
+
+.order_cont input[type="text"] {
+    width: 220px;
+}
+
+th > .important {
+    margin: 0 0 0 -10px;
+    padding: 0 0 0 10px;
+
+}
+
+input[type="text"], input[type="password"] {
+    height: 31px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.order_zone_tit {
+    margin: 0 0 0 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.order_view_info h4 {
+    margin: 50px 0 0 0;
+}
+
+.order_cont table ul {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.order_cont table li {
+    display: inline-block;
+    padding: 0 30px 0 0;
+}
+
+.form_element {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+}
+
+.form_element li {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.form_element ul {
+    padding: 0px;
+}
+
+.order_table_type td > strong {
+    color: #333333;
+}
+
+.payment_progress_list {
+    padding: 0 0 10px 0;
+    border-top: 1px solid #999999;
+}
+
+.payment_progress_list dl {
+    display: block;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid #dbdbdb;
+    margin-top: 0;
+}
+
+.payment_progress_list dt {
+    display: inline-block;
+    width: 180px;
+    font-size: 13px;
+    font-weight: bold;
+    vertical-align: top;
+    float: left;
+    padding-left: 24px;
+    padding-top: 20px;
+}
+
+.general_payment dd {
+    min-width: 520px;
+}
+
+.payment_final_total dd {
+    display: inline-block;
+    font-size: 30px;
+    color: #189fdb;
+}
+
+.payment_final_total {
+    padding: 13px 46px 20px 0;
+    border: 2px solid #d6d6d6;
+    text-align: right;
+}
+
+.payment_final_total dt {
+    display: inline-block;
+    padding: 0 15px 0 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* .form_element input {
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 0;
+    z-index: -1;
+    visibility: hidden;
+} */
+
+.payment_final .form_element label.check_s em b {
+    color: #189fdb;
+}
+
+.payment_final .payment_final_check {
+    padding: 30px 0 20px 0;
+    text-align: center;
+}
+
+.form_element label.check_s {
+    min-width: 13px;
+    padding: 0 0 0 22px;
+
+}
+
+.payment_final_btn {
+    text-align: center;
+}
+
+.btn_order {
+    display: inline-block;
+    width: 300px;
+    height: 61px;
+    line-height: 59px;
+    color: #fff;
+    font-size: 20px;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    text-align: center;
+}
+
+select {
+    margin-bottom: 10px;
+    padding : 5px;
+    border: 1px solid #d6d6d6;
+}
+
+.d_form {
+    margin: 0.2em 0;
+    font-size: 1em;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-color: #dbdbdb #d2d2d2 #d0d0d0 #d2d2d3;
+    box-shadow: inset 0.1em 0.1em 0.15em rgb(0 0 0 / 10%);
+    vertical-align: middle;
+    line-height: 1.25em;
+    outline: 0;
+    width: 20em;
+    background-color : #e2e2e2;
+}
+
+#deliveryMessage {
+    display:none;
+}
+
+#message {
+    margin-bottom: 10px;
+}
+
+.d_btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0.4em 0.15em;
+    border: 1px solid #ccc;
+    border-color: #dbdbdb #d2d2d2 #b2b2b2 #d2d2d3;
+    cursor: pointer;
+    color: #464646;
+    border-radius: 0.2em;
+    vertical-align: middle;
+    font-size: 1em;
+    line-height: 1.25em;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#f2f2f2));
+}
+
+dd {
+    margin: 0;
+    padding: 0;
+}

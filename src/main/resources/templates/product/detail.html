@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/product/productWrite.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/product/detail.css">
+    <link rel="stylesheet" href="/js/header/header.js">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        let csrfHeader = $('meta[name=_csrf_header]').attr('content');
+        let csrfToken = $('meta[name=_csrf]').attr('content');
+        // "reply" 객체 -> boardId & userId & content
+        function  createReply(boardId){
+            let replyListBlockId = '#review_reply_list_'+boardId;
+            let replyTextAreaId = '#reply_create_'+boardId;
+            let replyContent = $(replyTextAreaId).val();
+            let commentCountId = document.getElementById(boardId).querySelector('.reply_cnt_num');
+            let commentCount = document.getElementById(boardId).querySelector('.reply_cnt_num').innerHTML;
+            let reply = {
+                boardId : boardId,
+                commentContent : replyContent
+            };
+            $.ajax({
+                type:'POST',
+                url: '/api/comment/add',
+                data:JSON.stringify(reply),
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                   },
+                success:function(result) {
+                    commentCountId.innerHTML = parseInt(commentCount)+1
+                    $(replyListBlockId).empty();
+                    $(replyListBlockId).append(result);
+                },
+                error:function (){
+                    console.log("Reply 추가 Ajax 실패( Board Id : "+boardId+" )")
+                }
+            })
+        }
+        function  deleteReply(commentId,boardId){
+            let replyListBlockId = '#review_reply_list_'+boardId;
+            let commentCountId = document.getElementById(boardId).querySelector('.reply_cnt_num');
+            let commentCount = document.getElementById(boardId).querySelector('.reply_cnt_num').innerHTML;
+            $.ajax({
+                type:'POST',
+                url: '/api/comment/delete',
+                data:JSON.stringify({commentId:commentId, boardId: boardId}),
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                   },
+                success:function(result) {
+                    commentCountId.innerHTML = parseInt(commentCount)-1
+                    $(replyListBlockId).empty();
+                    $(replyListBlockId).append(result);
+                },
+                error:function (){
+                    console.log("Reply 삭제 Ajax 실패( Reply Id : "+commentId+" )");
+                }
+            })
+        }
+        function openModify(commentId){
+            let modifyBoxId = '#reply_modify_box_'+String(commentId);
+            let viewBoxId = '#reply_view_box_'+String(commentId);
+            let modifyBox = document.querySelector(modifyBoxId) ;
+            let viewBox = document.querySelector(viewBoxId);
+            if(modifyBox.style.display === 'none') {
+                modifyBox.style.display = 'block';
+                modifyBox.classList.remove('display-none');
+                viewBox.style.display = 'none'
+            } else {
+                modifyBox.style.display = 'none'
+                modifyBox.classList.add('display-none');
+                viewBox.style.display = 'block';
+            }
+        }
+        // "reply" 객체 -> commentId & content
+        function  updateReply(commentId,boardId){
+            let test = this;
+            let modifyReplyTextAreaId = '#reply_modify_'+String(commentId);
+            let replyContent = $(modifyReplyTextAreaId).val();
+            let replyListBlockId = '#review_reply_list_'+boardId;
+            let reply = {
+                commentId : commentId,
+                commentContent : replyContent,
+                boardId : boardId
+            };
+            $.ajax({
+                type:'POST',
+                url: '/api/comment/edit',
+                data:JSON.stringify(reply),
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                   },
+                success:function(result) {
+                   window.location.reload();
+                },
+                error:function (){
+                    console.log("Reply 수정 Ajax 실패( Reply Id : "+commentId+" )")
+                }
+            })
+        }
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[ */
+        /* 상품 Review Function */
+        // DELETE
+        function deleteReview(boardId){
+            let review = {
+                productId : [[${product.productId}]],
+                boardId:boardId
+            }
+            $.ajax({
+                type:'POST',
+                url: '/api/review/delete',
+                contentType:"application/json; charset=utf-8",
+                data:JSON.stringify(review),
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                   },
+                success:function(result) {
+                    $('#review_list').replaceWith(result);
+                },
+                error:function (){
+                    console.log("Review 삭제 Ajax 실패")
+                }
+            })
+        }
+        //UPDATE
+        function QnAOpenModify(boardId) {
+            let modifyBox = document.querySelector('#QnA_modify_box_'+String(boardId)) ;
+            let viewBoxId = '#QnA_view_box_'+String(boardId);
+            let viewBox = document.querySelector(viewBoxId);
+            if(modifyBox.style.display === 'none' || modifyBox.style.display === '') {
+                modifyBox.style.display = 'block';
+                modifyBox.classList.remove('display-none');
+                document.querySelector('#btn_QnA_modify_'+String(boardId)).style.display = 'none';
+                viewBox.style.display = 'none'
+            } else {
+                modifyBox.style.display = 'none'
+                modifyBox.classList.add('display-none');
+                document.querySelector('#btn_QnA_modify_'+String(boardId)).style.display = 'block';
+                viewBox.style.display = 'block'
+            }
+        }
+        function updateReview(boardId) {
+            let textAreaId = '#review_modify_text_'+String(boardId);
+            let updateText = $(textAreaId).val();
+            let review = {
+                boardId : boardId,
+                boardTypeId : 1,
+                productId : [[${product.productId}]],
+                boardContent : updateText
+            };
+
+            $.ajax({
+                type:'POST',
+                url: '/api/review/edit',
+                data:JSON.stringify(review),
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                   },
+                success:function(result) {
+                    $('#review_list').replaceWith(result);
+                },
+                error:function (){
+                    console.log("Review 수정 Ajax 실패")
+                }
+            })
+        }
+        // 댓글 보기
+
+        function getReplyList(reveiwBoardId){
+            let replyListBlockId = '#review_reply_list_'+String(reveiwBoardId);
+            var test  = $(replyListBlockId).children('div')
+            if(test.length===0){
+                $.ajax({
+                    type:'GET',
+                    url: '/api/comment?boardId='+reveiwBoardId,
+                    contentType:"text/html; charset=utf-8",
+                    dataType : "html",
+                    beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                   },
+                    success:function (result) {
+                        $(replyListBlockId).append(result);
+
+                    },
+                    error:function (){
+                        console.log("Reply 조회 Ajax 실패")
+                    }
+                })
+            }
+            else{
+                $(replyListBlockId).empty();
+            }
+        }
+        /*]]>*/
+    </script>
+    <script th:inline="javascript">
+        function editProduct(pid) {
+            location.href="?pid="+String(pid);
+        }
+        function deleteProduct(pid){
+            data = {productId : pid}
+            $.ajax({
+                type: 'POST',
+                url: "/product/delete",
+                data : JSON.stringify(data) ,
+                contentType : "application/json; charset=utf-8",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                },
+                dataType : "json",
+                success:function(result) {
+                     alert("삭제되었습니다.");
+                     location.href="redirect:/product/productlist/liquor";
+                },
+                error:function (){
+                    console.log(" Ajax 실패")
+                }
+            })
+        }
+
+        function createReview(){
+        if( null == [[${session.userId}]]){
+                alert("로그인해주세요");
+                return;
+            }
+            let reviewDTO = {
+                boardTypeId : 1,
+                productId : [[${product.productId}]],
+                boardContent : $('#review_contents').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: "/api/review/add",
+                data : JSON.stringify(reviewDTO) ,
+                contentType : "application/json; charset=utf-8",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                },
+                dataType : "html",
+                success:function(result) {
+                     $('#review_list').replaceWith(result);
+                     $('#review_contents').val('')
+                },
+                error:function (){
+                    console.log("Reply 추가 Ajax 실패( Board Id : "+boardId+" )")
+                }
+            })
+        };
+
+        /**
+         * 상품 리뷰 가져오기
+         * @param pid : BigInteger
+         * @param pageNum : BigInteger
+         */
+        function getReviewList(pid){
+            $.ajax({
+                type:'GET',
+                url: '/api/reviewList?productId='+pid,
+                contentType : "application/json charset=utf-8",
+                dataType: "html",
+                success: function (result) {
+                    $('#review_list').replaceWith(result);
+                },
+                error: function (){
+                    console.log("Review 조회 Ajax 실패")
+                }
+            })
+        };
+        function getPhotoReviewList(pid, pageNum){
+            $.ajax({
+                type:'GET',
+                url: 'product/photo-review',
+                data: JSON.stringify({'productId' : pid, 'pageNum' : pageNum}),
+                contentType:"application/json; charset=utf-8",
+                dataType: "html",
+                success: function (result) {
+                    $('#review_list').replaceWith(result);
+                },
+                error: function (){
+                    console.log("Review 조회 Ajax 실패")
+                }
+            })
+        };
+        /**
+         * 상품 QnA 가져오기
+         */
+        function getQnaList(pid){
+            $.ajax({
+                type:'GET',
+                url: '/api/productQnAList?productId='+pid,
+                contentType:"application/json; charset=utf-8",
+                dataType: "html",
+                success: function (result) {
+                    $('#qna-list').replaceWith(result);
+                },
+                error: function (){
+                    console.log("Review 조회 Ajax 실패")
+                }
+            })
+        };
+
+
+        $(document).ready(function(){
+            let pid = [[${product.productId}]];
+            // 상품 리뷰 댓글 가져오기
+            getReviewList(pid);
+            // 상품 QnA List 가져오기
+            getQnaList(pid);
+<!--            // 찜 버튼 반응 시켜 놓기-->
+            exitUserPick();
+        });
+
+
+
+        //상품 리뷰 업데이트 함수
+        // 상품 QnA 업데이트 함수
+
+        /*
+        기본 : 리뷰 = 기본적인 내용은 처음부터 View ++ [작성자/관리자일 경우] "리뷰"에 대한 수정 삭제 활성화
+                    -> 댓글만 클릭했을 때 보이기( Ajax )
+                    -> [작성자/관리자일 경우] "리뷰의 댓글"에 대한 수정 삭제 활성화
+        필요 기능 :
+         */
+
+        // 상품 리뷰 -> 댓글 달거나(관리자) , 수정/삭제 했을 경우 -> 업데이트 함수 호출 Event
+
+        // 상품 QnA -> 댓글 달거나(관리자) , 수정/삭제 했을 경우 -> 업데이트 함수 호출 Event
+
+
+
+    </script>
+
+    <script th:inline="javascript">
+        function exitUserPick(){
+        let data = {
+                productId : [[${product.productId}]]
+            };
+
+            $.ajax({
+                type:'POST',
+                url: '/api/userPick',
+                data:JSON.stringify(data),
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                   },
+                success:function(result) {
+                    if(result == "false"){
+                    document.querySelector("#addPickDiv").style.display = 'block';
+                    document.querySelector("#deletePickDiv").style.display = 'none';
+                    }else{
+                       document.querySelector("#addPickDiv").style.display = 'none';
+                        document.querySelector("#deletePickDiv").style.display = 'block';
+                    }
+                },
+                error:function (){
+                    document.querySelector("#addPickDiv").style.display = 'block';
+                    document.querySelector("#deletePickDiv").style.display = 'none';
+                }
+            })
+        }
+        function addCart(productId) {
+            if( null == [[${session.userId}]]){
+                alert("로그인해주세요");
+                return;
+            }
+            let data = {
+                productId : productId,
+                quantity : parseInt($("#selectCnt").val())
+            };
+
+            $.ajax({
+                type:'POST',
+                url: '/api/cart/insert',
+                data:JSON.stringify(data),
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                   },
+                success:function(result) {
+                    if(result == "true"){
+                        location.href="/cart"
+                    }
+                    else{
+                        alert("장바구니에 있습니다.")
+                    }
+                },
+                error:function (){
+                    console.log("Review 수정 Ajax 실패")
+                }
+            })
+        }
+        // 상품 QnA 본문 내용 가져오기
+        function getQnaDetail(boardId){
+            let QnABlockId = '#qna_detail_'+String(boardId);
+            var test  = $(QnABlockId).children('div');
+            if(test.length===0){
+                $.ajax({
+                    type:'GET',
+                    url : '/api/productQnA?boardId='+boardId,
+                    contentType:"application/json; charset=utf-8",
+                    dataType : "html",
+                    success : function (result) {
+                        $(QnABlockId).replaceWith(result);
+                    },
+                    error: function (){
+                        console.log("ProductQnA ( id : "+boardId+" ) 조회 Ajax 실패");
+                    }
+                })
+            }else{
+                $(QnABlockId).empty();
+            }
+        }
+        function openModify(commentId){
+            let modifyBoxId = '#reply_modify_box_'+String(commentId);
+            let viewBoxId = '#reply_view_box_'+String(commentId);
+            let modifyBox = document.querySelector(modifyBoxId) ;
+            let viewBox = document.querySelector(viewBoxId);
+            if(modifyBox.style.display === 'none') {
+                modifyBox.style.display = 'block';
+                modifyBox.classList.remove('display-none');
+                viewBox.style.display = 'none'
+            } else {
+                modifyBox.style.display = 'none'
+                modifyBox.classList.add('display-none');
+                viewBox.style.display = 'block';
+            }
+        }
+        function deleteProductQnA(boardId){
+            let QnABlockId = '#qna_detail_'+String(boardId);
+            var test  = $(QnABlockId).children('div');
+            let data = {
+                boardId:boardId,
+                productId:[[${product.productId}]]
+            }
+            $.ajax({
+                type:'POST',
+                url : "/board/productQnA/delete",
+                data : JSON.stringify(data) ,
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                },
+                success : function (result) {
+                    getQnaList([[${product.productId}]]);
+                },
+                error: function (){
+                    console.log("ProductQnA ( id : "+boardId+" ) 조회 Ajax 실패");
+                }
+            })
+        }
+
+        function addUserPick(){
+            if( null == [[${session.userId}]]){
+                alert("로그인해주세요");
+                return;
+            }
+            let data = {
+                productId:[[${product.productId}]]
+            }
+            $.ajax({
+                type:'POST',
+                url : "/api/insertUserPick",
+                data : JSON.stringify(data) ,
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                },
+                success : function (result) {
+                    alert("성공했습니다.");
+                    exitUserPick();
+                },
+                error: function (){
+                    console.log("add userpick Ajax 실패");
+                }
+            })
+        }
+        function deleteUserPick(){
+           if( null == [[${session.userId}]]){
+                alert("로그인해주세요");
+                return;
+            }
+            let data = {
+                productId:[[${product.productId}]]
+            }
+            $.ajax({
+                type:'POST',
+                url : "/api/deleteUserPick",
+                data : JSON.stringify(data) ,
+                contentType:"application/json; charset=utf-8",
+                dataType : "html",
+                beforeSend : function(xhr){
+                       xhr.setRequestHeader(csrfHeader,csrfToken);
+                       xhr.setRequestHeader("x-Requested-With","XMLHttpRequests");
+                },
+                success : function (result) {
+                    alert("성공했습니다.");
+                    exitUserPick();
+                },
+                error: function (){
+                    console.log("delete userpick Ajax 실패");
+                }
+            })
+        }
+    </script>
+    <script th:inline="javascript">
+      function viewProductQnAWriteFrom(){
+        if( null == [[${session.userId}]]){
+            alert("로그인해주세요");
+        }
+        else{
+            document.getElementById('product-write-form').style.display = "block";
+        }
+      }
+      function ProductQnAWriteCansel(){
+        let form = document.getElementById('product-write-form');
+        document.getElementById('productQnATitle').value = "";
+        document.getElementById('productQnAContent').value = "";
+        $("#productQnACategoryId").val("").prop("selected", true);
+        document.querySelector("div#image_container").innerHTML = '';
+        form.style.display = "none";
+        document.getElementById("productQnAImage").value = null;
+
+      }
+      function setThumbnail(event) {
+        document.querySelector("div#image_container").innerHTML = '';
+        for (var image of event.target.files) {
+          var reader = new FileReader();
+          reader.onload = function(event) {
+            var img = document.createElement("img");
+            img.setAttribute("src", event.target.result);
+            img.setAttribute("style", "max-width:100%");
+            document.querySelector("div#image_container").appendChild(img);
+          };
+        reader.readAsDataURL(image);
+        }
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="blank"></div>
+        <div class="content_box" th:object="${product}">
+            <div class="product_photo_detail_section">
+                <!-- 품절일 경우 : 품절 아이콘 계속 가져오기 -->
+                <div class="product_photo_box">
+                    <div class="product-photo_view">
+                        <img th:src="|${productImage}|" style="width: 100%;">
+                    </div>
+                </div>
+                <!--
+                    찜하기/장바구니 : JS로 action & 툴팁(장바구니) or 하트 색칠(찜) / 바로 구매하기 : 버튼 Submit & 이동
+                    수량 증감 : JS
+                    selectCnt -> value값 숫자 버튼 및 number타입 input 값 참조하게끔 JS
+                    selectCnt&pprice 자동계산 JS -> selectPrice
+
+                    id, 수량,
+                -->
+                <input type="hidden" name="pid" th:value="*{productId}">
+                <input type="hidden" name="pname" th:value="*{productName}">
+                <input type="hidden" name="pcategory" th:value="*{categoryId}">
+                <input type="hidden" name="pprice" th:value="*{price}">
+                <input type="hidden" name="selectCnt" id="selectCnt" value="1">
+                <input type="hidden" name="selectPrice" >
+
+                <div class="product_detail_box">
+                    <div class="product_detail_tit">
+                        <h3 th:text="*{productName}"></h3>
+                    </div>
+                    <div class="product_detail_list">
+                        <dl>
+                            <dt>설명</dt>
+                            <dd th:text="*{description}"></dd>
+                        </dl>
+                        <dl>
+                            <dt>주종</dt>
+                            <th:block th:switch="*{categoryId}">
+                                <dd th:case="1">막걸리</dd>
+                                <dd th:case="2">약주 / 청주</dd>
+                                <dd th:case="3">소주 / 증류식 소주</dd>
+                                <dd th:case="4">와인</dd>
+                                <dd th:case="5">기타 주류</dd>
+                            </th:block>
+                        </dl>
+                        <dl>
+                            <dt>상품코드</dt>
+                            <dd th:text="*{productId}"></dd>
+                        </dl>
+                        <dl>
+                            <dt>알코올 도수</dt>
+                            <dd th:text="*{alcoholContent}"></dd>
+                        </dl>
+                        <dl>
+                            <dt>제조사</dt>
+                            <dd th:text="*{brand}"></dd>
+                        </dl>
+                        <dl class="item_price">
+                            <dt>판매가</dt>
+                            <dd th:text="*{{price}}"></dd>
+                        </dl>
+                        <dl class="item_delivery_price">
+                            <dt>배송비</dt>
+                            <dd>
+                                <strong><span id="delivery_price"></span>3000원</strong>
+                                <input type="hidden" name="deliveryPrice" value="3000">
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="product_detail_cnt_select">
+                        <table class="cnt_select_option_area">
+                            <tbody class="option_area_display">
+                                <tr>
+                                    <td class="target_name_block">
+                                        <div class="name_box">
+                                            <strong class="name">
+                                                <span th:text="*{productName}"></span>
+                                            </strong>
+                                        </div>
+                                    </td>
+                                    <td class="target_cnt_block">
+                                        <span class="cnt_block_display">
+                                            <span class="count">
+                                                <!-- 위에 있는 hidden의 selectCnt 삭제하기 -->
+                                                <input type="number" name="selectCnt" min="1" th:max="*{quantity}" step="1" value="1">
+<!--                                                <span>-->
+<!--                                                    <button type="button" class="cnt_up" title="증가">증가</button>-->
+<!--                                                    <button type="button" class="cnt_down" title="감소">감소</button>-->
+<!--                                                </span>-->
+                                            </span>
+                                        </span>
+                                    </td>
+                                    <td class="target_product_total_block">
+                                        <span class="total_block_display">
+                                            <!-- JS로 위 selectCnt input 값을 사용해서 출력하기
+                                             : 여기 출력 & hidden input 중 selectPrice value로도 설정-->
+                                            <span class="total" th:text="*{price}"></span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="option_result_display">
+                            <div class="result_calc_block">
+                                <dl class="result_price">
+                                    <dt>총 상품 금액</dt>
+                                    <dd><strong class="price"></strong></dd>
+                                </dl>
+                                <!--
+                                <dl class="result_discount">
+                                    <dt>총 할인 금액</dt>
+                                    <dd><strong class="discount"></strong></dd>
+                                    <
+                                </dl>
+                                -->
+                                <dl class="result_calc">
+                                    <dt>총 합계 금액</dt>
+                                    <dd><strong class="calc_price"></strong></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product_detail_btn_select">
+                        <!-- 계정 정보 확인 -->
+                        <div class="consumer_display">
+                            <div class="request_buttons">
+                                <!--
+                                    찜, 장바구니, 바로 구매 버튼
+                                    비회원 : 모든 버튼 눌렀을 때, alert"로그인이 필요한 서비스입니다"
+                                    회원 :
+                                        - 찜 여부 check -> 활성화
+                                        - 장바구니 -> Post & Ajax -> 툴팁 바 활성화 ( 쇼핑 계속 / 장바구니로 가기 )
+                                        - 바로 구매 -> Order 페이지로 Post & 랜더링
+                                -->
+                                <div id="addPickDiv">
+                                    <button class="no-pick" id="pickBtn" onclick="addUserPick()">
+                                        <i class="icon-un-filled-heart"></i>
+                                        찜 하기
+                                    </button>
+                                </div>
+                                <div id="deletePickDiv">
+                                    <button class="already-pick" id="unpickBtn" onclick="deleteUserPick()">
+                                        <i class="icon-filled-heart"></i>
+                                        찜 해제
+                                    </button>
+                                </div>
+
+                                <button class="add-cart" th:onclick="|javascript:addCart(${product.productId})|">
+                                    <i class="icon-cart"></i>
+                                    장바구니
+                                </button>
+<!--                                <button class="sold-out">-->
+<!--                                    품절-->
+<!--                                </button>-->
+                            </div>
+                        </div>
+                        <div class="admin_display" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <div class="edit_buttons">
+                                <!-- 상품 수정, 삭제 버튼 -->
+                                <form th:action="@{/product/edit}" method="GET">
+                                    <input type="hidden" name="productId" th:value="${product.productId}">
+<!--                                <button class="product-edit" th:onclick="|javascript:editProduct(${product.productId})|">-->
+                                    <button class="product-edit" >
+                                        정보 수정
+                                    </button>
+                                </form>
+                                <form action="/product/delete" method="GET">
+                                    <input type="hidden" name="productId" th:value="${product.productId}">
+                                    <button type="submit" class="product-delete" >
+                                        상품 삭제
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product_info_section">
+                <div class="info_section_tab">
+                    <ul>
+                        <li id="tab-info">
+                            <a href="#info">상품 상세 정보</a>
+                        </li>
+                        <li id="tab-delivery">
+                            <a href="#delivery">배송 안내</a>
+                        </li>
+                        <li id="tab-exchange">
+                            <a href="#exchange">교환 및 반품 안내</a>
+                        </li>
+                        <li id="tab-review">
+                            <a href="#review">상품 리뷰<span class="font-blue"></span></a>
+                        </li>
+                        <li id="tab-qna">
+                            <a href="#qna">상품 문의<span class="font-blue"></span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!--
+                    소속된 div들 모두 display:none
+                    위에서 클릭된 <li>블럭의 id의 "tab-" 뒷 값과 일치하는 id를 가진 div만 해제시켜주기
+                -->
+                <div class="info_section_view">
+                    <div id="info">
+                        <div class="info_cont">
+                            <div class="info_template_container">
+                                <img th:src="|${detailImage}|" style="width: 100%;"> <!-- 상품 상세정보 이미지 -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="delivery">
+                        <div class="delivery_cont">
+                            <h3>배송 안내</h3>
+                            <div class="admin-msg">
+                                <p>- 배송비 : 기본배송료는 3,000원 입니다. (도서,산간,오지 일부지역은 배송비가 추가될 수 있습니다)  30,000원 이상 구매시 무료배송입니다.</p>
+                                <p>- 본 상품의 평균 배송일은 0일입니다.(입금 확인 후) 설치 상품의 경우 다소 늦어질수 있습니다.[배송예정일은 주문시점(주문순서)에 따른 유동성이 발생하므로 평균 배송일과는 차이가 발생할 수 있습니다.]</p>
+                                <p>- 본 상품의 배송 가능일은 0일 입니다. 배송 가능일이란 본 상품을 주문 하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. (단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다.)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="exchange">
+                        <div class="exchange_cont">
+                            <h3>교환 및 반품 안내</h3>
+                            <div class="admin-msg">
+                                <p>- 상품 택(tag)제거 또는 개봉으로 상품 가치 훼손 시에는 상품수령후 7일 이내라도 교환 및 반품이 불가능합니다.</p>
+                                <p>- 저단가 상품, 일부 특가 상품은 고객 변심에 의한 교환, 반품은 고객께서 배송비를 부담하셔야 합니다(제품의 하자,배송오류는 제외)</p>
+                                <p>- 일부 상품은 신모델 출시, 부품가격 변동 등 제조사 사정으로 가격이 변동될 수 있습니다.</p>
+                                <p>- 신발의 경우, 실외에서 착화하였거나 사용흔적이 있는 경우에는 교환/반품 기간내라도 교환 및 반품이 불가능 합니다.</p>
+                                <p>- 수제화 중 개별 주문제작상품(굽높이,발볼,사이즈 변경)의 경우에는 제작완료, 인수 후에는 교환/반품기간내라도 교환 및 반품이 불가능 합니다. </p>
+                                <p>- 수입,명품 제품의 경우, 제품 및 본 상품의 박스 훼손, 분실 등으로 인한 상품 가치 훼손 시 교환 및 반품이 불가능 하오니, 양해 바랍니다.</p>
+                                <p>- 일부 특가 상품의 경우, 인수 후에는 제품 하자나 오배송의 경우를 제외한 고객님의 단순변심에 의한 교환, 반품이 불가능할 수 있사오니, 각 상품의 상품상세정보를 꼭 참조하십시오. </p>
+                            </div>
+                            <h3>환불 안내</h3>
+                            <div class="admin-msg">
+                                <p>- 상품 청약철회 가능기간은 상품 수령일로 부터 7일 이내 입니다.</p>
+                            </div>
+                            <h3>AS 안내</h3>
+                            <div class="admin-msg">
+                                <p>- 배송비 : 기본배송료는 3,000원 입니다. (도서,산간,오지 일부지역은 배송비가 추가될 수 있습니다)  30,000원 이상 구매시 무료배송입니다.</p>
+                                <p>- 본 상품의 평균 배송일은 0일입니다.(입금 확인 후) 설치 상품의 경우 다소 늦어질수 있습니다.[배송예정일은 주문시점(주문순서)에 따른 유동성이 발생하므로 평균 배송일과는 차이가 발생할 수 있습니다.]</p>
+                                <p>- 본 상품의 배송 가능일은 0일 입니다. 배송 가능일이란 본 상품을 주문 하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. (단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다.)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="review">
+                        <div class="review_cont">
+                            <div class="review_box">
+                                <!-- 이미지가 들어갈 수 있기 때문에 enctype 지정 -->
+                                    <div class="review_tit">
+                                        <h3>상품 리뷰(<span class="review_cnt"></span>)</h3>
+                                    </div>
+                                    <div class="review_write">
+                                        <div class="review_write_box">
+                                            <div class="write_textarea">
+                                                <!-- 로그인 안한 상태 or 구매한적없는 고객 : readonly 속성 활성화 시키지 & alert 띄우기 -->
+                                                <textarea class="review_text" id="review_contents" name="review_contents" placeholder="구매하신 전통주에 대한 후기를 남겨주세요"></textarea>
+                                            </div>
+                                            <div class="write_file_upload">
+                                                <div class="btn_review_upload">
+                                                    <button class="review_upload" th:onclick="createReview()">
+                                                        리뷰등록
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div id="review_list"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="qna">
+                        <div class="qna_cont">
+                            <div class="qna_box">
+                                <h3>상품 Q&A</h3>
+                                <!-- 이부분은 인석이형 1대1문의 방법 참고해서 수정 필요 (아래 내용:임시-술마켓구조-) -->
+                                <!-- 상단 제목 우측 버튼 -->
+                                <div class="btn_qna_box">
+                                    <!-- 문의 게시판 이동 링크 -->
+                                    <a class="btn_to_qna_board" href="#">전체 문의 보기</a>
+                                    <!--
+                                        ## 상품 문의 글쓰기
+                                            - 상품 상세페이지에서 글쓰기 이동한 경우 : 이동해서 작성&등록한 후, 다시 해당 페이지로 돌아오기
+                                            ( viewcriteria 나 이동 경로 기억하기 )
+                                            - 게시판 페이지에서 글쓰기 이동한 경우 : 작성&등록한 후, 게시판 페이지로 이동
+                                    -->
+                                    <button class="btn_to_qna_write back-blue" th:onclick="viewProductQnAWriteFrom()">상품 문의 글쓰기</button>
+                                    <div class = "productQnA-write-layer" id="product-write-form">
+                                        <div class="productQnA-write-content">
+                                            <div class="board_zone_sec">
+                                                <form th:action="@{/board/productQnA/add}" method="POST" enctype="multipart/form-data">
+                                                    <div class="board_zone_tit">
+                                                        <h2>상품문의</h2>
+                                                    </div>
+                                                    <div class="board_zone_cont">
+                                                        <div class="board_list_qa">
+                                                            <table class="board_write_table" style="width:100%">
+                                                                <colgroup>
+                                                                    <col style="width:15%">
+                                                                    <col style="width:85%">
+                                                                </colgroup>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th scope="row">카테고리</th>
+                                                                    <td>
+                                                                        <div class="category_select">
+                                                                            <select class="tune" id="productQnACategoryId" name="boardCategory" style="width:127px;">
+                                                                                <option value="">카테고리</option>
+                                                                                <option value="회원/정보관리">회원/정보관리</option>
+                                                                                <option value="주문/결제">주문/결제</option>
+                                                                                <option value="배송">배송</option>
+                                                                                <option value="반품/환불/교환/AS">반품/환불/교환/AS</option>
+                                                                                <option value="기타">기타</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">제목</th>
+                                                                    <td>
+                                                                        <input type="text" name="title" id="productQnATitle">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">설명</th>
+                                                                    <td>
+                                                                        <textarea name="boardContent" id="productQnAContent"  cols="30" rows="10" style="resize: none; width: 95%;"></textarea>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">사진</th>
+                                                                    <td>
+                                                                        <input type="file"name="images" id="productQnAImage" onchange="setThumbnail(event);">
+                                                                        <div id="image_container" style="width : 100px"></div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="btn_center_box">
+                                                            <button type="button" class="btn_before" onclick="ProductQnAWriteCansel()"><strong>취소</strong></button>
+                                                            <button type="submit" class="btn_write_ok"><strong>등록</strong></button>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="productId" th:value="${product.productId}">
+                                                    <input type="hidden" name="userId" th:value="${session.userId}">
+                                                    <input type="hidden" name="boardTypeId" th:value="2">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="qna-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div id="footer" th:replace="layout/footer::footer"></div>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/mypage/mypage.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script th:inline="javascript">
+        let msg = [[${msg}]];
+        if(msg=="update_ok"){ alert("정상적으로 변경되었습니다.")};
+    </script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="mypage_wrapper">
+            <div class="mypage_sidebar mt60">
+                <div th:replace="layout/sidebar::sidebar"></div>
+            </div>
+            <div class="mypage_maincontent pt60">
+                <div class="maincontent">
+                    <div class="mypage_main">
+                        <div class="mypage_top_info">
+                            <div class="mypage_top_txt">
+                                <span class="grade_img"><img src="/image/ico_member_upload1.jpg"></span>
+                                <div class="grade_txt">
+                                    <p th:text="|${session.userNickName}님의|">오인석님의</p>
+                                    <p>회원등급은
+                                    <span>정회원등급</span>
+                                    입니다.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mypage_top_wallet">
+                                <ul>
+                                    <li>
+                                        <span><img src="/image/icon_coupon.png"></span>
+                                        <em>쿠폰</em>
+                                        <strong>0</strong>
+                                        장
+                                    </li>
+                                    <li>
+                                        <span><img src="/image/icon_mileage.png"></span>
+                                        <em>마일리지</em>
+                                        <strong>0</strong>
+                                        원
+                                    </li>
+                                    <li>
+                                        <span><img src="/image/icon_balance.png"></span>
+                                        <em>예치금</em>
+                                        <strong>0</strong>
+                                        원
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mypage_order_info">
+                            <div class="mypage_zone_tit">
+                                <h3>진행중인 주문
+                                <span>최근 5건의 진행중인 주문정보입니다.</span>
+                                </h3>
+                            </div>
+                            <div class="mypage_order_info_cont">
+                                <ol>
+                                    <li>
+                                        <b>입금대기</b>
+                                        <strong th:text="${statusCountList[0]}">0</strong>
+                                    </li>
+                                    <li>
+                                        <b>결제완료</b>
+                                        <strong th:text="${statusCountList[1]}">0</strong>
+                                    </li>
+                                    <li>
+                                        <b>배송준비중</b>
+                                        <strong th:text="${statusCountList[2]}">0</strong>
+                                    </li>
+                                    <li>
+                                        <b>배송중</b>
+                                        <strong th:text="${statusCountList[3]}">0</strong>
+                                    </li>
+                                    <li>
+                                        <b>배송완료</b>
+                                        <strong th:text="${statusCountList[4]}">0</strong>
+                                    </li>
+                                    <li>
+                                        <b>구매확정</b>
+                                        <strong th:text="${statusCountList[5]}">0</strong>
+                                    </li>
+                                </ol>
+                                <div class="order_case_list">
+                                    <ul>
+                                        <li>
+                                            <b>• 취소</b>
+                                            <span th:text="|${statusCountList[6]} 건|">0</span>
+
+                                        </li>
+                                        <li>
+                                            <b>• 교환</b>
+                                            <span th:text="|${statusCountList[7]} 건|">0</span>
+                                        </li>
+                                        <li>
+                                            <b>• 환불</b>
+                                            <span th:text="|${statusCountList[8]} 건|">0</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mypage_lately_info">
+                            <div class="mypage_zone_tit">
+                                <h3>최근 주문 정보
+                                <span>최근 5건의 주문하신 내역입니다.</span>
+                                </h3>
+                            </div>
+                            <a href="/mypageorderlist" class="btn_board_more">+ 더보기</a>
+                            <div class="mypage_table_type">
+                                <table>
+                                    <colgroup>
+                                        <col width="17.5%">
+                                        <col>
+                                        <col width="17.5%">
+                                        <col width="15%">
+                                        <col width="15%">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                날짜/주문번호
+                                            </th>
+                                            <th>
+                                                상품명/옵션
+                                            </th>
+                                            <th>
+                                                상품금액/수량
+                                            </th>
+                                            <th>
+                                                주문상태
+                                            </th>
+                                            <th>
+                                                구매확정
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${orderFormList.size == 0}">
+                                            <td colspan="6">
+                                                <p class="no_data">
+                                                    조회내역이 없습니다.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr th:if="${orderFormList.size != 0}" th:each="orderForm : ${orderFormList}">
+                                            <td th:text="|${orderForm.orderdate} / ${orderForm.orderId}|">
+                                                22-09-21/219394
+                                            </td>
+                                            <td>
+                                                <img th:src="${orderForm.OrderLatelyProductDto[0].imagepath}">
+                                                <span class="product_name" >
+                                                <a th:if="${(((orderForm.OrderLatelyProductDto.size)/2)-1) != 0}" th:href="@{/order/check(orderId=${orderForm.orderId})}" th:text="|${orderForm.OrderLatelyProductDto[0].productname} 외 ${((orderForm.OrderLatelyProductDto.size)/2)-1}건|">배혜정도가 외 23건</a>
+                                                <a th:if="${(((orderForm.OrderLatelyProductDto.size)/2)-1) == 0}" th:href="@{/order/check(orderId=${orderForm.orderId})}" th:text="|${orderForm.OrderLatelyProductDto[0].productname}">배혜정도가 외 23건</a></span>
+                                            </td>
+                                            <td th:text="|${{orderForm.OrderLatelyProductDto[0].price}}원/${orderForm.OrderLatelyProductDto[0].quantity}개|">
+
+                                            </td>
+                                            <td th:text="${orderForm.status}">
+                                                배송상태
+                                            </td>
+                                            <td>
+                                                <button class="purchaseconfirm" th:data_orderid="${orderForm.orderId}"
+                                                        th:disabled="${orderForm.status.toString().equals('주문취소') || orderForm.status.toString().equals('교환완료') || orderForm.status.toString().equals('환불완료') || orderForm.status.toString().equals('주문취소') || orderForm.status.toString().equals('교환신청') || orderForm.status.toString().equals('환불신청') || orderForm.status.toString().equals('입금대기') || orderForm.status.toString().equals('결제완료') ||
+                                                orderForm.status.toString().equals('배송준비중') || orderForm.status.toString().equals('배송중') || orderForm.status.toString().equals('구매확정')}" th:data_value="${orderForm.status.toString().equals('배송완료')}">구매 확정</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="mypage_lately_goods">
+                            <div class="mypage_zone_tit mypage_zone_tit_order_laterly">
+                                <h3>최근 본 상품
+                                <span>회원님께서 최근 본 상품입니다.</span>
+                                </h3>
+                            </div>
+                            <div class="goods_no_data" th:if="${productDtoList == null}">
+                                <strong>
+                                    최근 본 상품이 존재하지않습니다.
+                                </strong>
+                            </div>
+                            <div class="goods_list" th:if="${productDtoList != null}">
+                                <ul>
+                                    <li th:each="productDto : ${productDtoList}">
+                                        <div class="item_content">
+                                            <div class="item_content_wrap_wrap">
+                                                <div class="sold_out_gif" th:if="${productDto.quantity == 0}">
+                                                    <img src="/image/icon_soldout.gif">
+                                                </div>
+                                                <div class="item_img">
+                                                    <a th:href="@{/product/detail(pid=${productDto.productid})}">
+                                                        <img th:src="${productDto.imagepath}">
+                                                        <div th:if="${productDto.quantity == 0}">
+                                                            <strong class="item_sold_out">
+
+                                                            </strong>
+                                                        </div>
+                                                    </a>
+                                                    <div class="item_info_content">
+                                                        <div class="item_tit_box">
+                                                            <a href="#">
+                                                                <strong class="item_name" th:text="${productDto.productname}">
+                                                                    술마켓 안동소주 일품세트17도,21도,40도,샷잔 증정
+                                                                </strong>
+                                                            </a>
+                                                        </div>
+                                                        <div class="mt10">
+                    
+                                                        </div>
+                                                        <div class="item_price_box">
+                                                            <strong class="item_price" th:text="|${{productDto.price}}원|">31,000원</strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/mypage/mypage.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

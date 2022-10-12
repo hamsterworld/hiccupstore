@@ -1,0 +1,117 @@
+.findusername_box{
+    width: 100%;
+    margin-top:50px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.findusername_box_wrap{
+    width: 600px;
+    margin:0 auto;
+    margin-top:50px;
+}
+
+.findusername_box_wrap h2{
+    margin-bottom:30px;
+    padding:0;
+}
+
+.findusername_box_content{
+    border: 1px solid #dbdbdb;
+    padding: 70px 60px;
+}
+
+.findusername_id_sec{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+/* input box */
+
+.input_sec{
+    width: 478px;
+    min-height: 120px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    border-bottom:1px solid #dbdbdb;
+}
+
+.input_sec > div:first-child{
+    width: 302px;
+    float: left;
+}
+
+.input_sec > div > input{
+    display: block;
+    width: 292px;
+    height: 36px;
+    border: 1px solid #d0d0d0;
+    margin: 15px 0 10px 0;
+    padding: 0 0 0 8px;
+}
+
+.input_sec > button{
+    float:right;
+    width: 158px;
+    height: 91px;
+    margin: 15px 0 0 0;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* 버튼쪽 */
+
+.findusername_button_sec{
+    margin: 20px auto auto;
+    padding-top:25px;
+    text-align: center;
+}
+
+.btn_member_prev {
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    width: 150px;
+    height: 45px;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.btn_member_next {
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    width: 150px;
+    height: 45px;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #189fdb;
+    margin-left:20px;
+    background: #189fdb;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* 아이디를 찾앗다면 */
+.completed_find_id{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#text_id{
+    padding: 10px 0 10px 0;
+    font-size: 18px;
+}
+
+/*errormessage*/
+#errormessage{
+    
+}

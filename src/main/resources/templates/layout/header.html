@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+        <nav class="navbar" th:fragment="nav">
+            <div class="navbar__logo">
+                <a href="/">
+                    <img id="hiccup_image" src="/image/KakaoTalk_20220906_124616125.png">
+                </a>
+            </div>
+            <ul class="navbar__menu">
+                <li>
+                    <a th:href="@{/outstory}">우리들의 이야기</a>
+                </li>
+                <li><a th:href="@{/}">술마켓 커뮤니티</a>
+                    <ul class="sub">
+                        <li><a th:href="@{/notice}">공지사항</a></li>
+                    </ul>
+                </li>
+                <li><a href="/product/productlist/liquor">우리술 한눈에 보기</a>
+                    <ul class="sub">
+                        <li><a href="/product/productlist/liquor?type=1">막걸리</a></li>
+                        <li><a href="/product/productlist/liquor?type=2">약주/청주</a></li>
+                        <li><a href="/product/productlist/liquor?type=3">소주</a></li>
+                        <li><a href="/product/productlist/liquor?type=4">와인</a></li>
+                        <li><a href="/product/productlist/liquor?type=5">기타</a></li>
+                    </ul>
+                </li>
+                <li><a href="/product/productlist/price">가격별로 살펴보기 </a>
+                    <ul class="sub">
+                        <li><a href="/product/productlist/price?p=0">1만원이하</a></li>
+                        <li><a href="/product/productlist/price?p=1">2만원이하</a></li>
+                        <li><a href="/product/productlist/price?p=2">3만원이하</a></li>
+                        <li><a href="/product/productlist/price?p=3">4만원이하</a></li>
+                        <li><a href="/product/productlist/price?p=4">4만원이상</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <div class="navbar_search">
+                <div class="inputwrap">
+                    <form action="/" method="get" name="search">
+                        <input type="text" id="txt" name="searhname" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)">
+                        <button type="submit" id="btn1">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    </form>
+                </div>
+            </div>
+            <ul class="navbar__links">
+                <li>
+                    <a href="/cart">
+                        <img src="/image/icon_top_cart.jpg">
+                    </a>
+                    <div class="basketnumberposition">
+                    </div>
+                </li>
+                <li>
+                    <a href="/mypage" sec:authorize="isAnonymous()">
+                        <img src="/image/icon_top_my.jpg">
+                    </a>
+                    <a href="/mypage" sec:authorize="hasRole('ROLE_USER')">
+                        <img src="/image/icon_top_my.jpg">
+                    </a>
+                    <a href="/managerpage/managerpageorder" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <img src="/image/icon_top_admin.png">
+                    </a>
+                </li>
+            </ul>
+            <script type="text/javascript" th:src="@{/js/header/header.js}"></script>
+        </nav>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/managerpage/managerpageorder.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="mypage_wrapper">
+            <div class="mypage_sidebar mt60">
+                <div th:replace="layout/sidebarmanager::sidebarmanager"></div>
+            </div>
+            <div class="mypage_maincontent pt60">
+                <div class="maincontent">
+                    <div class="mypage_main">
+                        <div class="mypage_lately_info">
+                            <div class="mypage_zone_tit">
+                                    <h3>고객 주문 조회</h3>
+                            </div>
+                            <div class="date_check_box">
+                                <form th:action="@{/managerpage/managerpageorder}" method="get" name="information">
+                                    <h3>조회기간</h3>
+                                    <div class="data_check_list">
+                                        <button type="button" data-value="0" class>오늘</button>
+                                        <button type="button" data-value="7" class>7일</button>
+                                        <button type="button" data-value="15" class>15일</button>
+                                        <button type="button" data-value="30" class>1개월</button>
+                                        <button type="button" data-value="90" class>3개월</button>
+                                        <button type="button" data-value="365" class>1년</button>
+                                    </div>
+                                    <div class="date_check_calendar">
+                                        <input type="date"  th:value="${startdate}" name="startdate" id="startdate">
+                                        ~
+                                        <input type="date" th:value="${lastdate}" name="lastdate" id="lastdate">
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn_date_check">
+                                            <em>조회</em>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="board_search_box">
+                                <form name="frmList" id="frmList" th:action="@{/managerpage/managerpageorder}" method="get">
+                                    <select name="searchField" class="selectsearch">
+                                        <option value="회원번호" selected>회원번호</option>
+                                    </select>
+                                    <input type="text" class="text" name="searchUserId" th:value="${searchUserId}">
+                                    <button type="button" class="btn_board_search">검색</button>
+                                </form>
+                            </div>
+                            <div class="mypage_zone_tit">
+                                <div class="pick_list_num">
+                                    주문목록 / 배송조회 내역 총
+                                    <strong th:if="${orderFormList == null}">0</strong>
+                                    <strong th:if="${orderFormList != null}" th:text="${orderFormList.size}">0</strong>
+                                    건
+                                </div>
+                            </div>
+                            <div class="mypage_table_type">
+                                <table>
+                                    <colgroup>
+                                        <col width="15%">
+                                        <col>
+                                        <col width="15%">
+                                        <col width="15%">
+                                        <col width="15%">
+                                        <col width="15%">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                날짜/주문번호/회원번호
+                                            </th>
+                                            <th>
+                                                상품명/옵션
+                                            </th>
+                                            <th>
+                                                상품금액/수량
+                                            </th>
+                                            <th>
+                                                주문상태 변경
+                                            </th>
+                                            <th>
+                                                확인/리뷰
+                                            </th>
+                                            <th>
+                                                취소/환불/교환 변경
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${orderFormList != null}" th:each="orderForm : ${orderFormList}">
+                                            <td th:text="|${orderForm.orderdate} / ${orderForm.orderId} / ${orderForm.userid}|">
+                                                22-09-21/219394/6
+                                            </td>
+                                            <td>
+                                                <img th:src="${orderForm.OrderLatelyProductDto[0].imagepath}">
+                                                <span class="product_name" >
+                                                <a th:if="${(((orderForm.OrderLatelyProductDto.size)/2)-1) != 0}" th:href="@{/order/managerpagecheck2(orderId=${orderForm.orderId})}"
+                                                   th:text="|${orderForm.OrderLatelyProductDto[0].productname} 외 ${((orderForm.OrderLatelyProductDto.size)/2)-1}건|">
+                                                    배혜정도가 외 23건
+                                                </a>
+                                                <a th:if="${(((orderForm.OrderLatelyProductDto.size)/2)-1) == 0}" th:href="@{/order/managerpagecheck2(orderId=${orderForm.orderId})}"
+                                                   th:text="${orderForm.OrderLatelyProductDto[0].productname}">
+                                                    배혜정도가 외 23건
+                                                </a></span>
+                                            </td>
+                                            <td th:text="|${{orderForm.OrderLatelyProductDto[0].price}}원/${orderForm.OrderLatelyProductDto[0].quantity}개|">
+
+                                            </td>
+                                            <td th:if="${orderForm.status.toString().equals('구매확정')}">
+                                                구매확정
+                                            </td>
+                                            <td th:if="${!orderForm.status.toString().equals('구매확정')}">
+                                            <select name="status" id="statuschanged" class="statuschanged" th:data_orderid="${orderForm.orderId}">
+                                                <option th:value="noselected" th:text="선택" >선택</option>
+                                                <option th:value="입금대기" th:text="입금대기" th:selected="${orderForm.status.toString().equals('입금대기')}">입금 대기</option>
+                                                <option th:value="결제완료" th:text="결제완료" th:selected="${orderForm.status.toString().equals('결제완료')}">결제 완료</option>
+                                                <option th:value="배송준비중" th:text="배송준비중" th:selected="${orderForm.status.toString().equals('배송준비중')}">배송준비중</option>
+                                                <option th:value="배송중" th:text="배송중" th:selected="${orderForm.status.toString().equals('배송중')}">배송중</option>
+                                                <option th:value="배송완료" th:text="배송완료" th:selected="${orderForm.status.toString().equals('배송완료')}">배송 완료</option>
+                                            </select>
+                                            </td>
+                                            <td th:if="${orderForm.status.toString().equals('구매확정')}">
+                                                구매확정
+                                            </td>
+                                            <td th:if="${!orderForm.status.toString().equals('구매확정')}">
+                                                구매 미확정
+                                            </td>
+                                            <td th:if="${orderForm.status.toString().equals('구매확정')}">
+                                                구매확정
+                                            </td>
+                                            <td th:if="${!orderForm.status.toString().equals('구매확정')}">
+                                                <select name="status" id="refundstatuschanged" class="statuschanged" th:data_orderid="${orderForm.orderId}">
+                                                    <option th:value="noselected" th:text="선택" >선택</option>
+                                                    <option th:value="환불신청" th:text="환불신청" th:selected="${orderForm.status.toString().equals('환불신청')}">환불 신청</option>
+                                                    <option th:value="교환신청" th:text="교환신청" th:selected="${orderForm.status.toString().equals('교환신청')}">교환 신청</option>
+                                                    <option th:value="주문취소신청" th:text="주문취소신청" th:selected="${orderForm.status.toString().equals('주문취소신청')}">주문취소 신청</option>
+                                                    <option th:value="환불완료" th:text="환불완료" th:selected="${orderForm.status.toString().equals('환불완료')}">환불 완료</option>
+                                                    <option th:value="교환완료" th:text="교환완료" th:selected="${orderForm.status.toString().equals('교환완료')}">교환 완료</option>
+                                                    <option th:value="주문취소" th:text="주문취소" th:selected="${orderForm.status.toString().equals('주문취소')}">주문 취소</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mypage_order_info_paging" th:if="${paging != null}">
+                                <a th:if="${paging.showPrev}" th:href="@{/managerpage/managerpageorder(page=${paging.beginPage - 1},pagesize=${paging.pageSize},startdate=${startdate},lastdate=${lastdate})}" th:text="Prev"></a>
+                                <th:block th:with="start=${paging.beginPage}, end=${paging.endPage}">
+                                    <th:block th:each=" i : ${#numbers.sequence(start,end)}">
+                                        <a th:href="@{/managerpage/managerpageorder(page=${i},pagesize=${paging.pageSize},startdate=${startdate},lastdate=${lastdate})}" th:text="${i}" th:classappend="${page} == ${i} ? 'paging_on'"></a>
+                                    </th:block>
+                                </th:block>
+                                <a th:if="${paging.showNext}" th:href="@{/managerpage/managerpageorder(page=${paging.endPage + 1},pagesize=${paging.pageSize},startdate=${startdate},lastdate=${lastdate})}" th:text="Next"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/managerpage/managerpageorder.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

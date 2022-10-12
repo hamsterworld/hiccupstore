@@ -1,0 +1,590 @@
+.mt60{
+    margin-top: 60px !important;
+}
+
+.pt60{
+    padding-top: 60px !important;
+}
+
+/* 사이드바 관련 css */
+.mypage_wrapper{
+    min-height: 400px;
+    width: 1200px;
+    margin:auto;
+}
+
+.mypage_sidebar_submenu a:hover{
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+.active {
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+.mypage_wrapper:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.mypage_sidebar{
+    float: left;
+    width: 200px;
+}
+
+.mypage_sidebar_content{
+    min-height: 250px;
+    padding: 0 0 50px 0;
+}
+
+.mypage_sidebar_content h2{
+    padding: 0 0 14px 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.mypage_sidebar_submenu{
+    margin: 7px 0 0 0;
+    list-style: none;
+    padding:0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin: 7px 0 0 0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu > li:first-child{
+    margin: 30px 0 0 0;
+}
+
+.mypage_sidebar_submenu > li{
+    padding: 8px 0 15px 0;
+    font-size: 14px;
+    font-weight: bold;
+    background: url(/image/lnb_tit.png) no-repeat top left;
+}
+
+
+/* 하위사이드바 1 */
+.mypage_sidebar_submenu1{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu1 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu1 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 2 */
+.mypage_sidebar_submenu2{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu2 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu2 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 3 */
+.mypage_sidebar_submenu3{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu3 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu3 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 4 */
+.mypage_sidebar_submenu4{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu4 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu4 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 메인 content 영역 */
+.mypage_maincontent{
+    width: 940px !important;
+    float: right;
+}
+
+.maincontent{
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.mypage_main{
+    padding: 0 0 50px 0;
+}
+
+/* main content 영역의 top-info */
+
+.mypage_top_info {
+    display: table;
+    width: 100%;
+    margin: 0 0 35px 0;
+    background: #f7f9f8;
+}
+
+.mypage_top_txt {
+    display: table-cell;
+    width: 30%;
+    padding: 20px 0 20px 0;
+    text-align: center;
+    vertical-align: middle;
+    background: #f7f9f8;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+
+.grade_img{
+    display: block;
+    max-width: 70px;
+    margin: 0 auto;
+    padding: 0 0 10px 0;
+}
+
+.grade_img img{
+    max-width: 70px;
+    border: 0 none;
+    vertical-align: top;
+}
+
+.mypage_top_wallet {
+    display: table-cell;
+    width: 69%;
+    vertical-align: middle;
+    background: #ffffff;
+}
+
+.mypage_top_wallet ul{
+    width: 100%;
+    padding: 27px 10px 27px 10px;
+    font-size: 0;
+    list-style: none;
+    line-height: 1;
+}
+
+.mypage_top_wallet ul > li:first-child{
+    border-left: none 0;
+}
+
+.mypage_top_wallet ul > li{
+    list-style: none;
+    display: inline-block;
+    width: 33%;
+    font-size: 14px;
+    border-left: 1px solid #e1e3e2;
+    text-align: center;
+}
+
+.mypage_top_wallet ul > li span{
+    display: block;
+    padding: 0 10px 10px 10px;
+}
+
+.mypage_top_wallet ul > li span img{
+    border: 0 none;
+    vertical-align: top;
+}
+
+.btn_board_more{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    font-size: 12px;
+}
+
+/*mypage content영역에 order_info */
+.mypage_order_info{
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+.mypage_zone_tit {
+    margin: 0 0 0 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.mypage_zone_tit h3{
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.mypage_zone_tit h3 span{
+    padding: 0 0 0 5px;
+    color: #777777;
+    font-size: 12px;
+    font-weight: normal;
+}
+.mypage_order_info_cont {
+    margin: 0 0 30px 0;
+    padding: 35px 0 35px 0;
+    font-size: 0;
+    border: 1px solid #e3e3e3;
+    border-top: 1px solid #999999;
+    text-align: center;
+}
+
+.mypage_order_info_cont ol {
+    margin:0;
+    padding:0;
+    list-style: none;
+    display: inline-block;
+    width: 80%;
+    font-size: 0;
+    border-right: 1px solid #e3e3e3;
+    vertical-align: middle;
+}
+
+.mypage_order_info_cont ol li:first-child {
+    padding-left: 10px;
+    background: none 0;
+}
+
+.mypage_order_info_cont ol li {
+    display: inline-block;
+    width: 10%;
+    min-width: 66px;
+    padding: 0 10px 0 30px;
+    font-size: 13px;
+    background: url(/image/mypgae_ing_next_bg.png) no-repeat left 50px;
+    text-align: center;
+}
+
+.mypage_order_info_cont ol li b {
+    display: block;
+    padding: 0 0 15px 0;
+}
+
+.mypage_order_info_cont ol li strong {
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    padding: 12px 0 0 0;
+    color: #ffffff;
+    font-size: 18px;
+    background: url(/image/mypgae_ing_list_bg.png) no-repeat 0 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.order_case_list {
+    display: inline-block;
+    width: 19%;
+    font-size: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.order_case_list ul {
+    padding:0;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    display: inline-block;
+    width: 70%;
+    font-size: 0;
+    list-style: none;
+}
+
+.order_case_list ul li:first-child {
+    border-top: none 0;
+}
+
+.order_case_list ul li{
+    padding: 8px 5px 10px 5px;
+    font-size: 12px;
+    border-top: 1px dotted #bfbfbf;
+    text-align: left;
+}
+
+.order_case_list ul li span {
+    float: right;
+}
+
+
+/* mypage영역에 최근주문상품 */
+.mypage_table_type {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.mypage_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mypage_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mypage_table_type th {
+    padding: 9px 10px 10px 10px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #dbdbdb;
+    background: #f7f7f7;
+}
+
+.mypage_table_type td {
+    padding: 15px 10px 14px 10px;
+    color: #777777;
+    border-bottom: 1px solid #dbdbdb;
+    position: relative;
+}
+
+.product_name{
+    display: inline-block;
+    height: 33px;
+}
+
+.mypage_table_type td img{
+    height: 50px;
+    width: 50px;
+    vertical-align: bottom;
+}
+
+td[colspan="6"]{
+    height: 100px;
+}
+
+#wrap .no_data {
+    padding: 50px 30px 50px 30px;
+    /* border-bottom: 1px solid #dbdbdb; */
+    text-align: center;
+}
+
+.mypage_lately_info{
+    position: relative;
+}
+
+
+/** 페이징 관련 css */
+.mypage_order_info_paging{
+    margin-top:30px;
+    text-align: center;
+}
+
+.mypage_order_info_paging a{
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.pick_list_num {
+    font-family: "Noto Sans KR",sans-serif !important;
+    color: #333;
+    display: block;
+    padding: 20px 0 0px 0;
+    font-size: 14px;
+}
+
+.pick_list_num strong {
+    color: #189fdb;
+}
+
+
+/** date_check_box */
+
+.date_check_box {
+    margin: 0 0 35px 0;
+    padding: 20px 20px 20px 30px;
+    border: 3px solid #eeeeee;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.date_check_box:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+
+.date_check_box h3 {
+    float: left;
+    padding: 6px 15px 0 0;
+    color: #777777;
+    font-size: 13px;
+}
+
+button.on {
+    color: #ffffff !important;
+    background: #aeaeae !important;
+}
+
+.data_check_list{
+    padding:12px 10px 0 0;
+}
+
+.data_check_list button {
+    background-color: transparent;
+    vertical-align: middle;
+    float: left;
+    width: 54px;
+    height: 31px;
+    margin: 0 0 0 -1px;
+    font-size: 12px;
+    color: #777777;
+    border: 1px solid #d6d6d6;
+    cursor: pointer;
+}
+
+.data_check_list button:hover {
+    background-color: #AEAEAE;
+    color: #ffffff !important;
+}
+
+.date_check_calendar {
+    position: relative;
+    float: left;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin-left:10px;
+}
+
+/** input data쪽 css*/
+input[type="date"]{
+    font-family: "Noto Sans KR",sans-serif;
+    width: 120px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+    height: 31px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.btn_date_check {
+    /* display: inline-block; */
+    float: left;
+    min-width: 100px;
+    height: 31px;
+    color: #ffffff;
+    font-weight: bold;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    text-align: center;
+    margin-left: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    cursor: pointer;
+}
+
+.btn_date_check em {
+    padding: 0 20px 0 0;
+    background-image: url(/image/btn_goods_search.png);
+    background-position: right 3px;
+    background-repeat: no-repeat;
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+.btn_date_check:hover {
+    border: 1px solid #A67842;
+    background-color: #A67842;
+}
+
+#startdate2,#lastdate2{
+    display: none;
+}
+
+.purchaseconfirm{
+    margin: 0;
+    color: #ffffff;
+    font-size: 12px;
+    border: 1px solid #666666;
+    background: #666666;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.paging_on{
+    text-decoration: underline !important;
+    font-size: 15px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}

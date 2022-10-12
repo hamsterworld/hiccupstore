@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/mypage/mypagewishlist.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="mypage_wrapper">
+            <div class="mypage_sidebar mt60">
+                <div th:replace="layout/sidebar::sidebar"></div>
+            </div>
+            <div class="mypage_maincontent pt60">
+                <div class="maincontent">
+                    <div class="mypage_main">
+                        <div class="mypage_lately_goods">
+                            <div class="mypage_zone_tit">
+                                <h1>찜 목록</h1>
+                            </div>
+                            <div class="goods_list">
+                                <div th:if="${productList == null}">
+                                    찜한 상품이 없습니다.
+                                </div>
+                                <ul th:if="${productList != null}">
+                                    <li th:each="product : ${productList}">
+                                        <div class="item_content">
+                                            <div class="item_content_wrap_wrap">
+                                                <div class="item_img">
+                                                    <a th:href="|/product/detail?pid=${product.productId}|">
+                                                        <img th:src="${product.imagePath}">
+                                                    </a>
+                                                    <div class="item_info_content">
+                                                        <div class="item_tit_box">
+                                                            <a href="#">
+                                                                <strong class="item_name" th:text="${product.productName}">
+                                                                    술마켓 안동소주 일품세트17도,21도,40도,샷잔 증정
+                                                                </strong>
+                                                            </a>
+                                                        </div>
+                                                        <div class="mt10">
+                    
+                                                        </div>
+                                                        <div class="item_price_box">
+                                                            <strong class="item_price" th:text="|${{product.price}} 원|">31,000원</strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script src="/js/mypage/mypagewishlist.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

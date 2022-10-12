@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/product/productList.css">
+    <link rel="stylesheet" href="/css/product/productWrite.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div class = "productQnA-write-layer" id="product-write-form">
+    <div class="productQnA-write-content">
+        <div class="board_zone_sec">
+            <form th:action="@{/board/ProductQnA/add}" name="information"  method="POST" enctype="multipart/form-data">
+            <div class="board_zone_tit">
+                <h2>상품문의</h2>
+            </div>
+            <div class="board_zone_cont">
+                <div class="board_list_qa">
+                    <table class="board_write_table" style="width:100%">
+                        <colgroup>
+                            <col style="width:15%">
+                            <col style="width:85%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th scope="row">카테고리</th>
+                                <td>
+                                    <div class="category_select">
+                                        <select class="tune" id="categoryId" name="categoryId" style="width:127px;">
+                                            <option value>카테고리</option>
+                                            <option value="1">회원/정보관리</option>
+                                            <option value="2">주문/결제</option>
+                                            <option value="3">배송</option>
+                                            <option value="4">반품/환불/교환/AS</option>
+                                            <option value="5">기타</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">제목</th>
+                                <td>
+                                    <input type="text" name="title">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">설명</th>
+                                <td>
+                                    <textarea name="content"  cols="30" rows="10" style="resize: none; width: 95%;"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">사진</th>
+                                <td>
+                                    <input type="file" multiple="multiple" name="images" onchange="setThumbnail(event);">
+                                    <div id="image_container" style="width : 300px"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn_center_box">
+                    <button type="button" class="btn_before"><strong>취소</strong></button>
+                    <button type="submit" class="btn_write_ok"><strong>등록</strong></button>
+                </div>
+            </div>
+                <input type="hidden" name="productId" value="">
+                여기에 상품 아이디를 넣어야한다.
+            </form>
+        </div>
+    </div>
+</div>
+<!--    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
+<script type="text/javascript">
+function setThumbnail(event) {
+    document.querySelector("div#image_container").innerHTML = '';
+    for (var image of event.target.files) {
+      var reader = new FileReader();
+      reader.onload = function(event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        img.setAttribute("style", "max-width:100%");
+        document.querySelector("div#image_container").appendChild(img);
+      };
+    reader.readAsDataURL(image);
+    }
+}
+</script>
+</body>
+</html>

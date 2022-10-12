@@ -1,0 +1,351 @@
+#wrapper{
+    padding-top: 70px;
+    margin-top: 10px;
+}
+
+
+/* 맨위상단 박스  */
+.contentwrapper{
+    margin:auto;
+    border-bottom: 1px solid #999999;
+    overflow: hidden;
+    width:800px;
+}
+
+.contenttit h2{
+    margin: 0 0 20px 0;
+    float:left;
+    font-size: 28px;
+    color: #222222;
+}
+
+ol{
+    margin:0;
+    padding:0;
+    float:right;
+    list-style: none;
+    line-height: 62px;
+}
+
+.contenttit li{
+    float:left;
+}
+
+.page_on{
+    font-size: 14px;
+    color: #189fdb;
+}
+
+.page_on span:first-child{
+    font-size: 16px;
+    font-weight: bold
+}
+
+.page_on img{
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.contenttit ol li:first-child {
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+
+.contenttit ol li:nth-child(n+3) {
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+.contenttit ol li:nth-child(3) img{
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.contenttit ol li:first-child img{
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.contenttit ol li span{
+    font-size: 16px;
+    font-weight: bold
+}
+
+.icon_password{
+    position: relative;
+    top:5px;
+    margin-left:5px;
+    width: 20px;
+    height: 20px;
+}
+
+.icon_password2{
+    position: relative;
+    top:5px;
+    margin-left:5px;
+    width: 20px;
+    height: 20px;
+}
+
+/* input box 관련 css */
+
+.input_id{
+   margin-bottom: 0px;
+}
+
+.member_cnt{
+    width: 743px;
+    margin: 0 auto;
+    border: none;
+    padding: 70px 60px;
+}
+
+.base_info_box h3 {
+    padding: 0 0 17px 0;
+    font-size: 18px;
+    color: #222222;
+    display: inline-block;
+    margin:0;
+}
+
+#important {
+    float:right;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    padding: 0 0 0 10px;
+    line-height: 40px;
+    color: #189fdb;
+    background: url(/image/icon_dot_03.png) no-repeat 0 center;
+}
+table{
+    border-spacing: 0px;
+    border-collapse: separate; /*사이 간격 조정*/
+}
+.base_info_sec {
+    border-top: 1px solid #999999;
+}
+
+.base_info_sec table {
+    width: 100%;
+}
+
+.base_info_sec table th{
+    padding: 10px 25px;
+    text-align:left;
+    border-bottom: 1px solid #dcdcdc;
+    background: #fbfbfb;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.base_info_sec .important{
+    background: url(/image/icon_dot_03.png) no-repeat 0 center;
+}
+
+.base_info_sec table th span {
+    padding: 0 0 0 10px;
+    margin: 0 0 0 -10px;
+}
+
+.base_info_sec table td {
+    padding: 15px 0 15px 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.memberwaring{
+    display: inline;
+    position:relative;
+}
+
+.base_info_sec table input[type="text"] {
+    width: 380px;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+}
+
+input[type="text"], input[type="password"] {
+    height: 31px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#email {
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+    height: 31px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 251px;
+}
+
+select {
+    height: 31px;
+    color: #717171;
+    vertical-align: top;
+    outline: none;
+}
+
+#guide{
+    display: none;
+
+}
+.input_address input[type="text"]:first-child{
+    width: 150px;
+}
+
+.input_address input[type="button"]{
+    font-size: 12px;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.input_address input[type="text"]{
+    margin-bottom: 10px;
+}
+
+
+/* 부가정보 */
+
+.addition_info_box {
+    margin: 40px 0 0 0;
+}
+
+.addition_info_box h3 {
+    margin:0;
+    padding: 0 0 17px 0;
+    font-size: 18px;
+    color: #222222;
+}
+
+.addition_info_sec {
+    border-top: 1px solid #999999;
+}
+
+.addition_info_sec table {
+    width: 100%;
+}
+
+.addition_info_sec table th{
+    padding: 10px 25px;
+    text-align:left;
+    border-bottom: 1px solid #dcdcdc;
+    background: #fbfbfb;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+
+.addition_info_sec table th span {
+    padding: 0 0 0 10px;
+    margin: 0 0 0 -10px;
+}
+
+.addition_info_sec table td {
+    padding: 15px 0 15px 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.addition_info_sec table input[type="text"] {
+    width: 100px;
+    margin-right:5px;
+}
+
+.addition_info_select ul{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+
+.addition_info_select li{
+    float:left;
+    margin:0;
+    padding:0;
+    list-style: none;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin-right: 10px;
+}
+
+.addition_info_select li label{
+    position: relative;
+    top:-1.8px;
+}
+
+#bir_mm{
+    display: inline;
+    margin-right:5px;
+}
+
+#bir_dd{
+    display: inline;
+}
+
+
+/*  버튼 관련 css */
+
+.btn_center_box{
+
+    width: 350px;
+    margin:0 auto;
+    margin-top:50px;
+}
+
+#btnnextstep{
+    float:right;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 10px;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#btnprevstep{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    cursor: pointer;
+}
+#btnnextstep:hover{
+    background: sienna;
+    border: 1px solid sienna;
+}
+
+.error_next_box{
+    color:red;
+    margin-top:3px;
+    font-size:12px;
+}

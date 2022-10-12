@@ -1,0 +1,322 @@
+.mt60{
+    margin-top: 60px !important;
+}
+
+.pt60{
+    padding-top: 60px !important;
+}
+
+/* 사이드바 관련 css */
+.mypage_wrapper{
+    min-height: 400px;
+    width: 1200px;
+    margin:auto;
+}
+
+.mypage_sidebar_submenu a:hover{
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+.mypage_wrapper:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+.active {
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+
+.mypage_sidebar{
+    float: left;
+    width: 200px;
+}
+
+.mypage_sidebar_content{
+    min-height: 250px;
+    padding: 0 0 50px 0;
+}
+
+.mypage_sidebar_content h2{
+    padding: 0 0 14px 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.mypage_sidebar_submenu{
+    margin: 7px 0 0 0;
+    list-style: none;
+    padding:0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin: 7px 0 0 0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu > li:first-child{
+    margin: 30px 0 0 0;
+}
+
+.mypage_sidebar_submenu > li{
+    padding: 8px 0 15px 0;
+    font-size: 14px;
+    font-weight: bold;
+    background: url(/image/lnb_tit.png) no-repeat top left;
+}
+
+
+/* 하위사이드바 1 */
+.mypage_sidebar_submenu1{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu1 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu1 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 2 */
+.mypage_sidebar_submenu2{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu2 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu2 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 3 */
+.mypage_sidebar_submenu3{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu3 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu3 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 4 */
+.mypage_sidebar_submenu4{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu4 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu4 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 메인 content 영역 */
+.mypage_maincontent{
+    width: 940px !important;
+    float: right;
+}
+
+.maincontent{
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.mypage_main{
+    padding: 0 0 50px 0;
+}
+
+
+/* 최근본상품 */
+.mypage_lately_goods {
+    margin: 50px 0 0 0;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.goods_list{
+    margin:auto;
+    width: 100%;
+}
+
+.goods_list ul{
+    list-style: none;
+    padding:0;
+    margin:0;
+    overflow: hidden;
+}
+
+.goods_list ul li{
+    float:left;
+    width: 33.3%;
+    box-sizing: border-box;
+    margin: 40px 0 0 0;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.item_content{
+    border: 1px solid #e0e0e0;
+    padding: 0 10px;
+    padding-bottom: 20px;
+    color: #1c1c1c;
+}
+
+.item_img{
+    text-align: center;
+    overflow: hidden;
+    border: 0;
+    padding: 40px 0;
+    position: relative;
+}
+
+.item_img a img{
+    border: 0 none;
+    vertical-align: top;
+    width: 248px;
+    height: 270px;
+}
+
+.item_info_content{
+    display: block;
+    width: 100%;
+    padding: 20px 20px;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+.item_tit_box .item_name {
+    display: block;
+    padding: 10px 0 0 0;
+    font-size: 16px;
+    word-break: break-all;
+    font-weight: 300;
+    line-height: 1.4;
+    height: 50px;
+    overflow: hidden;
+    font-family: "Noto Sans KR",sans-serif !important;
+}
+
+.item_price_box{
+    margin-top:22px;
+    overflow: hidden;
+}
+
+.item_price{
+    font-size: 18px;
+    color: #222;
+    font-weight: 600;
+    float: left;
+}
+
+/* 품절 이미지 */
+
+.item_sold_out{
+    background-image: url(/image/soldout-3.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    display: block;
+    width: 248px;
+    height: 270px;
+    top:50px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.sold_out_gif{
+    float:left;
+    position: absolute;
+    top:-1px;
+    left:-11px;
+}
+
+.item_content_wrap_wrap{
+    position: relative;
+}
+
+.item_img a {
+    display: block;
+    height: 100%;
+}
+
+.btn_board_more{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    font-size: 12px;
+}
+
+.mypage_lately_info{
+    position: relative;
+}
+
+
+/** 최근 본상품이 없을때 css */
+.goods_no_data {
+     min-height: 200px;
+     text-align: center;
+     font-size: 12px;
+     line-height: 1.5;
+     font-family: "Noto Sans KR",sans-serif;
+     color: #333;
+ }
+
+ .goods_no_data strong {
+     font-size: 14px;
+     font-weight: normal;
+     line-height: 150px;
+ }
+
+ .purchaseconfirm{
+     margin: 0;
+     color: #ffffff;
+     font-size: 12px;
+     border: 1px solid #666666;
+     background: #666666;
+     cursor: pointer;
+     font-weight: bold;
+ }

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/product/productlist.css">
+    <link rel="stylesheet" href="/js/header/header.js">
+    <link rel="stylesheet" href="/js/product/productlist.js">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#header").load("/html/header/header2.html") ;
+
+            $("#footer").load("/html/footer/footer2.html") ;
+
+        });
+    </script>
+    <script th:inline="javascript">
+        const ranges = [0,1,2,3,4] ;
+        const ids = ['under-one','under-two','under-three','under-four','over-four']
+        $(document).ready(function (){
+            ranges.forEach(function(range){
+                let tagId = '#'+ids[range] ;
+                $.ajax({
+                    type:'GET',
+                    url:'/product/productlist/priceRange?p='+ String(range),
+                    dataType:'text',
+                    success:function(result){
+                        console.log(tagId+' 태그의 범위 : '+ String(range+1)+' 만원 이하( 5만원 이하 : 4만원 이상)');
+                        $(tagId).html(result);
+                    },
+                    error:function(){
+                        console.log("Ajax Error!");
+                    }
+                });
+            });
+
+        });
+
+        $(function (){
+            $("#viewCnt").change(function (){
+                let changeVal = $("#viewCnt option:selected").val();
+                console.log(changeVal);
+                location.href="/product/productlist/price?pageNum="+ [[${page.currentPage}]] + "&p=" + [[${viewCriteria.p}]] +"&sort="+ [[${viewCriteria.sort}]] + "&viewCnt=" + changeVal;
+            });
+        });
+    </script>
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div id="header" th:replace="layout/header::nav"></div>
+
+<!-- 본문 -->
+<div id='wrapper'>
+    <div id="productlistwrap">
+        <div class="productlistcategory">
+            <ul th:object="${page}">
+                <li>
+                    <a th:href="@{/product/productlist/price(pageNum=*{currentPage}, p='0', sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">10,000 원 미만 (<span id="under-one"></span>)</a>
+                </li>
+                <li>
+                    <a th:href="@{/product/productlist/price(pageNum=*{currentPage}, p='1', sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">10,000 원대 (<span id="under-two"></span>)</a>
+                </li>
+                <li>
+                    <a th:href="@{/product/productlist/price(pageNum=*{currentPage}, p='2', sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">20,000 원대 (<span id="under-three"></span>)</a>
+                </li>
+                <li>
+                    <a th:href="@{/product/productlist/price(pageNum=*{currentPage}, p='3', sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">30,000 원대 (<span id="under-four"></span>)</a>
+                </li>
+                <li>
+                    <a th:href="@{/product/productlist/price(pageNum=*{currentPage}, p='4', sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">40,000 원 이상 (<span id="over-four"></span>)</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 카테고리 설명 템플릿 -->
+<!--        <div class="addition_zone" th:if="${page.viewCriteria.p ne null}">-->
+<!--            <div class="category_image" th:switch="${page.viewCriteria.type}">-->
+<!--                    <span th:case=1>-->
+<!--                        <img alt="막걸리에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">-->
+<!--                    </span>&lt;!&ndash;makgeolli에 해당하는 카테고리 설명 템플릿&ndash;&gt;-->
+<!--                <span th:case=2>-->
+<!--                        <img alt="약주/청주에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">-->
+<!--                    </span>&lt;!&ndash;yakju에 해당하는 카테고리 설명 템플릿&ndash;&gt;-->
+<!--                <span th:case=3>-->
+<!--                        <img alt="전통 소주에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">-->
+<!--                    </span>&lt;!&ndash;soju에 해당하는 카테고리 설명 템플릿&ndash;&gt;-->
+<!--                <span th:case=4>-->
+<!--                        <img alt="한국 와인에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">-->
+<!--                    </span>&lt;!&ndash;wine에 해당하는 카테고리 설명 템플릿&ndash;&gt;-->
+<!--                <span th:case=5>-->
+<!--                        <img alt="기타 주류에 대한 간략한 설명" th:src="@{/image/productlist/cate_01.jpg}">-->
+<!--                    </span>&lt;!&ndash;etc에 해당하는 카테고리 설명 템플릿&ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="view-container">
+
+            <span class="view-num">
+                    전체상품
+                    <strong class="fw500" th:text="${page.total}"></strong>
+                    개
+                </span>
+            <div class="view-option">
+                <div class="view-option-s">
+                    <ul class="view-option-sort" th:object="${page}">
+                        <li>
+                            <a th:with="rate='rate'" th:href="@{/product/productlist/price(pageNum=*{currentPage}, type=*{viewCriteria.p}, sort='rate', viewCnt=*{cntPerPage})}">판매량 순</a>
+                        </li>
+                        <li>
+                            <a th:with="review='review'" th:href="@{/product/productlist/price(pageNum=*{currentPage}, type=*{viewCriteria.p}, sort='review', viewCnt=*{cntPerPage})}">리뷰 많은 순</a>
+                        </li>
+                        <li>
+                            <a th:with="pick='pick'" th:href="@{/product/productlist/price(pageNum=*{currentPage}, type=*{viewCriteria.p}, sort='pick', viewCnt=*{cntPerPage})}">찜 순</a>
+                        </li>
+                        <li>
+                            <a th:with="low='low'" th:href="@{/product/productlist/price(pageNum=*{currentPage}, type=*{viewCriteria.p}, sort='low', viewCnt=*{cntPerPage})}">낮은 가격 순</a>
+                        </li>
+                        <li>
+                            <a th:with="high='high'" th:href="@{/product/productlist/price(pageNum=*{currentPage}, type=*{viewCriteria.p}, sort='high', viewCnt=*{cntPerPage})}">높은 가격 순</a>
+                        </li>
+                        <div style="float:right;height:50px">
+
+                            <select class="view-option-number" id="viewCnt" style="margin-top: 15px;">
+                                <option value="16" selected>16개씩 보기</option>
+                                <option value="32">32개씩 보기</option>
+                                <option value="48">48개씩 보기</option>
+                            </select>
+
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="goods_list">
+
+            <div class="extist-list" th:if="${list}">
+                <ul>
+                    <th:block  th:each="item : ${list}">
+                        <li>
+                            <div class="item_content" >
+                                <div id="item_content_wrap_wrap">
+                                    <div class="sold_out_gif" th:if="${item.quantity eq 0}">
+                                        <img src="/image/productlist/icon_soldout.gif">
+                                    </div>
+                                    <div class="item_img">
+                                        <a th:href="@{product/detail(pid=${item.productId})}">
+                                            <img th:src="|${item.imagePath}|">
+                                        </a>
+                                        <div th:if="${item.quantity eq 0}">
+                                            <strong class="item_sold_out">
+                                            </strong>
+                                        </div>
+                                        <div class="item_info_content">
+                                            <div class="item_tit_box">
+                                                <a th:href="@{/product/detail(pid=${item.productId})}">
+                                                    <strong class="item_name" th:text="${item.productName}">
+                                                    </strong>
+                                                </a>
+                                            </div>
+                                            <div class="mt10">
+                                            </div>
+                                            <div class="item_price_box">
+                                                <strong class="item_price" th:text="|${#numbers.formatInteger(item.price, 0, 'COMMA')} 원|"></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+            <div class="no-extist-list" th:if="${list.size() eq 0}">
+                <div style="text-align: center ;height: 370px; line-height:370px">
+                    <span style="color: #777777"><strong>조회된 상품이 없습니다.</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이징 -->
+        <div th:object="${page}">
+
+            <div class="big-page-bar" style="text-align: center">
+                <a class="changePage" th:if="*{prev}" th:href="@{/product/productlist/price(pageNum=*{startPage - 1}, type=*{viewCriteria.type}, sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">
+                    <code>&lt;</code>
+                </a>
+                <th:block th:each=" num : ${#numbers.sequence(page.getStartPage(), page.getEndPage())}">
+                    <!-- 현재 페이지에 해당하는 페이지 넘버일 땐, 링크없는 text로만 출력 -->
+                    <code th:if="${page.getCurrentPage() == num}" th:text="${num}"></code>
+                    <a class="changePage" th:unless="${page.getCurrentPage() == num}" th:href="@{/product/productlist/liquor(pageNum=${num}, type=*{viewCriteria.type}, sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">
+                        <code th:text="${num}"></code>
+                    </a>
+                </th:block>
+                <a class="changePage" th:if="*{next}" th:href="@{/product/productlist/price(pageNum=*{endPage + 1}, type=*{viewCriteria.type}, sort=*{viewCriteria.sort}, viewCnt=*{cntPerPage})}">
+                    <code>&gt;</code>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="footer" th:replace="layout/footer::footer"></div>
+</body>
+</html>

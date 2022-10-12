@@ -1,0 +1,61 @@
+
+<!-- Model -> 소속 리뷰 "BoardId" & "CommentList" -->
+<div class="review_reply_list" >
+    <th:block th:each="comment : ${commentList}">
+        <ul class="reply_list">
+            <li class="reply_detail_box" th:object="${comment}">
+                <div th:id="|reply_view_box_${comment.commentId}|">
+                    <strong th:text="${comment.userId}">
+                        <span th:text="${comment.commentCreateDate}">
+                        </span>
+                    </strong>
+                    <pre th:text="${comment.commentContent}">
+                    </pre>
+                </div>
+                <!-- 해당 Reply 작성자의 경우에만 보이게 -->
+                <div class="only_own_writer" th:if="${comment.userId} == ${session.userId}">
+                    <div class="my_reply_modify">
+                        <button class="btn_open_modify" th:onclick="|javascript:openModify(${comment.commentId})|">수정</button>
+                    </div>
+                    <div class="my_reply_delete">
+                        <a th:onclick="|javascript:deleteReply(${comment.commentId},${comment.boardId})|"  class="btn_my_reply_delete">
+                            <strong>삭제</strong>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 작성 권한 있는 사람(작성자)만 "수정 " 버튼을 누를경우 display -->
+                <div th:id="|reply_modify_box_${comment.commentId}|" class="reply_modify_box display-none">
+                    <form>
+                        <input type="hidden" name="mode" value="modifyReply">
+                        <div class="reply_write" >
+                            <div class="reply_textarea">
+                                <!-- 기존에 등록했었던 내용 불러오기 -->
+                                <textarea th:id="|reply_modify_${comment.commentId}|" required></textarea>
+                                <span class="btn_reply_span">
+                                    <button type="button" class="btn_reply_modify" th:onclick="|javascript:updateReply(${comment.commentId},${comment.boardId})|">수정</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </li>
+        </ul>
+    </th:block>
+    <!-- 회원만 댓글 가능 -->
+    <div class="reply_write_box" sec:authorize="hasRole('ROLE_ADMIN')">
+        <form>
+            <input type="hidden" name="mode" value="addReply">
+            <h4 style="margin-bottom: 0px">댓글 작성하기</h4>
+            <div class="reply_write">
+                <div class="reply_textarea">
+                    <textarea th:id="|reply_create_${boardId}|" required></textarea>
+                    <span class="btn_reply_span">
+                        <button type="button" class="btn_reply_save" th:onclick="|javascript:createReply(${boardId})|">등록</button>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

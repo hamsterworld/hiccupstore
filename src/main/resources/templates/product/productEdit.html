@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/product/productList.css">
+    <link rel="stylesheet" href="/css/product/productWrite.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="mypage_wrapper">
+            <div class="mypage_sidebar mt60">
+                <div th:replace="layout/sidebarmanager::sidebarmanager"></div>
+            </div>
+            <div class="mypage_maincontent pt60">
+                <div class="maincontent">
+                    <div th:if="${product == null}">
+                        <h2>게시글이 존재하지않습니다.</h2>
+                    </div>
+                    <div th:if="${product != null}" class="board_zone_sec">
+                        <form th:action="@{/product/edit}"  method="POST" enctype="multipart/form-data">
+                        <div class="board_zone_tit">
+                            <h2>상품 수정</h2>
+                        </div>
+                        <div class="board_zone_cont">
+                            <div class="board_list_qa">
+                                <table class="board_write_table" style="width:100%">
+                                    <colgroup>
+                                        <col style="width:15%">
+                                        <col style="width:85%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">카테고리</th>
+                                            <td>
+                                                <div class="category_select">
+                                                    <select class="tune" id="category" name="categoryId" style="width:127px;">
+                                                        <option value="1" th:selected="${product.categoryId} == 1">MAKGEOLLI</option>
+                                                        <option value="2"th:selected="${product.categoryId} == 2">YAKJU</option>
+                                                        <option value="3"th:selected="${product.categoryId} == 3">SOJU</option>
+                                                        <option value="4"th:selected="${product.categoryId} == 4">WINE</option>
+                                                        <option value="5"th:selected="${product.categoryId} == 5">ETC</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">이름</th>
+                                            <td>
+                                                <input type="text" name="productName" th:value="${product.productName}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">가격</th>
+                                            <td>
+                                                <input type="number" name="price" min="1"  th:value="${product.Price}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">수량</th>
+                                            <td>
+                                                <input type="number" name="quantity" min="1" th:value="${product.quantity}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">도수</th>
+                                            <td>
+                                                <input type="number" name="alcoholContent" min="1"step="0.1" th:value="${product.alcoholContent}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">브랜드</th>
+                                            <td>
+                                                <input type="text" name="brand" th:value="${product.brand}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">설명</th>
+                                            <td>
+                                                <textarea name="description" th:text="${product.description}" cols="30" rows="10" style="resize: none; width: 95%;"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">대표 사진</th>
+                                            <td>
+                                                <input type="file" id="productImageFile" name="productImageFile" onchange="setThumbnail(event);" th:hidden="${detailImageName}!=''">
+                                                <input type="hidden" id="PreProductImage" name="PreProductImage" th:value="${productImageName}">
+                                                <button type="button" class="btn_before" id="btn_productImageFile" onclick="changeImage(this);"><strong>사진변경</strong></button>
+                                                <div id="product_image_container" style="width : 300px;">
+                                                    <img th:src="|${productImageName}|" style="width : 100%;">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">상세 사진</th>
+                                            <td>
+                                                <input type="file" id="detailImageFile" name="detailImageFile" onchange="setThumbnail(event);" th:hidden="${detailImageName}!=''">
+                                                <input type="hidden" id="PreDetailImage" name="PreDetailImage" th:value="${detailImageName}">
+                                                <button type="button" class="btn_before" id="btn_detailImageFile" onclick="changeImage(this);"><strong>사진변경</strong></button>
+                                                <div id="detail_image_container" style="width : 300px;">
+                                                    <img th:src="|${detailImageName}|" style="width : 100%;">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="btn_center_box">
+                                <button type="button" class="btn_before"><strong>이전</strong></button>
+                                <button type="submit" class="btn_write_ok"><strong>저장</strong></button>
+                            </div>
+                        </div>
+                            <input type="hidden" name="productId" th:value="${product.productId}">
+                            <input type="hidden" name="sellCount" th:value="${product.sellCount}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+      <script type="text/javascript">
+        function setThumbnail(event) {
+            var type = event.currentTarget.attributes[1].nodeValue;
+            let targetDiv = ""
+            if(type === "productImageFile"){
+                targetDiv = "div#product_image_container";
+            }
+            else{
+                targetDiv = "div#detail_image_container";
+            }
+            document.querySelector(targetDiv).innerHTML = '';
+        
+            for (var image of event.target.files) {
+              var reader = new FileReader();
+              reader.onload = function(event) {
+                var img = document.createElement("img");
+                img.setAttribute("src", event.target.result);
+                img.setAttribute("style", "max-width:100%");
+                document.querySelector(targetDiv).appendChild(img);
+              };
+            reader.readAsDataURL(image);
+        }
+      }
+
+      function changeImage(item) {
+            var target = item.id;
+            if(target === "btn_detailImageFile"){
+                $(detailImageFile)[0].removeAttribute("hidden");
+                $(btn_detailImageFile)[0].remove();
+                $(PreDetailImage)[0].remove();
+            }
+            else{
+                $(productImageFile)[0].removeAttribute("hidden");
+                $(btn_productImageFile)[0].remove();
+                $(PreProductImage)[0].remove();
+            }
+      }
+      </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+.membercomplete_box{
+    width: 100%;
+    border-top:1px solid black;
+}
+
+.membercomplete_wrap{
+    font-family: "Noto Sans KR",sans-serif;
+    font-size: 15px;
+    width: 593px;
+    margin: 100px auto 40px auto;
+    
+}
+
+.membercomplete_wrap h2{
+    font-size: 28px;
+    margin: 0 0 20px 0;
+}
+
+
+.membercomplete_wrap2 img{
+    display: block;
+    margin:auto;
+    position: absolute;
+    top:40%;
+    right:45%;
+}
+
+
+.membercomplete_wrap2{
+    border-radius: 5%;
+    margin:auto;
+    width: 593px;
+    height: 500px;
+    border:1px solid black;
+    position:relative;
+    z-index: -1;
+}
+
+.membercompletex_spanbox{
+    padding-top:15px;
+    text-align: center;
+    margin:auto;
+    width: 290px;
+    margin-top:20px;
+    border-top:1px solid black;
+    position: absolute;
+    top:55%;
+    right:25%;
+}
+
+
+/* 버튼 가운데로 */
+
+.member_complete_center{
+    width:350px;
+    margin:auto;
+    overflow: hidden;
+}
+
+.member_complete_prev{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.member_complete_next{
+    float:right;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 10px;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    cursor: pointer;
+    font-weight: bold;
+}

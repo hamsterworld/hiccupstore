@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="mypage_sidebar_content" th:fragment="sidebar">
+    <h2>마이 페이지</h2>
+    <ul class="mypage_sidebar_submenu">
+        <li>
+            쇼핑정보
+            <ul class="mypage_sidebar_submenu1">
+                <li>
+                    <a th:href="@{/mypage/mypageorderlist}">-주문목록/배송조회</a>
+                </li>
+                <li>
+                    <a th:href="@{/mypage/mypagerefund}">-취소/반품/교환 내역</a>
+                </li>
+                <li>
+                    <a th:href="@{/mypage/mypagewishlist}">-찜리스트</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            고객센터
+            <ul class="mypage_sidebar_submenu2">
+                <li>
+                    <a th:href="@{/mypage/mypage1vs1}">-1:1 문의</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            회원정보
+            <ul class="mypage_sidebar_submenu3">
+                <li>
+                    <a th:href="@{/mypage/userinformationupadte}">-배송지 변경</a>
+                </li>
+                <li>
+                    <a th:href="@{/mypage/userwithdrawal}">-회원 탈퇴</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            나의 상품문의
+            <ul class="mypage_sidebar_submenu4">
+                <li>
+                    <a th:href="@{/mypage/mypageproduct}">-나의 상품문의</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            나의 상품리뷰
+            <ul class="mypage_sidebar_submenu4">
+                <li>
+                    <a th:href="@{/mypage/mypagereview}">-나의 상품리뷰</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

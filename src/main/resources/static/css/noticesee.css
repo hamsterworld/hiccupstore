@@ -1,0 +1,211 @@
+/* 공통 클래스 */
+.fcBlue {
+    color: #189fdb !important;
+}
+
+.fw600 {
+    font-weight: 600 !important;
+}
+
+.fw300 {
+    font-weight: 300 !important;
+}
+
+.fs34 {
+    font-size: 34px !important;
+}
+
+.f_scd {
+    font-family: 'S-Core Dream' !important;
+}
+
+
+/* 첫번째 박스의 css */
+
+h2{
+    color:white;
+    font-size: 200%;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.6em;
+}
+
+.firstcontentbox{
+    position: relative;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    overflow: hidden;
+}
+.firstcontentbox img{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+}
+
+
+
+/* 두번째 박스의 css */
+
+.secondcontentbox{
+    position:relative;
+    margin-bottom: 100px;
+    margin:auto;
+}
+
+.secondcontentbox h3{
+    margin-top: 70px;
+    text-align: center;
+}
+
+.secondcontentboximg{
+    height: 400px;
+    width: 100%;
+}
+
+
+/* 세번제 박스의 css */
+
+.thirdcontentbox{
+    width: 1000px;
+    margin: auto;
+}
+
+.thirdcontentbox img{
+    width: 1000px;
+}
+
+
+/* 네번째 박스의 css */
+
+.fourchcontentbox{
+    width: 1000px;
+    margin: auto;
+}
+
+.fourchcontentbox img{
+    width: 1000px;
+}
+
+/**  mmmmmmmmmmm */
+
+.sub_content {
+    padding: 0px 0 0 0;
+    position: relative;
+    margin: 0 auto;
+}
+
+.content {
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.board_zone_sec {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 0 0 0;
+    min-height: 600px;
+}
+
+.board_zone_tit {
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333 !important;
+}
+
+.board_view_tit {
+    overflow: hidden;
+    padding: 1px 15px 1px 15px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #dbdbdb;
+    background: #f7f7f7;
+    font-family: "Noto Sans KR",sans-serif;
+}
+.board_zone_tit h2{
+    text-align: left !important;
+    color: #333 !important;
+}
+
+.board_zone_list {
+    text-align: center;
+}
+
+
+.board_view_tit h3 {
+    display: inline-block;
+    color: #111111;
+    font-size: 18px;
+}
+
+.board_zone_view .board_view_info {
+    overflow: hidden;
+    padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid #dbdbdb;
+    font-size: 15px;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.view_info_day {
+    height: 10px;
+    margin: 0 0 0 7px;
+    padding-left: 10px;
+    font-size: 11px;
+    border-left: 1px solid #dbdbdb;
+    vertical-align: middle;
+}
+
+.board_view_content {
+    font-family: "Noto Sans KR",sans-serif;
+    min-height: 350px;
+}
+
+.view_goods_select {
+    margin: 1px 0 0 0;
+}
+
+.board_view_content .seem_cont {
+    padding: 30px 15px 30px 15px;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.board_view_content img {
+    max-width: 100%;
+    border: 0 none;
+    vertical-align: top;
+}
+.board_view_comment {
+    padding: 10px 0 10px 0;
+}
+
+.view_comment {
+    padding: 0 0 0 0;
+    border-bottom: 1px solid #dbdbdb;
+    background: #ffffff;
+}
+
+.btn_right_box {
+    text-align: right;
+    margin: 10px 0 0 0;
+}
+
+.btn_board_list {
+    height: 34px;
+    line-height: 32px;
+    margin: 0 0 0 5px;
+    padding: 0 22px 0 22px;
+    color: #666666;
+    border: 1px solid #a3a3a3;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Noto Sans KR",sans-serif;
+    cursor: pointer;
+}

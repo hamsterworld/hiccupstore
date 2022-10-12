@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/managerpage/managerpage1vs1seeandanswer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/SmartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="mypage_wrapper">
+            <div class="mypage_sidebar mt60">
+                <div th:replace="layout/sidebarmanager::sidebarmanager"></div>
+            </div>
+            <div class="mypage_maincontent pt60">
+                <div class="maincontent">
+                    <div class="mypage_main">
+                        <div class="board_zone_sec">
+                            <div class="board_zone_tit">
+                                <h2>1:1문의</h2>
+                            </div>
+                            <div class="board_zone_cont">
+                                <div class="board_list_qa">
+                                    <table class="board_write_table" style="width:100%">
+                                        <colgroup>
+                                            <col style="width:15%">
+                                            <col style="width:85%">
+                                        </colgroup>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">말머리</th>
+                                            <td>
+                                                <div class="category_select" th:text="${boarddto[0].boardcategory}">
+                                                    결제불량
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">작성자 , 회원번호</th>
+                                            <td th:text="|${boarddto[0].nickname} , ${boarddto[0].userid}|">
+                                                오인석
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">제목</th>
+                                            <td th:utext="${boarddto[0].boardtitle}">
+                                                안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">본문</th>
+                                            <td>
+                                                <div class="content_box_box_width" th:utext="${boarddto[0].boardcontent}">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">업로드한 사진</th>
+                                            <td>
+                                                <th:block th:each="board : ${boarddto}" th:if="${image}">
+                                                    <img th:src="${board.s3imageUrl}">
+                                                </th:block>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="board_zone_sec">
+                            <form th:action="@{/managerpage/managerpage1vs1write}" name="information"  method="post">
+                                <input type="hidden" th:value="${boardid}" name="boardId">
+                            <div class="board_zone_tit">
+                                <h3>고객에게 답변 하기</h3>
+                            </div>
+                            <div class="board_zone_cont">
+                                <div class="board_list_qa">
+                                    <table class="board_write_table" style="width:100%">
+                                        <colgroup>
+                                            <col style="width:15%">
+                                            <col style="width:85%">
+                                        </colgroup>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">답변하기</th>
+                                                <td>
+                                                    <textarea name="boardcontent" id="editorTxt" class="int" cols="30" rows="10"></textarea>
+                                                </td>
+                                            </tr>
+                                        </tbody>   
+                                    </table>
+                                </div>
+                                <div class="btn_center_box">
+                                    <button type="button" class="btn_before" onclick="prevpage()"><strong>이전</strong></button>
+                                    <button type="button" class="btn_write_ok" onclick="nextpage()"><strong>답변하기</strong></button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/managerpage/managerpage1vs1seeandanswer.js"></script>
+    <script>
+        let oEditors = []
+
+        smartEditor = function() {
+          console.log("Naver SmartEditor")
+          nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "editorTxt",
+            sSkinURI: "/SmartEditor/SmartEditor2Skin.html",
+            fCreator: "createSEditor2"
+          })
+        };
+
+        $(document).ready(function() {
+          smartEditor()
+        });
+      </script>
+</body>
+</html>

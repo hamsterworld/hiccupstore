@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/noticesee.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="subcontent">
+            <div class="content">
+                <div class="board_zone_sec">
+                    <div class="board_zone_tit">
+                        <h2>공지사항</h2>
+                    </div>
+                    <div class="board_zone_cont">
+                        <div class="board_zone_view">
+                            <div class="board_view_tit">
+                                <h3 th:text="${noticedto.boardtitle}">제목입니다.</h3>
+                            </div>
+                            <div class="board_view_info">
+                                <span class="view_info_idip">
+                                    <strong>관리자</strong>
+                                </span>
+                                <span class="view_info_day" th:text="${noticedto.createdate}">
+                                    2020-03-03
+                                </span>
+                            </div>
+                            <div class="board_view_content">
+                                <div class="view_goods_select">
+    
+                                </div>
+                                <div class="seem_cont">
+                                    <div style="margin:10px 0 10px 0"></div>
+                                    <div style="text-align: left;">
+                                        <span th:utext="${noticedto.boardcontent}"></span>
+                                        <th:block th:if="${image}">
+                                        <img th:src="${noticedto.imagepath}">
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="board_view_comment">
+                                <div class="view_comment js_comment_area">
+    
+                                </div>
+                            </div>
+                            <div class="btn_right_box">
+                                <button type="button" class="btn_board_list" onclick="prevpage()">목록</button>
+                                <button type="button" class="btn_board_list" onclick="noticeupdate()"
+                                        sec:authorize="hasRole('ROLE_ADMIN')">수정</button>
+                                <button type="button" class="btn_board_list" onclick="noticedelete()"
+                                        sec:authorize="hasRole('ROLE_ADMIN')">삭제</button>
+                                <input type="hidden"  id="hidden_noticedid" th:value="${noticedto.noticeid}">
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>   
+        </div>
+    </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/noticesee.js"></script>
+</body>
+</html>

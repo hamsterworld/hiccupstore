@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/noticeupdate.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/SmartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script th:inline="javascript">
+        let msg = [[${maximage1}]];
+        if(msg=="maximage1"){ alert("이미지는 최대 1개만 가능합니다.")};
+    </script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <form th:action="@{/notice/update/{noticeid}(noticeid=${noticedto.noticeid})}" name="information"  method="POST" enctype="multipart/form-data">
+    <div id='wrapper'>
+        <div class="subcontent">
+            <div class="content">
+                <div class="board_zone_sec">
+                    <div class="board_zone_tit">
+                        <h2>공지사항</h2>
+                    </div>
+                    <div class="board_zone_cont">
+                        <div class="board_zone_view">
+                            <div class="board_list_qa">
+                                <table class="board_write_table" style="width:100%">
+                                    <colgroup>
+                                        <col style="width:15%">
+                                        <col style="width:85%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">작성자</th>
+                                            <td>
+                                                관리자
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">제목</th>
+                                            <td>
+                                                <input type="text" name="boardtitle" value th:value="${noticedto.boardtitle}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">본문</th>
+                                            <td>
+                                                <textarea name="boardcontent" id="editorTxt" class="int" cols="30" rows="10" th:utext="${noticedto.boardcontent}"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">파일업로드</th>
+                                            <td>
+                                                <input type="file" name="imageFiles" onchange="setThumbnail(event);">
+                                                <div id="image_container"></div>
+                                                <div id="clear"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">업로드한 사진</th>
+                                            <td>
+                                                <th:block th:if="${image}">
+                                                    <img th:src="${noticedto.imagepath}">
+                                                    <button type="button" class="delete_img_button"><strong>x</strong></button>
+                                                    <div th:value="${noticedto.imagename}" th:class="delete_imagename"></div>
+                                                </th:block>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="btn_right_box">
+                                <button type="button" class="btn_board_list" onclick="prev()">이전</button>
+                                <button type="button" class="btn_board_list" onclick="noticeupdate()">수정하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden_delete_input">
+            </div>
+            <input type="hidden" name="noticeid" th:value="${noticedto.noticeid}">
+            <input type="hidden" name="imagename" th:value="${noticedto.imagename}">
+        </div>
+    </div>
+    </div>
+    </form>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/noticeupdate.js"></script>
+    <script th:replace="/layout/update_image::delete_image"></script>
+    <script>
+        let oEditors = []
+    
+        smartEditor = function() {
+          console.log("Naver SmartEditor")
+          nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "editorTxt",
+            sSkinURI: "/smarteditor/SmartEditor2Skin.html",
+            fCreator: "createSEditor2"
+          })
+        };
+    
+        $(document).ready(function() {
+          smartEditor()
+        });
+      </script>
+</body>
+</html>

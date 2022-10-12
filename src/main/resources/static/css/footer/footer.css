@@ -1,0 +1,161 @@
+html{
+    height: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* 상단 footer*/
+#hiccup_image{
+    width:105px;
+    height:29px;
+}
+#footerwrap{
+    background: #1a1a1a;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+#footerdiv{
+    padding-top: 20px;
+    padding-bottom: 30px;
+    color: #888;
+    width: 1000px;
+    margin: 0 auto;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    display:flex;
+    font-size: 12px;
+    justify-content: space-between;
+}
+
+.fw600{
+    font-weight: 600 !important;
+}
+
+.clearfix > span:nth-child(2){
+    position: relative;
+    margin-left:20px;
+}
+
+.clearfix > span:nth-child(2):after{
+    content: "";
+    position:absolute;
+    border-left: 1px solid #444;
+    left:-10px;
+    top:0.5px;
+    height: 13px;
+}
+
+
+.clearfix > span:nth-child(3){
+    position: relative;
+    margin-left:20px;
+}
+
+.clearfix > span:nth-child(3):after{
+    content: "";
+    position:absolute;
+    border-left: 1px solid #444;
+    left:-10px;
+    top:0.5px;
+    height: 13px;
+}
+
+.footerdivcol2 > span:first-child{
+    display:block;
+    margin-bottom: 5px !important;
+}
+.footerdivcol2 > span:nth-child(2){
+    color:#189fdb !important;
+    font-size:20px !important;
+}
+.fcWhite{
+    color: #fff !important;
+}
+.fw400{
+    font-weight: 400 !important;
+}
+.fs15{
+    font-size:15px;
+}
+
+.footerdivcol3 > span:first-child{
+    display:block;
+    margin-bottom: 5px !important;
+}
+
+.footerdivcol3 > span:nth-child(n+1){
+    display: inline-block;
+    width: 90px;
+    font-size: 13px;
+}
+
+
+
+
+
+
+/* 최하단 푸터 */
+
+#footerdiv2{
+    width: 1000px;
+    margin:0 auto;
+    font-family: "Noto Sans KR",sans-serif;
+    font-size: 12px;
+}
+
+#footerdiv3 > a{
+    color: #888;
+    text-decoration: none;
+    margin-right: 35px;
+}
+
+#footerdiv3 > a:nth-child(-n+3):after {
+    content: "";
+    position: relative;
+    right: -18px;
+    top: 50%;
+    height: 10px;
+    margin-top: -6px;
+    border-right: 1px solid #888;
+}
+.footerdivcol3 a{
+    color: #888;
+}
+#footerdiv4{
+    float: right;
+    color: #888;
+}
+
+#footerwrap2{
+    padding:15px 0;
+    background-color: #1d1d1d;  
+}
+
+
+
+/* 푸터 하단에 쳐박기*/
+#wrapper{
+    height: auto;
+    min-height: 50%;
+    margin-bottom: 100px;
+  }
+  footer{
+    top:308.4px;
+    height: 308.4px;
+    position : relative;
+    transform : translateY(-100%);
+  }
+  .hamster{
+    height: 1000px;
+    width: 1000px;
+    border: 1px solid red;
+    margin:auto;
+  }

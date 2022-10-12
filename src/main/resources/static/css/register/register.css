@@ -1,0 +1,255 @@
+#wrapper{
+    padding-top: 70px;
+    margin-top: 10px;
+}
+
+
+/* 맨위상단 박스  */
+.contentwrapper{
+    margin:auto;
+    border-bottom: 1px solid #999999;
+    overflow: hidden;
+    width:800px;
+}
+
+.contenttit h2{
+    margin: 0 0 20px 0;
+    float:left;
+    font-size: 28px;
+    color: #222222;
+}
+
+ol{
+    margin:0;
+    padding:0;
+    float:right;
+    list-style: none;
+    line-height: 62px;
+}
+
+.contenttit li{
+    float:left;
+}
+
+.page_on{
+    font-size: 14px;
+    color: #189fdb;
+}
+
+.page_on span:first-child{
+    font-size: 16px;
+    font-weight: bold
+}
+
+.page_on img{
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.contenttit ol li:nth-child(n+2) {
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+.contenttit ol li:nth-child(2) img{
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.contenttit ol li span{
+    font-size: 16px;
+    font-weight: bold
+}
+
+
+/* 동의 박스 */
+
+.informationinsertbox{
+    width: 743px;
+    margin: 0 auto;
+    padding: 60px 60px;
+}
+
+.informationinsertbox h3{
+    padding: 0 0 17px 0;
+    font-weight: normal;
+    font-size: 18px;
+    color: #222222;
+}
+
+.informationinsertbox .join_agreement_content{
+    padding: 30px 0 0 0;
+    border-top: 1px solid #999999;
+}
+
+.join_agreement_box{
+    margin: 0 0 30px 0;
+}
+
+.form_elements{
+    position: relative;
+}
+
+.form_element{
+    position: relative;
+}
+
+.form_elements input {
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 0;
+}
+
+.form_element input {
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 0;
+}
+
+input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    position:relative;
+    top:-2px;
+}
+
+.form_elements label {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 0 0 0px;
+   /* background: url(/image/check_off.png) no-repeat 1px top; */
+}
+
+.form_element label {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 0 0 0px;
+   /* background: url(/image/check_off.png) no-repeat 1px top; */
+}
+
+/*
+.form_element label:hover {
+    background: url(/image/check_over.png) no-repeat 1px top;
+}
+
+.form_element label.on {
+    background: url(/image/check_on.png) no-repeat 1px top;
+}*/
+
+.form_element span {
+    color: #717171;
+    font-size: 11px;
+}
+
+
+.form_elements span {
+    color: #717171;
+    font-size: 11px;
+}
+
+.check em{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.require{
+    width: 15px !important;
+    height: 15px !important;
+    vertical-align: top;
+    position:relative;
+    top:2.5px !important;
+}
+
+.form_element strong {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #189fdb;
+}
+
+.check_s{
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.form_element span > a {
+    padding: 0 10px 0 5px;
+    color: #189fdb;
+    font-size: 12px;
+    background: url(image/icon_arrow_03.png) no-repeat right center;
+    text-decoration: underline;
+}
+
+.aggreementcontentbox {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 89px;
+    margin: 10px 0 0;
+    padding: 20px;
+    border: 1px solid #e6e6e6;
+    border-top: 1px solid #999999;
+    line-height: 18px;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.btn_center_box{
+    margin: 35px 0 0 0;
+    text-align: center;
+}
+
+.btn_member_prev {
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.btn_member_next {
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 10px;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn_member_next:hover:enabled{
+    background: sienna;
+    border: 1px solid sienna;
+}
+
+.btn_member_next:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }

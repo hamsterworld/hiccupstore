@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hiccup.hiccupstore.userpick.dao.UserPickMapper">
+
+    <select id="findAllByUserId" resultType="hiccup.hiccupstore.userpick.dto.UserPick" parameterType="Integer">
+        select pick.userId, pick.productId, p.productName, p.price ,img.imagePath
+        FROM USER_PICKPRODUCT pick
+        INNER JOIN product p ON p.productId= pick.productId
+        INNER JOIN product_image img ON p.productId = img.productId
+        WHERE pick.userId = #{userId} AND img.imageType = "PRODUCT"
+    </select>
+
+    <insert id="insertUserPick" parameterType="Integer">
+        INSERT INTO USER_PICKPRODUCT(productId,UserId) VALUES(#{productId},#{userId})
+    </insert>
+
+    <delete id="deleteUserPick" parameterType="Integer">
+        DELETE FROM USER_PICKPRODUCT WHERE userId = #{userId} AND productId = #{productId}
+    </delete>
+
+    <select id="findByUserIdAndProductId" resultType="hiccup.hiccupstore.userpick.dto.UserPick" parameterType="Integer">
+        SELECT * FROM USER_PICKPRODUCT WHERE userId = #{userId} AND productId = #{productId}
+    </select>
+
+</mapper>

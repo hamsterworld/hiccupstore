@@ -1,0 +1,134 @@
+
+<!-- 해당 페이지는 관리자와 작성자만 볼 수 있는 공간 -->
+<div th:id="|qna_detail_${productQnA.boardId}|">
+    <tr class="qna_detail">
+        <div class="qna_detail_box">
+            <div class="qna_view" th:id="|QnA_view_box_${productQnA.boardId}|">
+                <table class="board_write_table" style="width:100%">
+                    <colgroup>
+                        <col style="width:15%">
+                        <col style="width:85%">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th scope="row">문의분류</th>
+                        <td>
+                            <div class="category_select" th:text="${productQnA.boardCategory}">
+                                결제불량
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">작성자</th>
+                        <td th:text="${session.userNickName}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">제목</th>
+                        <td th:utext="${productQnA.boardTitle}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">본문</th>
+                        <td>
+                            <div class="content_box_box_width" >
+                                <pre th:utext="${productQnA.boardContent}"></pre>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">업로드한 사진</th>
+                        <td>
+                            <div></div>
+                            <th:block th:each="imageName : ${imageNameList}" th:if="${imageNameList.size()} > 0">
+                                <img th:src="|${imageName}|" style="float: left; width: 100%;">
+                            </th:block>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="qna_modify display-none" th:id="|QnA_modify_box_${productQnA.boardId}|">
+                <form th:action="@{/board/productQnA/edit}" method="POST" enctype="multipart/form-data">
+                <table class="board_write_table" style="width:100%">
+                    <colgroup>
+                        <col style="width:15%">
+                        <col style="width:85%">
+                    </colgroup>
+                    <tbody>
+
+                        <tr>
+                            <th scope="row">상품문의</th>
+                            <td>
+                                <div class="category_select">
+                                    <select class="tune" id="categoryId" name="boardCategory" style="width:127px;">
+                                        <option value>카테고리</option>
+                                        <option value="1" th:selected="${productQnA.boardCategory} == '회원/정보관리'">회원/정보관리</option>
+                                        <option value="2" th:selected="${productQnA.boardCategory} == '주문/결제'">주문/결제</option>
+                                        <option value="3" th:selected="${productQnA.boardCategory} == '배송'">배송</option>
+                                        <option value="4" th:selected="${productQnA.boardCategory} == '반품/환불/교환/AS'">반품/환불/교환/AS</option>
+                                        <option value="5" th:selected="${productQnA.boardCategory} == '기타'">기타</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">작성자</th>
+                            <td>
+                                <div class="board_type">
+                                    <input type="hidden" name="userId" th:value="${productQnA.userId}">
+                                    <input type="hidden" name="userName" th:value="${productQnA.userName}">
+                                    <span th:text="${session.userNickName}"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">제목</th>
+                            <td>
+                                <div>
+                                    <input type="text" name="title" th:value="${productQnA.boardTitle}">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">본문</th>
+                            <td>
+                                <div class="content_box_box_width">
+                                    <textarea name="boardContent"  th:text="${productQnA.boardContent}" required style="resize : none; width : 100%;"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">업로드한 사진</th>
+                            <td>
+                                <div>
+                                    <input type="hidden" name="preImages"th:if="${imageNameList.size()}>0" th:value="${imageNameList[0]}">
+                                    <input type="file" name="images" multiple>
+                                    <div th:id="|preview_file+${productQnA.boardId}|">
+                                        <ol id="file_list">
+                                            <th:block th:each="imageName : ${imageNameList}" th:if="${imageNameList}">
+                                                <img th:src="|${imageName}| " style="width: 100%;">
+                                            </th:block>
+
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    <div>
+                        <input type="hidden" name = "boardId" th:value="${productQnA.boardId}">
+                        <input type="hidden" name = "productId" th:value="${productQnA.productId}">
+                        <input type="hidden" name = "boardTypeId" th:value="${productQnA.boardTypeId}">
+                        <input type="hidden" name = "userId" th:value="${session.userId}">
+                        <button type="button" class="btn_to_qna_write back-blue" th:onclick="|javascript:deleteProductQnA(${productQnA.boardId})|">삭제</button>
+                        <button type="submit" class="btn_to_qna_write back-blue " th:id="|btn_QnA_save_${productQnA.boardId}|" th:onclick="|javascript:saveProductQnA(${productQnA.boardId})|">저장</button>
+                    </div>
+                </form>
+            </div>
+            <div class="my_review_modify">
+                <button type="button" class="btn_to_qna_board" th:id="|btn_QnA_modify_${productQnA.boardId}|"  th:onclick="|javascript:QnAOpenModify(${productQnA.boardId})|">수정</button>
+            </div>
+        </div>
+    </tr>
+</div>

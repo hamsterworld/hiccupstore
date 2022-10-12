@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div id="commentTable">
+         <span class="js_pr_btn_comment_close">
+         댓글닫기
+         </span>
+        <div class="review_comment_list js_pr_comment">
+            <ul class="js_pr_comment_list">
+                <li class="reply-container js_pr_comment_row" th:each="comment:${commentdtos}">
+                    <strong class="comment_name" th:text="${comment.username}">
+                        관리자
+                    </strong>
+                    <span class="board_day_time" th:text="${comment.commentcreatedate}">
+                            2022.06.10 14:14
+                    </span>
+                    <p>
+                        <em th:utext="${comment.commentcontent}">
+                            고객아 반갑다
+                        </em>
+                    </p>
+                </li>
+            </ul>
+        </div>
+</div>
+</html>

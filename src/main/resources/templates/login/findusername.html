@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/find/findusername.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+      function findpassword(){
+      location.href='/findpassword';
+      }
+      function login(){
+        location.href='/login';
+      }
+    </script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="findusername_box">
+            <div class="findusername_box_wrap">
+                <h2>아이디찾기</h2>
+                <div class="findusername_box_content">
+                    <form action="#">
+                        <div class="findusername_box_box">
+                            <div class="findusername_id_sec">
+                                <h3>회원 아이디찾기</h3>
+                                <div class="radio_sec">
+                                    <input type="radio" id="FindTypeEmail" name="FindType" value="email" checked>
+                                    <label for="FindTypeEmail">이메일</label>
+                                    <input type="radio" id="FindTypePhone" name="FindType" value="phone">
+                                    <label for="FindTypePhone">전화번호</label>
+                                </div>
+                                <div class="input_sec">
+                                    <div>
+                                        <input type="text" placeholder="이름" id="username" name="username">
+                                        <input type="email" placeholder="가입이메일주소" id="email" name="email">
+                                    </div>
+                                    <button type="button" id="findid">아이디 찾기</button>
+                                </div>
+                                <span id="errormessage"></span>
+                            </div>
+                            <div class="findusername_button_sec">
+                                <button type="button" id="btnprevstep" class="btn_member_prev" onclick="findpassword()">
+                                    비밀번호 찾기
+                                </button>
+                                <button type="button" id="btnnextstep" class="btn_member_next" onclick="login()">
+                                    로그인 하기
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/find/findusername.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

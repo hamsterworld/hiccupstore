@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="mypage_sidebar_content" th:fragment="sidebarmanager">
+    <h2>관리자 페이지</h2>
+    <ul class="mypage_sidebar_submenu">
+        <li>
+            주문 정보
+            <ul class="mypage_sidebar_submenu1">
+                <li>
+                    <a th:href="@{/managerpage/managerpageorder}">-고객 주문 관리</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            고객센터 관리
+            <ul class="mypage_sidebar_submenu2">
+                <li>
+                    <a th:href="@{/managerpage/managerpage1vs1}">-1:1 문의 답변</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            상품 관리
+            <ul class="mypage_sidebar_submenu4">
+                <li>
+                    <a th:href="@{/managerpage/managerpageproduct}">-상품문의 답변</a>
+                </li>
+                <li>
+                    <a th:href="@{/product/write}">-상품등록</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

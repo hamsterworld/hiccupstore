@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script th:inline="javascript" th:fragment="delete_image">
+
+let count = 0;
+
+ $('.delete_img_button').click(function(){
+    if(confirm('이미지를 삭제하시겠습니까?')){
+        let delete_image_name = $(this).next('.delete_imagename').attr('value');
+        $(this).prev('img').css('display','none');
+        $('.delete_img_button').css('display','none');
+        $('.hidden_delete_input').append('<input type="hidden" name="deleteImageFiles" value="'+delete_image_name+'">');
+        count = count+1;
+    }
+ })
+
+</script>
+</html>

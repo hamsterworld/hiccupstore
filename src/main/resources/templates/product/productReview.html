@@ -1,0 +1,74 @@
+
+<div id="review_list">
+
+    <div class="review_list no-review" th:if="${reviewList.size() == 0}">
+        <strong>해당 상품에 작성된 리뷰가 없습니다.</strong>
+    </div>
+    <div th:if="${reviewList}" class="review_list">
+        <!-- 여기서부터 each 반복 -->
+        <th:block th:each="review : ${reviewList}">
+        <div class="review_list_row">
+            <div class="star_date_name">
+<!--                <strong>★★★★★</strong>&lt;!&ndash; 별표 &ndash;&gt;-->
+                <span th:text="|${review.createDate}|"></span><!-- 날짜 -->
+                <span th:text="|${review.userName}|"></span><!-- 닉네임 -->
+            </div>
+            <div class="review_text_file_reply_box">
+                <div class="review_text_file_container">
+                    <div class="review_text">
+                        <pre th:text="${review.boardContent}" ></pre>
+                    </div>
+
+                    <div th:id="|review_modify_box_${review.boardId}|"  class="review_modify_box display-none">
+                        <form th:name="|${review.boardId}_modifyReview|">
+<!--                            <input type="hidden" name="mode" value="modifyReview">-->
+                            <div class="review_modify_write">
+                                <div class="review_modify_textarea">
+                                    <!-- 기존에 등록했었던 내용 불러오기 -->
+                                    <textarea th:id="|review_modify_text_${review.boardId}|" th:text="${review.boardContent}" required></textarea>
+                                    <span class="btn_review_modify_span">
+                                        <button type="button" th:onclick="|javascript:updateReview(${review.boardId})|" class="btn_review_modify">수정</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="only_own_writer" th:if="${review.userName} == ${session.userName}">
+                    <div class="my_review_modify">
+                        <button class="btn_open_modify" th:onclick="|javascript:openModify(${review.boardId})|">수정</button>
+                    </div>
+                    <div class="my_review_delete">
+                        <a th:onclick="|javascript:deleteReview(${review.boardId})|"  class="btn_my_review_delete">
+                            <strong>삭제</strong>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="review_reply_container">
+                    <div class="review_reply_top">
+                        <span class="reply_cnt">
+                            <a th:id="|${review.boardId}|" th:onclick="|javascript:getReplyList(${review.boardId})|" class="reply_open">
+                                <strong class="reply_cnt_num" th:text="${review.commentCount}"></strong>
+                                개의 댓글이 있습니다.
+                            </a>
+                        </span>
+                        <!--                        <span class="reply_like_cnt">-->
+                        <!--                            추천:-->
+                        <!--                            <strong class="reply_like_cnt_num"></strong>-->
+                        <!--                            <a href="#" class="btn_reply_like">-->
+                        <!--                                <em>추천하기</em>-->
+                        <!--                            </a>-->
+                        <!--                        </span>-->
+                    </div>
+                    <!-- x개의 답글이 있습니다 누르면 display:block 으로 변환 -->
+                    <div>
+                        <div th:id="|review_reply_list_${review.boardId}|"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </th:block>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+.loginwrapper{
+    width: 600px;
+    margin:auto;
+    margin-top: 100px;
+    margin-bottom: 200px;
+}
+#wrapper{
+    margin-top: 30px;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+
+
+.loginbox{
+    padding: 70px 60px;
+    border: 1px solid #dbdbdb;
+}
+
+.loginbox h3{
+    margin-top:0;
+}
+
+.login_input_sec{
+    width: 478px;
+    overflow: hidden;
+}
+
+.login_input_sec > div:first-child{
+    width: 302px;
+    height: 116px;
+    float: left;
+}
+
+/*478px */
+.login_input_sec > div > input{
+    display: block;
+    width: 292px;
+    height: 36px;
+    border: 1px solid #d0d0d0;
+    margin: 15px 0 10px 0;
+    padding: 0 0 0 8px;
+}
+
+.login_input_sec > button{
+    float:right;
+    width: 158px;
+    height: 91px;
+    margin: 15px 0 0 0;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn_login_box{
+    clear: both;
+    margin: 125px 0 0 0; /* float는 margin으로 못밀어내나.. 1번째*/
+    padding: 20px 0 0 0;
+    border-top: 1px solid #dcdcdc;
+    overflow: hidden;
+}
+
+.btn_login_box li{
+    float:left;
+    margin: 0 0 0 13.5px;
+}
+
+.btn_login_box li:first-child{
+    margin: 0;
+}
+
+ul{
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+
+.btn_member_join{
+    width: 150px;
+    height: 45px;
+    margin: 0;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #666666;
+    background: #666666;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn_member_idpassword{
+    width: 150px;
+    height: 45px;
+    color: #3e3d3c;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+    background: #fff;
+    cursor: pointer;
+}
+
+.errorcheck{
+    color:red !important;
+    margin-top:0px;
+    margin-bottom:20px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:15px;
+}
+
+.sns_login_box1{
+    border-top: 1px solid #dcdcdc;
+    clear: both;
+    margin: 20px 0 0 0; /* float는 margin으로 못밀어내나.. 1번째*/
+    padding: 20px 0 0 0;
+    overflow: hidden;
+    text-align: center;
+}
+.sns_login_box2{
+    clear: both;
+    margin: 0 0 0 0; /* float는 margin으로 못밀어내나.. 1번째*/
+    padding: 10px 0 0 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+.sns_login_logo{
+    width: 480px;
+    height: 70px;
+    border: 0 none;
+    vertical-align: top;
+}

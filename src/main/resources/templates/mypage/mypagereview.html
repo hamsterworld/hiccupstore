@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/mypage/mypagereview.css">
+    <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/free-icon-alcohol-6984023.png">
+    <title>술마켓</title>
+</head>
+<body>
+    <div th:replace="layout/top::header"></div>
+    <div id="header" th:replace="layout/header::nav"></div>
+    <div id='wrapper'>
+        <div class="mypage_wrapper">
+            <div class="mypage_sidebar mt60">
+                <div th:replace="layout/sidebar::sidebar"></div>
+            </div>
+            <div class="mypage_maincontent pt60">
+                <div class="maincontent">
+                    <div class="board_zone_sec">
+                        <div class="board_zone_tit">
+                            <h2>나의 리뷰</h2>
+                        </div>
+                        <div class="no_data" th:if="${boardDtoList.size == 0}">
+                            작성된 리뷰가 없습니다.
+                        </div>
+                        <div class="plus_review_view js_pr_list" th:if="${boardDtoList.size != 0}">
+                            <div class="plus_review_view_list js_pr_row view_point_bg" th:each="board : ${boardDtoList}">
+                                <div class="star_day_name">
+                                    <span th:text="${board.createdate}">2022.05.30</span>
+                                    <span th:text="${user.nickName}">hamster</span>
+                                    <span class="fw-15"><a th:href="@{/product/detail(pid=${board.productid})}">해당 상품 이동</a></span>
+                                </div>
+                                <div class="option_text_file_box">
+                                    <div class="review_text  js_pr_contents_short" th:utext="${board.boardcontent}">
+                                    서울에 가고싶은 밤~ 원매, 매실원주를 워낙 좋게 마셨어서 세트로 나온 술을 사봤어요. 선물용 아니고 개인용으로요^^ 같이 들어있는 스트레이트잔도 귀엽고 매실주를 증류한 서울의밤은 보틀을 비틀자 향긋한 매실향이 좋습니다( 같이 마신 친구들은 머루주냐고 ㅋㅋ ) 향이 워낙 좋아 도수가 느껴지지 않네요. 좋은 술입니다.
+                                    </div>
+                                    <div class="review_comment_box">
+                                        <div class="review_comment_top">
+                                            <span class="comment_num">
+                                                <span class="js_pr_btn_comment ajax_comment" th:data_boardid="${board.boardid}">
+                                                    댓글보기
+                                                </span>
+                                                <span class="js_pr_btn_comment_open open" th:data_boardid="${board.boardid}">
+                                                    댓글보기
+                                                </span>
+                                                <span class="js_pr_btn_comment_close close" th:data_boardid="${board.boardid}">
+                                                    댓글닫기
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div th:class="|framentcomment${board.boardid}|">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination">
+                            <div class="mypage_order_info_paging" th:if="${boardDtoList.size != 0}">
+                                <a th:if="${paging.showPrev}" th:href="@{/mypage/mypage1vs1(page=${paging.beginPage - 1})}" th:text="Prev"></a>
+                                <th:block th:with="start=${paging.beginPage}, end=${paging.endPage}">
+                                    <th:block th:each=" i : ${#numbers.sequence(start,end)}">
+                                        <a th:href="@{/mypage/mypage1vs1(page=${i})}" th:text="${i}" th:classappend="${page} == ${i} ? 'paging_on'"></a>
+                                    </th:block>
+                                </th:block>
+                                <a th:if="${paging.showNext}" th:href="@{/mypage/mypage1vs1(page=${paging.endPage + 1})}" th:text="Next"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" th:replace="layout/footer::footer"></div>
+    <script type="text/javascript" src="/js/mypage/mypagereview.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

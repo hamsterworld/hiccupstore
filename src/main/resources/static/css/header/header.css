@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
+/* 맨위에 firstbar css */
+html{
+    height: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+    min-width: 1300px;
+    height: 100%;
+}
+
+#hiccup_image{
+    width:133px;
+    height:55px;
+}
+.firstbarwrap {
+    border-bottom: 1px solid #ddd;
+    text-align: right;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+.firstbar{
+    width: 100%;
+    padding: 0px 50px;
+    box-sizing: border-box;
+}
+.firstbarlink{
+    font-family: 'Roboto' , sans-serif !important;
+    text-decoration: none;
+    color: #777;
+    padding:8px;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+
+/* nav쪽 css */
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-bottom:1px solid #ddd;
+}
+
+.navbar__menu{
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+    z-index:100;
+}
+
+.navbar__menu li{
+    padding: 8px 20px;
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 30px;
+}
+
+.navbar__links{
+    list-style: none;
+    display: flex;
+    padding-left: 0px;
+}
+
+.navbar__links li{
+    padding: 8px 12px;
+}
+
+input:focus {
+    outline: none;
+}
+#txt{
+    border: none;
+}
+.inputwrap{
+    border-bottom:2px solid #189EDB;
+}
+
+.fa-solid{
+    color:#189EDB;
+}
+
+#btn1{
+    background-color: white;
+    border: 0px;
+    outline: 0px;
+    cursor: pointer;
+}
+
+.basketnumber{
+    color: white;
+    background-color: black;
+    position:absolute;
+    width: 20px;
+    height: 23px;
+    text-align: center;
+    border-radius: 100%;
+    bottom:33px;
+    left:35px;
+}
+
+.basketnumberposition{
+    position:absolute;
+}
+
+
+/* 드롭다운 */
+
+.sub{
+    width: 76%;
+    list-style: none;
+    position: absolute; 
+    top: 50px;  
+    border: 2px solid #000;  
+    box-sizing: border-box;
+    padding:0px;
+    margin:0px;
+    display: none;
+    background-color: white;;
+}
+
+.sub li{
+    width: 100%; 
+    line-height: 50px;
+    text-align: center;
+    padding:0;
+    margin:0;
+    font-size: 80%;
+  }
+
+
+ .navbar__menu>li:hover .sub{
+   display: block;
+ }
+
+ .navbar__menu>li{
+    position:relative;
+ }
+
+ .navbar__menu li a{
+    display: block; 
+    width: 100%; 
+    height: 100%;
+  }
+
+ .sub li:hover{
+    background-color: #189EDB;
+ }

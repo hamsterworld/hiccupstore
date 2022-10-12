@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/header/header.css">
+  <link rel="stylesheet" href="/css/footer/footer.css">
+  <link rel="stylesheet" href="/css/order/orderResult.css">
+  <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+  <title>Document</title>
+</head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div id="header" th:replace="layout/header::nav"></div>
+<div id='wrapper'>
+  <div class="container pt60">
+    <div class="content_box">
+      <div class="order_wrap">
+        <div class="order_tit">
+          <h2>주문 완료</h2>
+          <ol>
+            <li><span>01</span>장바구니<span><img src="/image/icon_join_step_off.png"></span></li>
+            <li><span>02</span>주문서작성/결제<span><img src="/image/icon_join_step_off.png"></span></li>
+            <li class="page_on" ><span>03</span>주문완료</li>
+          </ol>
+        </div>
+
+        <div class="order_cont">
+          <div class="check_cont">
+            <div class="order_image">
+              <img src="/image/shopping-bag.png" height="200px" width="200px">
+              <h2><span th:text="${orderMessage}"></span></h2>
+              <span>계좌관련 정보가 필요하면 여기다가 입력</span>
+            </div>
+            <div class="check_order_info">
+              <table id="orderInfoTable">
+                <tr>
+                  <td class="orderId">
+                    <span>주문번호</span><br><br>
+                    <span th:text="${orderId}" id="orderId"></span>
+                  </td>
+                  <td class="orderPrice">
+                    <span>주문금액</span><br><br>
+                    <span th:text="${#numbers.formatInteger(total,4,'COMMA')}" id="orderPrice">원</span>
+                  </td>
+                </tr>
+
+              </table>
+            </div>
+
+          </div>
+          <div class="check_btn">
+            <input id="checkButton" type="button" value="주문 내역 확인하기" onclick="checkOrder()">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer" th:replace="layout/footer::footer"></div>
+
+<script src="/js/order/orderResult.js"></script>
+</body>
+</html>

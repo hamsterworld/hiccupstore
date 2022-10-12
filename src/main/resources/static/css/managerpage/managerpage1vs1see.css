@@ -1,0 +1,291 @@
+.mt60{
+    margin-top: 60px !important;
+}
+
+.pt60{
+    padding-top: 60px !important;
+}
+
+/* 사이드바 관련 css */
+.mypage_wrapper{
+    min-height: 400px;
+    width: 1200px;
+    margin:auto;
+}
+
+.mypage_sidebar_submenu a:hover{
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+.mypage_wrapper:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.mypage_sidebar{
+    float: left;
+    width: 200px;
+}
+
+.mypage_sidebar_content{
+    min-height: 250px;
+    padding: 0 0 50px 0;
+}
+
+.mypage_sidebar_content h2{
+    padding: 0 0 14px 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.mypage_sidebar_submenu{
+    margin: 7px 0 0 0;
+    list-style: none;
+    padding:0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin: 7px 0 0 0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu > li:first-child{
+    margin: 30px 0 0 0;
+}
+
+.mypage_sidebar_submenu > li{
+    padding: 8px 0 15px 0;
+    font-size: 14px;
+    font-weight: bold;
+    background: url(/image/lnb_tit.png) no-repeat top left;
+}
+
+
+/* 하위사이드바 1 */
+.mypage_sidebar_submenu1{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu1 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu1 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 2 */
+.mypage_sidebar_submenu2{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu2 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu2 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 3 */
+.mypage_sidebar_submenu3{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu3 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu3 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 4 */
+.mypage_sidebar_submenu4{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu4 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu4 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 메인 content 영역 */
+.mypage_maincontent{
+    width: 940px !important;
+    float: right;
+    margin-top:100px;
+}
+
+.maincontent{
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.mypage_main{
+    padding: 0 0 50px 0;
+}
+
+.pt60 {
+    padding-top: 60px !important;
+}
+
+.board_zone_sec{
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 0 0 0;
+}
+
+.board_zone_tit {
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+
+
+/** table css  */
+.board_write_table {
+    width: 100%;
+    margin: 0px 0px 20px;
+    border-width: 1.5px 0px 0px;
+    border-right-style: initial;
+    border-bottom-style: initial;
+    border-left-style: initial;
+    border-right-color: initial;
+    border-bottom-color: initial;
+    border-left-color: initial;
+    border-image: initial;
+    border-spacing: 0px;
+    border-top-style: solid;
+    border-top-color: rgb(153, 153, 153);
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR", sans-serif;
+    color: rgb(51, 51, 51);
+}
+.board_write_table th {
+    font-size: 13.5px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR", sans-serif;
+    color: rgb(51, 51, 51);
+    padding: 13px 0px 7px 25px;
+    font-weight: bold;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    background: rgb(251, 251, 251);
+    text-align: left;
+    vertical-align: top;
+}
+
+.board_write_table td {
+    height: 32px;
+    margin: 0px;
+    padding: 7px 0px 7px 15px;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    background: rgb(255, 255, 255);
+}
+
+select {
+    height: 31px;
+    color: rgb(113, 113, 113);
+    vertical-align: top;
+    outline: none;
+}
+
+.board_write_table td > input {
+    width: 312px;
+    height: 31px;
+    padding: 0px 5px;
+    color: rgb(51, 51, 51);
+    border: 1px solid rgb(214, 214, 214);
+    line-height: 31px;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    outline: none;
+    font-size: 12px;
+}
+
+.board_zone_sec .btn_center_box {
+    margin: 30px 0px 0px;
+}
+
+.btn_center_box {
+    text-align: center;
+}
+
+.btn_before {
+    display: inline-block;
+    width: 100px;
+    height: 42px;
+    padding: 0px 5px;
+    color: rgb(62, 61, 60);
+    font-size: 14px;
+    border: 1px solid rgb(204, 204, 204);
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn_write_ok {
+    margin-left: 6px;
+    display: inline-block;
+    min-width: 90px;
+    height: 42px;
+    padding: 0px 10px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    border: 1px solid rgb(24, 159, 219);
+    background: rgb(24, 159, 219);
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn_write_ok:hover {
+    border: 1px solid rgb(166, 120, 66);
+    background: rgb(166, 120, 66);
+}
+
+
+.content_box_box_width{
+    width: 600px;
+    min-height: 200px;
+}

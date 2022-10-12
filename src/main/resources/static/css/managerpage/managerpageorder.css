@@ -1,0 +1,467 @@
+.mt60{
+    margin-top: 60px !important;
+}
+
+.pt60{
+    padding-top: 60px !important;
+}
+
+/* 사이드바 관련 css */
+.mypage_wrapper{
+    min-height: 400px;
+    width: 1200px;
+    margin:auto;
+}
+
+.mypage_sidebar_submenu a:hover{
+    font-weight: bold;
+    background: #f8f8f8;
+    color: #189fdb;
+}
+
+.mypage_wrapper:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.mypage_sidebar{
+    float: left;
+    width: 200px;
+}
+
+.mypage_sidebar_content{
+    min-height: 250px;
+    padding: 0 0 50px 0;
+}
+
+.mypage_sidebar_content h2{
+    padding: 0 0 14px 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.mypage_sidebar_submenu{
+    margin: 7px 0 0 0;
+    list-style: none;
+    padding:0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin: 7px 0 0 0;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu > li:first-child{
+    margin: 30px 0 0 0;
+}
+
+.mypage_sidebar_submenu > li{
+    padding: 8px 0 15px 0;
+    font-size: 14px;
+    font-weight: bold;
+    background: url(/image/lnb_tit.png) no-repeat top left;
+}
+
+
+/* 하위사이드바 1 */
+.mypage_sidebar_submenu1{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu1 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu1 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 2 */
+.mypage_sidebar_submenu2{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+.mypage_sidebar_submenu2 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu2 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 3 */
+.mypage_sidebar_submenu3{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu3 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu3 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 하위사이드바 4 */
+.mypage_sidebar_submenu4{
+    margin: 5px 0 25px 0;
+    list-style: none;
+    padding:0;
+}
+
+
+.mypage_sidebar_submenu4 li{
+    padding: 1px 0 0 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+.mypage_sidebar_submenu4 a{
+    font-size: 12px;
+    text-indent: 20px;
+    display: block;
+    padding: 7px 0 6px 0;
+}
+
+/* 메인 content 영역 */
+.mypage_maincontent{
+    width: 940px !important;
+    float: right;
+}
+
+.maincontent{
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.mypage_main{
+    padding: 0 0 50px 0;
+}
+
+/* mypage영역에 최근주문상품 */
+.mypage_table_type {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.mypage_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mypage_table_type table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mypage_table_type th {
+    padding: 9px 10px 10px 10px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #dbdbdb;
+    background: #f7f7f7;
+}
+
+.mypage_table_type td {
+    padding: 15px 10px 14px 10px;
+    color: #777777;
+    border-bottom: 1px solid #dbdbdb;
+    position: relative;
+}
+
+.product_name{
+    display: inline-block;
+    height: 33px;
+}
+
+.mypage_table_type td img{
+    height: 50px;
+    width: 50px;
+    vertical-align: bottom;
+}
+
+td[colspan="6"]{
+    height: 100px;
+}
+
+#wrap .no_data {
+    padding: 50px 30px 50px 30px;
+    /* border-bottom: 1px solid #dbdbdb; */
+    text-align: center;
+}
+
+.mypage_lately_info{
+    position: relative;
+}
+
+
+/** 페이징 관련 css */
+.mypage_order_info_paging{
+    margin-top:30px;
+    text-align: center;
+}
+
+.mypage_order_info_paging a{
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+    font-family: "Noto Sans KR",sans-serif
+}
+
+.pick_list_num {
+    font-family: "Noto Sans KR",sans-serif !important;
+    color: #333;
+    display: block;
+    padding: 20px 0 0px 0;
+    font-size: 14px;
+}
+
+.pick_list_num strong {
+    color: #189fdb;
+}
+
+
+/** date_check_box */
+
+.date_check_box {
+    margin: 0 0 35px 0;
+    padding: 20px 20px 20px 30px;
+    border: 3px solid #eeeeee;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.date_check_box:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+
+.date_check_box h3 {
+    float: left;
+    padding: 6px 15px 0 0;
+    color: #777777;
+    font-size: 13px;
+}
+
+button.on {
+    color: #ffffff !important;
+    background: #aeaeae !important;
+}
+
+.data_check_list{
+    padding:12px 10px 0 0;
+}
+
+.data_check_list button {
+    background-color: transparent;
+    vertical-align: middle;
+    float: left;
+    width: 54px;
+    height: 31px;
+    margin: 0 0 0 -1px;
+    font-size: 12px;
+    color: #777777;
+    border: 1px solid #d6d6d6;
+    cursor: pointer;
+}
+
+.data_check_list button:hover {
+    background-color: #AEAEAE;
+    color: #ffffff !important;
+}
+
+.date_check_calendar {
+    position: relative;
+    float: left;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    margin-left:10px;
+}
+
+/** input data쪽 css*/
+input[type="date"]{
+    font-family: "Noto Sans KR",sans-serif;
+    width: 120px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+    height: 31px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.btn_date_check {
+    /* display: inline-block; */
+    float: left;
+    min-width: 100px;
+    height: 31px;
+    color: #ffffff;
+    font-weight: bold;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    text-align: center;
+    margin-left: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    cursor: pointer;
+}
+
+.btn_date_check em {
+    padding: 0 20px 0 0;
+    background-image: url(/image/btn_goods_search.png);
+    background-position: right 3px;
+    background-repeat: no-repeat;
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+.btn_date_check:hover {
+    border: 1px solid #A67842;
+    background-color: #A67842;
+}
+
+#startdate2,#lastdate2{
+    display: none;
+}
+
+select{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    font-size:12px;
+}
+
+option{
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+    font-size:12px;
+}
+
+.purchaseconfirm{
+    margin: 0;
+    color: #ffffff;
+    font-size: 12px;
+    border: 1px solid #666666;
+    background: #666666;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.paging_on{
+    text-decoration: underline;
+    font-size: 15px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+/** 검색창 css*/
+
+.board_search_box {
+    margin: auto;
+    padding: 10px 10px 10px 10px;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    background: #f7f7f7;
+    text-align: center;
+}
+
+.board_search_box select {
+    width: 90px;
+}
+
+.selectsearch {
+    height: 31px;
+    color: #717171;
+    vertical-align: top;
+    outline: none;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.text {
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+    height: 31px;
+    width: 200px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    vertical-align: middle;
+}
+
+.btn_board_search {
+    height: 31px;
+    margin: 0 0 0 5px;
+    padding: 0 15px 0 15px;
+    color: #fff;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    line-height: 29px;
+    font-family: "Noto Sans KR",sans-serif;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.container2 {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}

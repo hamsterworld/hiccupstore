@@ -1,0 +1,279 @@
+/* 공통 클래스 */
+.fcBlue {
+    color: #189fdb !important;
+}
+
+.fw600 {
+    font-weight: 600 !important;
+}
+
+.fw300 {
+    font-weight: 300 !important;
+}
+
+.fs34 {
+    font-size: 34px !important;
+}
+
+.f_scd {
+    font-family: 'S-Core Dream' !important;
+}
+
+
+/* 첫번째 박스의 css */
+
+h2{
+    color:white;
+    font-size: 200%;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.6em;
+}
+
+.firstcontentbox{
+    position: relative;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    overflow: hidden;
+}
+.firstcontentbox img{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+}
+
+
+
+/* 두번째 박스의 css */
+
+.secondcontentbox{
+    position:relative;
+    margin-bottom: 100px;
+    margin:auto;
+}
+
+.secondcontentbox h3{
+    margin-top: 70px;
+    text-align: center;
+}
+
+.secondcontentboximg{
+    height: 400px;
+    width: 100%;
+}
+
+
+/* 세번제 박스의 css */
+
+.thirdcontentbox{
+    width: 1000px;
+    margin: auto;
+}
+
+.thirdcontentbox img{
+    width: 1000px;
+}
+
+
+/* 네번째 박스의 css */
+
+.fourchcontentbox{
+    width: 1000px;
+    margin: auto;
+}
+
+.fourchcontentbox img{
+    width: 1000px;
+}
+
+/**  mmmmmmmmmmm */
+
+.content {
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.board_zone_sec {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 0 0 0;
+    min-height: 600px;
+}
+
+.board_zone_tit {
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333 !important;
+}
+
+
+.board_zone_tit h2{
+    text-align: left !important;
+    color: #333 !important;
+}
+
+.board_zone_list {
+    text-align: center;
+}
+
+.board_list_table {
+    width: 100%;
+    margin: 0 0 20px 0;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-top: 1px solid #999999;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    color: #333;
+}
+
+.board_list_table th {
+    padding: 10px 10px 10px 14px;
+    border-bottom: 1px solid #dbdbdb;
+    background: #fbfbfb;
+}
+
+.board_list_table td {
+    padding: 13px 10px 15px 10px;
+    border-bottom: 0.5px solid #dbdbdb;
+}
+
+.board_list_table .board_tit {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.board_list_table .board_tit img {
+    margin: 0 2px 0 2px;
+    vertical-align: middle;
+}
+
+/** 검색창 css*/
+
+.board_search_box {
+    margin: auto;
+    padding: 10px 10px 10px 10px;
+    margin-top: 100px;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    background: #f7f7f7;
+    text-align: center;
+}
+
+.board_search_box select {
+    width: 90px;
+}
+
+select {
+    height: 31px;
+    color: #717171;
+    vertical-align: top;
+    outline: none;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+}
+
+.text {
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+    height: 31px;
+    width: 200px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR",sans-serif;
+    vertical-align: middle;
+}
+
+.btn_board_search {
+    height: 31px;
+    margin: 0 0 0 5px;
+    padding: 0 15px 0 15px;
+    color: #fff;
+    border: 1px solid #189fdb;
+    background: #189fdb;
+    line-height: 29px;
+    font-family: "Noto Sans KR",sans-serif;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.container2 {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/** paging*/
+
+.pagination {
+    padding-top: 15px;
+    text-align: center;
+}
+
+.pagination .on {
+    color: #fff;
+    font-weight: 500;
+    background: #189fdb !important;
+}
+
+.pagination ul {
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.pagination li {
+    float: left;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 1px;
+}
+
+.pagination li a, .pagination li span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 45px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.pagination li a:hover{
+    background-color:#e8e8e8;
+}
+
+.pagination .on {
+    color: #fff;
+    font-weight: 500;
+    background: #189fdb !important;
+}
+
+.button_right_align{
+    margin-top: 20px;
+    text-align: right;
+}

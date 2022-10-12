@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/header/header.css">
+  <link rel="stylesheet" href="/css/footer/footer.css">
+  <link rel="stylesheet" href="/css/order/order.css">
+
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="https://kit.fontawesome.com/c8cd91406a.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+  <title>Document</title>
+</head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div id="header" th:replace="layout/header::nav"></div>
+<div id='wrapper'>
+  <div class="container pt60">
+    <div class="content_box">
+      <div class="order_wrap">
+        <div class="order_tit">
+          <h2>주문서작성/결제</h2>
+          <ol>
+            <li><span>01</span>장바구니<span><img src="/image/icon_join_step_off.png" alt=""></span></li>
+            <li class="page_on"><span>02</span>주문서작성/결제<span><img src="/image/icon_join_step_on.png"></span></li>
+            <li><span>03</span>주문완료</li>
+          </ol>
+        </div>
+
+        <div class="order_cont">
+          <div class="order_cart_tit">
+            <h3>주문상세내역</h3>
+          </div>
+          <div class="order_table_type">
+            <table id="order_cart">
+              <colgroup>
+                <col>
+                <!-- 상품명/옵션 -->
+                <col style="width: 5%">
+                <!-- 수량 -->
+                <col style="width: 10%">
+                <!-- 상품금액 -->
+                <col style="width: 20%">
+                <!-- 합계금액 -->
+
+              </colgroup>
+              <thead>
+              <tr>
+                <th>상품/옵션 정보</th>
+                <th>수량</th>
+                <th>상품금액</th>
+                <th>합계금액</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="order-goods-layout" th:each="orderInfo, stat : ${orderInfo.orderProductInfo}">
+                <td class="td_left">
+                  <input type="hidden" id="orderProductId" th:value="${orderInfo.productId}">
+                  <img th:src="${orderInfo.imagePath}" alt="이미지없음" height="35" width="35">
+                  <span th:text="${orderInfo.productName}" id="productName" style="font-weight: bold;"></span>
+                </td>
+                <td class="td_order_amount">
+                  <div class="order_goods_num" id="quantity">
+                    <strong>
+                      <input type="hidden" id="orderQuantity" th:value="${orderInfo.quantity}">
+                      <span th:text = ${orderInfo.quantity}></span>
+                    </strong>
+                  </div>
+                </td>
+                <td>
+                  <strong class="order_sum_txt price">
+                    <span th:text = ${#numbers.formatInteger(orderInfo.quantity*orderInfo.price,4,'COMMA')}></span>
+                  </strong>
+                </td>
+                <td>
+                  <strong class="order_sum_txt">
+                    <input type="hidden" id="orderPrice" th:value="${orderInfo.quantity*orderInfo.price}">
+                    <span th:text = ${#numbers.formatInteger(orderInfo.quantity*orderInfo.price,4,'COMMA')}></span>
+                  </strong>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- 장바구니 리스트 끝! -->
+          </div>
+        </div>
+        <div class="btn_left_box">
+          <a href="/cart" class="shop_go_link">
+            <em>< 장바구니 가기</em>
+          </a>
+        </div>
+        <div class="price_sum">
+          <div class="price_sum_cont">
+            <div class="price_sum_list">
+              <dl>
+                <dt>
+                  총
+                  <strong><span th:text = ${orderInfo.orderProductInfo.size}></span></strong>
+                  개의 상품 금액
+                </dt>
+                <dd>
+                  <strong><span th:text = ${#numbers.formatInteger(orderInfo.total,4,'COMMA')}></span></strong>
+                  원
+                </dd>
+              </dl>
+              <span><img src="/image/order_price_plus.png"></span>
+              <dl>
+                <dt>
+                  배송비
+                </dt>
+                <dd>
+                  <Strong><span th:text="${#numbers.formatInteger(3000,4,'COMMA')}"></span></Strong>원
+                </dd>
+              </dl>
+              <span><img src="/image/order_price_total.png"></span>
+              <dl class="price_total">
+                <dt>
+                  합계
+                </dt>
+                <dd>
+                  <strong><span th:text =${#numbers.formatInteger(orderInfo.total+(3000),4,'COMMA')}></span></strong>원
+                </dd>
+
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="order_view_info">
+          <div class="order_info">
+            <div class="order_zone_tit">
+              <h4>주문자 정보</h4>
+            </div>
+            <div class="order_table_type shopping_info">
+              <table class="table_left shopping_info_table" id="userInfo">
+                <colgroup>
+                  <col style="width: 15%;">
+                  <col style="width: 85%;">
+                </colgroup>
+                <tbody>
+                <tr>
+                  <th scope="row"><span class="import">주문하시는 분</span></th>
+                  <td><span th:text="${user.nickName}"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">주소</span></th>
+                  <td><span th:text="${user.address}"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">휴대폰 번호</span></th>
+                  <td><span th:text="${user.phone}"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">이메일</span></th>
+                  <td><span th:text="${user.email}"></span></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="delivery_info">
+            <div class="order_zone_tit">
+              <h4>배송정보</h4>
+            </div>
+            <div class="order_table_type shopping_info">
+              <table id="packageInfo" class="table_left shopping_info_table">
+                <colgroup>
+                  <col style="width: 15%;">
+                  <col style="width: 85%;">
+                </colgroup>
+                <tbody>
+                <tr>
+                  <th scope="row"><span class="import">배송지 확인</span></th>
+                  <td>
+                    <div class="form_element">
+                      <ul>
+                        <li>
+                          <input type="radio" name="shipping" id="shippingBasic" class="shipping" checked>
+                          <label for="shippingBasic" class="choice_s">기본 배송지</label>
+                        </li>
+                        <li>
+                          <input type="radio" name="shipping" class="shipping" id="shippingNew">
+                          <label for="shippingNew" class="choice_s">직접입력</label>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <input type="text" id="sample4_postcode" class="d_form mini" placeholder="우편번호" readonly>
+                      <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="d_btn" disabled>
+                      <br>
+                      <input type="text" id="sample4_roadAddress" class="d_form std" placeholder="도로명주소" readonly>
+                      <br>
+                      <span id="guide" style="color:#999;display:none"></span>
+                      <input type="text" id="sample4_detailAddress" class="d_form" placeholder="상세주소">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">받으실분</span></th>
+                  <td><input type="text" id="userName" size="60" th:value="${user.nickName}"></td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">받으실곳</span></th>
+                  <td><input type="text" id="address" size="60" th:value="${user.address}" readonly></td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">휴대전화번호</span></th>
+                  <td><input type="text" id="phone" size="60" th:value="${user.phone}"></td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">배송 메세지</span></th>
+                  <td>
+                    <select id="messageBox" onchange="changeMessage()">
+                      <option value="0">배송기사에게 전달되는 메시지 입니다. 선택하여 주세요.</option>
+                      <option value="1">부재 시 경비실에 맡겨주세요</option>
+                      <option value="2">부재시 문앞에 놓아주세요</option>
+                      <option value="3">직접 받겠습니다</option>
+                      <option value="4">배송전에 연락주세요</option>
+                      <option value="5">직접입력</option>
+                    </select><br/>
+                    <input type="text" id="message" size="60" readonly><br><span id="deliveryMessage">배송메시지를 입력해주세요</span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="payment_info">
+            <div class="order_zone_tit">
+              <h4>결제정보</h4>
+            </div>
+            <div class="order_table_type shopping_info">
+              <table class="table_left shopping_info_table">
+                <colgroup>
+                  <col style="width: 15%;">
+                  <col style="width: 85%;">
+                </colgroup>
+                <tbody>
+                <tr>
+                  <th scope="row"><span class="import">상품 합계 금액</span></th>
+                  <td>
+                    <strong><span th:text="${#numbers.formatInteger(orderInfo.total,4,'COMMA')}"></span></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">배송비</span></th>
+                  <td><span th:text="${#numbers.formatInteger(3000,4,'COMMA')}"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="import">최종 결제 금액</span></th>
+                  <td><strong><span th:text = "${#numbers.formatInteger(orderInfo.total+(3000),4,'COMMA')}">원</span></strong></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="payment_progress">
+            <div class="order_zone_tit">
+              <h4>결제수단 선택 / 결제</h4>
+            </div>
+            <div class="payment_progress_list">
+              <div class="js_pay_content">
+                <div class="general_payment" id="settlekind_general">
+                  <dl>
+                    <dt>일반결제</dt>
+                    <dd>
+                      <div class="form_element">
+                        <ul class="payment_progress_select">
+                          <li id="settlekindType_1">
+                            <input type="radio" id="settleKind_card"  name="settleKind" value="card" checked>
+                            <label class="choice_s on" for="settleKind_card">신용카드</label>
+                          </li>
+                          <li id="settlekindType_2">
+                            <input type="radio" id="settleKind_bank" name="settleKind" value="bank">
+                            <label class="choice_s on" for="settleKind_bank">계좌이체</label>
+                          </li>
+                          <li id="settlekindType_3">
+                            <input type="radio" id="settleKind_vrCount" name="settleKind" value="vrCount">
+                            <label class="choice_s on" for="settleKind_vrCount">가상계좌</label>
+                          </li>
+                          <li id="settlekindType_4">
+                            <input type="radio" id="settleKind_kakao" name="settleKind" value="kakao">
+                            <label class="choice_s on" for="settleKind_kakao">카카오페이</label>
+                          </li>
+                        </ul>
+                      </div>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+            <div class="payment_final">
+              <div class="payment_final_total">
+                <dl>
+                  <dt>최종 결제 금액</dt>
+                  <dd>
+                    <span>
+                        <strong id="totalSettlePrice"><span th:text = ${#numbers.formatInteger(orderInfo.total+(3000),4,'COMMA')}></span></strong>원
+                    </span>
+                  </dd>
+                </dl>
+
+              </div>
+              <div class="payment_final_check">
+                <div class="form_element">
+                  <input type="checkbox" id="essential">
+                  <label class="check_s" for="essential">
+                    <em>
+                      <b>(필수)</b>
+                      구매하실 상품의 결제 정보를 확인하였으며, 구매진행에 동의합니다.
+                    </em>
+                  </label>
+                </div>
+              </div>
+              <div class="payment_final_btn">
+                <button class="btn_order" id="btnOrder" onclick="OrderBtn();">
+                  <em>결제하기</em>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer" th:replace="layout/footer::footer"></div>
+<script src="/js/order/order.js"></script>
+</body>
+</html>

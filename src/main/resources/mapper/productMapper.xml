@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hiccup.hiccupstore.product.dao.ProductMapper">
+<!--
+    꺽쇠 논리연산자 사용시
+    Tag로 인식해서 오류 발생할 수 있으니
+    <![CDATA[ ... ]]> 로 감싸주기
+-->
+
+
+<!-- Result Map : Product / ProductImage / ProductForView -->
+    <!-- hiccup.hiccupstore.product.dto.Product -->
+    <resultMap id="product" type="hiccup.hiccupstore.product.dto.Product">
+        <result column="productId"  property="productId"/>
+        <result column="categoryId"  property="categoryId"/>
+        <result column="productName"  property="productName"/>
+        <result column="price"  property="price"/>
+        <result column="quantity"  property="quantity"/>
+        <result column="alcoholContent"  property="alcoholContent"/>
+        <result column="brand"  property="brand"/>
+        <result column="description"  property="description"/>
+        <result column="sellCount" property="sellCount"/>
+    </resultMap>
+    <resultMap id="productForView" type="hiccup.hiccupstore.product.dto.ProductForView">
+        <result column="productId"  property="productId"/>
+        <result column="productName"  property="productName"/>
+        <result column="price"  property="price"/>
+        <result column="quantity"  property="quantity"/>
+        <result column="sellCount" property="sellCount"/>
+        <result column="reviewCount" property="reviewCount"/>
+        <result column="pickCount" property="pickCount"/>
+        <result column="imgPath" property="imgPath"/>
+    </resultMap>
+
+<!-- INSERT -->
+    <!-- Product 테이블 -->
+    <insert id="insertProduct" parameterType="hiccup.hiccupstore.product.dto.Product">
+        insert into product
+        values (#{productId},
+                #{categoryId},
+                #{productName},
+                #{price},
+                #{quantity},
+                #{alcoholContent},
+                #{brand},
+                #{description},
+                #{sellCount})
+        <selectKey keyProperty="productId" resultType="Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <!-- ProductImage 테이블 -->
+    <insert id="insertProductImage" parameterType="hiccup.hiccupstore.product.dto.ProductImage">
+        insert into product_image
+        values (#{imageId},
+                #{productId},
+                #{imageName},
+                #{imagePath},
+                #{imageType})
+
+    </insert>
+
+
+<!-- UPDATE -->
+    <!-- Product 수정 -->
+    <update id="updateProduct" parameterType="hiccup.hiccupstore.product.dto.Product">
+        UPDATE product
+        SET productName = #{productName},
+            price = #{price},
+            quantity = #{quantity},
+            alcoholContent = #{alcoholContent},
+            brand = #{brand},
+            description = #{description},
+            sellCount = #{sellCount}
+        WHERE productId = #{productId} and categoryId = #{categoryId}
+    </update>
+    <!-- ProductImage 수정 -->
+    <update id="updateProductImage" parameterType="hiccup.hiccupstore.product.dto.ProductImage">
+        UPDATE product_image
+        SET imageName = #{imageName},
+            imagePath = #{imagePath}
+        WHERE productId = #{productId} and imageType LIKE CONCAT('%', #{imageType}, '%')
+    </update>
+
+
+<!-- DELETE -->
+    <!-- Product 삭제 -->
+    <delete id="deleteProduct" parameterType="Integer">
+        delete from product
+        where productId = #{productId}
+    </delete>
+
+    <!-- ProductImage 삭제 -->
+    <delete id="deleteProductImage" parameterType="Integer">
+        delete from product_image
+        where imageId = #{imageId}
+    </delete>
+
+
+<!-- SELECT -->
+    <!-- 상품 정보 조회 usage : 상품 상세 정보 페이지 -->
+    <select id="getProductImageListById" resultType="hiccup.hiccupstore.product.dto.ProductImage" parameterType="Integer">
+        SELECT *
+        FROM product_image
+        WHERE productId = #{productId}
+    </select>
+    <select id="selectById" resultMap="product" parameterType="Integer">
+        SELECT *
+        FROM product
+        WHERE productId = #{productId}
+    </select>
+    <select id="selectProductIdByName" resultType="int" parameterType="String">
+        SELECT productId
+        FROM product
+        WHERE productName = #{productName}
+    </select>
+
+    <select id="selectBySearch" resultMap="productForView" parameterType="HashMap" >
+        <!-- Parameter : keyword( String ) , sort(String) -->
+        SELECT p.productid,
+        p.productname,
+        p.price,
+        p.quantity,
+        p.sellCount,
+        b.reviewCount,
+        up.pickCount,
+        pi.imagePath
+        FROM product p
+        LEFT JOIN (SELECT productId, imagePath
+        FROM product_image
+        WHERE imageType = 'product') pi ON p.productId = pi.productId
+        LEFT JOIN (SELECT productId, COUNT(boardId) AS reviewCount
+        FROM board
+        WHERE boardTypeId = 1
+        GROUP BY productId) b ON p.productId = b.productId
+        LEFT JOIN (SELECT productId,COUNT(pickProductId) AS pickCount
+        FROM user_pickproduct
+        GROUP BY productId) up ON p.productId = up.productId
+        WHERE p.productName LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY
+        <choose>
+            <when test="sort == 'rate'">p.sellCount;</when>
+            <when test="sort == 'review'">b.reviewCount; </when>
+            <when test="sort == 'pick'">up.pickCount DESC;</when>
+            <when test="sort == 'low'">p.price;</when>
+            <when test="sort == 'high'">p.price DESC ;</when>
+            <otherwise>p.productName;</otherwise>
+        </choose>
+    </select>
+
+
+    <!-- 20220812_최종 ViewCriteria 사용 Mapper -->
+    <select id="getTotalByCategory" resultType="int">
+        SELECT count(*)
+        FROM product
+        WHERE categoryId = #{categoryId} ;
+    </select>
+    <select id="getTotalByPriceRangeOverFour" resultType="int">
+        SELECT count(*)
+        FROM product
+        WHERE price >= (#{p}*10000)
+    </select>
+    <select id="getTotalByPriceRangeUnderFour" resultType="int">
+        SELECT count(*)
+        FROM product
+        WHERE ((#{p}*10000) + 9999) >= price  AND  price >= (#{p}*10000)
+    </select>
+
+
+<!--    <select id="getCategoryListSize" resultType="int" parameterType="hiccup.hiccupstore.product.dto.page.ViewCriteria">-->
+<!--    &lt;!&ndash; Parameter : categoryId(int) , sort(String) &ndash;&gt;-->
+<!--    SELECT count(*)-->
+<!--    FROM product p-->
+<!--    <if test="type >= 0">-->
+<!--        WHERE p.categoryId = #{type}-->
+<!--    </if>-->
+<!--    </select>-->
+
+    <!--
+    <select id="getPriceRangeListSize" resultType="int" parameterType="hiccup.hiccupstore.product.dto.page.ViewCriteria">
+        SELECT count(*)
+        FROM product p
+        <choose>
+          <when test="criteria.p >= 0 and criteria.p != 4">
+              WHERE ((#{p}*10000) + 9999) <![CDATA[>=]]> p.price  AND  p.price <![CDATA[>=]]> (${p}*10000)
+          </when>
+          <when test="criteria.p >= 0 and criteria.p == 4">
+              WHERE p.price <![CDATA[>=]]> (#{p}*10000)
+          </when>
+        </choose>
+    </select>
+    -->
+    <select id="getAllListSize" resultType="int">
+        SELECT count(*)
+        FROM product p
+    </select>
+    <select id="getCategoryListSize" resultType="int">
+        SELECT count(*)
+        FROM product
+        WHERE categoryId = #{type} ;
+    </select>
+    <select id="getPriceRangeListSizeOverFour" resultType="int">
+        SELECT count(*)
+        FROM product p
+        WHERE p.price <![CDATA[>=]]> (#{p}*10000)
+    </select>
+    <select id="getPriceRangeListSizeUnderFour" resultType="int">
+        SELECT count(*)
+        FROM product p
+        WHERE ((#{p}*10000) + 9999) <![CDATA[>=]]> p.price  AND  p.price <![CDATA[>=]]> (${p}*10000)
+    </select>
+
+
+
+    <select id="selectByCategory" resultType="productForView">
+        <!-- Parameter : categoryId(int) , sort(String) -->
+        SELECT p.productid,
+        p.productname,
+        p.price,
+        p.quantity,
+        p.sellCount,
+        b.reviewCount,
+        up.pickCount,
+        pi.imagePath
+        FROM product p
+        LEFT JOIN (SELECT productId, imagePath
+        FROM product_image
+        WHERE imageType = 'product') pi ON p.productId = pi.productId
+        LEFT JOIN (SELECT productId, COUNT(boardId) AS reviewCount
+        FROM board
+        WHERE boardTypeId = 1
+        GROUP BY productId) b ON p.productId = b.productId
+        LEFT JOIN (SELECT productId,COUNT(pickProductId) AS pickCount
+        FROM user_pickproduct
+        GROUP BY productId) up ON p.productId = up.productId
+        <if test="type >= 0">
+            WHERE p.categoryId = #{type}
+        </if>
+        ORDER BY
+            <if test="sort == 'rate'">p.sellCount  LIMIT #{cntPerPage}
+                OFFSET #{start};</if>
+            <if test="sort == 'review'">b.reviewCount LIMIT #{cntPerPage}
+                OFFSET #{start};</if>
+            <if test="sort == 'pick'">up.pickCount desc LIMIT #{cntPerPage}
+                OFFSET #{start};</if>
+            <if test="sort == 'low'">p.price LIMIT #{cntPerPage}
+                OFFSET #{start};</if>
+            <if test="sort == 'high'">p.price DESC LIMIT #{cntPerPage}
+                OFFSET #{start};</if>
+            <if test="sort == 'default'">p.productName LIMIT #{cntPerPage}
+                OFFSET #{start};</if>
+
+    </select>
+
+<!--    <select id="selectByPriceRange" resultType="productForView">-->
+<!--        &lt;!&ndash; Parameter : categoryId(int) , sort(String) &ndash;&gt;-->
+<!--        &lt;!&ndash; select1 해줘야orderby 없이 조회결과 순번 부여 &ndash;&gt;-->
+<!--            SELECT-->
+<!--                p.productid as pid,-->
+<!--                p.productname as pname,-->
+<!--                p.price as pprice,-->
+<!--                p.quantity as pquanity ,-->
+<!--                p.sellCount as psellcount,-->
+<!--                b.reviewCount as previewcount,-->
+<!--                up.pickCount as ppickcount,-->
+<!--                pi.imagePath as pimagepath-->
+<!--            FROM product as p-->
+<!--            LEFT JOIN (-->
+<!--                SELECT productId, imagePath-->
+<!--                FROM product_image-->
+<!--                WHERE imageType = 'product'-->
+<!--                ) pi ON p.productId = pi.productId-->
+<!--            LEFT JOIN (-->
+<!--                SELECT productId, COUNT(boardId) AS reviewCount-->
+<!--                FROM board-->
+<!--                WHERE boardTypeId = 1-->
+<!--                GROUP BY productId-->
+<!--                ) b ON p.productId = b.productId-->
+<!--            LEFT JOIN (-->
+<!--                SELECT productId,COUNT(pickProductId) AS pickCount-->
+<!--                FROM user_pickproduct-->
+<!--                GROUP BY productId-->
+<!--                ) up ON p.productId = up.productId-->
+
+
+<!--        <if test="type != -1">-->
+<!--            WHERE p.categoryId = #{type}+1 &lt;!&ndash; Enum에서의 idx는 0부터 시작 &ndash;&gt;-->
+<!--        </if>-->
+<!--        <choose>-->
+<!--            <when test="sort == 'rate'"><![CDATA[-->
+<!--                ORDER BY p.sellCount-->
+<!--                LIMIT  #{amountInOnePage}-->
+<!--                OFFSET  (#{amountInOnePage}) *(#{pageNum});-->
+<!--            ]]></when>-->
+<!--            <when test="sort == 'review'"><![CDATA[-->
+<!--                ORDER BY b.reviewCount-->
+<!--                LIMIT  #{amountInOnePage}-->
+<!--                OFFSET  #{amountInOnePage} * #{pageNum};-->
+<!--            ]]></when>-->
+<!--            <when test="sort == 'pick'"><![CDATA[-->
+<!--                ORDER BY up.pickCount-->
+<!--                LIMIT  #{amountInOnePage}-->
+<!--                OFFSET  #{amountInOnePage} * #{pageNum};-->
+<!--            ]]></when>-->
+<!--            <when test="sort == 'low'"><![CDATA[-->
+<!--                ORDER BY p.price-->
+<!--                LIMIT  #{amountInOnePage}-->
+<!--                OFFSET  #{amountInOnePage} * #{pageNum};;-->
+<!--            ]]></when>-->
+<!--            <when test="sort == 'high'"><![CDATA[-->
+<!--                ORDER BY p.price-->
+<!--                LIMIT  #{amountInOnePage}-->
+<!--                OFFSET  #{amountInOnePage} * #{pageNum};;-->
+<!--            ]]></when>-->
+<!--            <otherwise><![CDATA[-->
+<!--                ORDER BY p.productName-->
+<!--                LIMIT  #{amountInOnePage}-->
+<!--                OFFSET  #{amountInOnePage} * #{pageNum};;-->
+<!--            ]]></otherwise>-->
+<!--        </choose>-->
+
+<!--    </select>-->
+
+    <!-- 상품 리스트 조회 : Mapper Service에서 Map 타입으로 파라미터 넣어주기 -->
+    <select id="selectByPriceRange" resultMap="productForView" parameterType="hiccup.hiccupstore.product.dto.page.PageCriteria">
+        <!-- Parameter : p( priceRange : int ) , sort(String) -->
+        SELECT p.productid,
+        p.productname,
+        p.price,
+        p.quantity,
+        p.sellCount,
+        b.reviewCount,
+        up.pickCount,
+        pi.imagePath
+        FROM product p
+        LEFT JOIN (SELECT productId, imagePath
+        FROM product_image
+        WHERE imageType = 'product') pi ON p.productId = pi.productId
+        LEFT JOIN (SELECT productId, COUNT(boardId) AS reviewCount
+        FROM board
+        WHERE boardTypeId = 1
+        GROUP BY productId) b ON p.productId = b.productId
+        LEFT JOIN (SELECT productId,COUNT(pickProductId) AS pickCount
+        FROM user_pickproduct
+        GROUP BY productId) up ON p.productId = up.productId
+        <if test="p >= 0">
+            <choose>
+                <when test="p == 4">
+                    WHERE p.price >= (#{p}*10000)
+                </when>
+                <otherwise>
+                    WHERE ((#{p}*10000) + 9999) >= p.price  AND  p.price >= (#{p}*10000)
+                </otherwise>
+            </choose>
+        </if>
+        ORDER BY
+        <if test="sort == 'rate'">p.sellCount  LIMIT #{cntPerPage}
+            OFFSET #{start};</if>
+        <if test="sort == 'review'">b.reviewCount LIMIT #{cntPerPage}
+            OFFSET #{start};</if>
+        <if test="sort == 'pick'">up.pickCount desc LIMIT #{cntPerPage}
+            OFFSET #{start};</if>
+        <if test="sort == 'low'">p.price LIMIT #{cntPerPage}
+            OFFSET #{start};</if>
+        <if test="sort == 'high'">p.price DESC LIMIT #{cntPerPage}
+            OFFSET #{start};</if>
+        <if test="sort == 'default'">p.productName LIMIT #{cntPerPage}
+            OFFSET #{start};</if>
+
+    </select>
+
+</mapper>
