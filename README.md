@@ -3,7 +3,9 @@
 우리나라 전통술을 판매하는 웹사이트를 만들어보고 호스팅해보는 것이 목적인 Project입니다.
 
 ## 기술 스텍
-<img src="https://img.shields.io/badge/spring_boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"/>
+<img src="https://img.shields.io/badge/spring boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"/>
+<img src="https://img.shields.io/badge/spring security-6DB33F?style=flat-square&logo=Spring Security&logoColor=white"/>
+<img src="https://img.shields.io/badge/java-FF160B?style=flat-square&logo=Java&logoColor=white"/>
 
 
 
