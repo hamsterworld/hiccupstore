@@ -3,6 +3,7 @@
 우리나라 전통술을 판매하는 웹사이트를 만들어보고 호스팅해보는 것이 목적인 Project입니다.
 
 
+![KakaoTalk_20220906_124616125](https://user-images.githubusercontent.com/91558193/195794514-d6f2a6c3-ab52-45f0-9842-5cdd57f8a140.png)
 
 
 
