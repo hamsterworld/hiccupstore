@@ -79,3 +79,66 @@
 
 <br/>
 <br/>
+
+
+### 📁 File directory
+
+<br/>
+
+```bash
+hiccupstore
+│  
+│  
+├── board
+│   ├── controller
+│   ├── dao
+│   ├── dto
+│   ├── service
+│   └── util
+│
+├── cart
+│   ├── controller
+│   ├── dao
+│   ├── dto
+│   ├── service
+│   └── util
+│
+├── commonutil
+│   ├── aspect
+│   ├── aws
+│   ├── file
+│   ├── fillter
+│   ├── sercurity
+│   └── logtrace
+│
+├── order
+│   ├── controller
+│   ├── dao
+│   ├── dto
+│   ├── service
+│   └── util
+│
+├── product
+│   ├── controller
+│   ├── dao
+│   ├── dto
+│   ├── service
+│   └── util
+│
+├── user
+│   ├── controller
+│   │   ├── mypage
+│   │   └── managerpage
+│   ├── dao
+│   ├── dto
+│   │   ├── board
+│   │   ├── find
+│   │   ├── join
+│   │   └── order
+│   ├── service
+│   │   ├── mypage
+│   │   └── managerpage
+│   └── util
+│  
+└── resource
+``` 
