@@ -103,7 +103,7 @@ hiccupstore
 │   ├── service
 │   └── util
 │
-├── commonutil
+├── commonutil (기여한 file directory)
 │   ├── aspect
 │   ├── aws
 │   ├── file
@@ -125,7 +125,7 @@ hiccupstore
 │   ├── service
 │   └── util
 │
-├── user
+├── user (기여한 file directory)
 │   ├── controller
 │   │   ├── mypage
 │   │   └── managerpage
