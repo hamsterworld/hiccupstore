@@ -77,9 +77,6 @@
 
 ![HiccupStoreAWS아키텍처](https://user-images.githubusercontent.com/91558193/195802567-031cb872-8a85-457e-9a8f-0f6cdd89829d.jpg)
 
-``
-서버 비용문제로 잠시 호스팅을 중단합니다.
-``
 
 <br/>
 <br/>
